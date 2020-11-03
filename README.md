@@ -58,9 +58,9 @@ You will also be provided with a notebook that has all the characters, all the r
 
 Suspects
 - [x] Professor Plum
-you can cross this because you have this card in you hand and *you know* the envelope cannot contain it.
-- [ ] Mr. Green 
-you decide not to cross this because you *do not know* if this card is in someone else's hand or in the envelope.
+- you can cross this because you have this card in you hand and *you know* the envelope cannot contain it.
+- [ ] Mrs. Peacock 
+- you decide not to cross this because you *do not know* if this card is in someone else's hand or in the envelope.
 
 
 ## Game Play
@@ -80,10 +80,42 @@ You are not allowed to enter the same room twice on the same turn nor pass throu
 
 You are not allowed to jump or pass through another character. This includes if the character is blocking an entrance to a room. You also cannot get out of a room if all the entrances are blocked. If this were to happen, you need to wait until someone moves and un-blocks a door. 
 
+If the room you are trying to enter already has someone inside, you cannot do in. 
+
 
 ### Sugestions
-A sugestion is when
+When you enter a room, you can make a suggestion by naming a suspect, murder weapon and the room *you just entered*.
+
+> "The crime was committed by **Mrs. Peacock** in the **library** with a **wrench**".
+
+Both the suspect and the weapon are moved into the room you entered.
+
+Then your opponents (starting by your left) must – if possible – prove that your suggestion is false by showing you, and **only you** one card that matches your suggestion.
+
+If the player can't disprove, the next player must try it, until all players have passed.
+
+If one player hold more than one of the suggested cards they have to chose which card to show, they must show one but only one. 
+
+You use this to mark as many boxes as you can to be certain who is and is not *guilty*.
+
+If no one is able to prove your suggestion false, you may either end your turn or make an accusation.
+
+Once your turn ends the suspect, when their turn happens, can chose to stay in that room or roll the dice. 
+
+There is no limit to the number of weapons that a room holds, yet one room cannot hold more than two people (the one who made a suggestion and the suspect). 
 
 
 ### Accusing
-An accusation is when
+If you think you have solved the crime, you can end your turn at any time during the game by making an accusation and name your suspicions elements.
+
+> "I accuse **Mrs. Peacock** of committing the crime in the **library** with the **wrench**".
+
+Then, the contents of the envelope will be shown to you. 
+
+If you are correct, Congratulations! You won!
+
+If not, you lose.
+
+You are only able to make **one** accusation per game, so make sure you are *certain* that you are right. 
+
+You need to be faster than the rest or they might find the killer sooner! 
