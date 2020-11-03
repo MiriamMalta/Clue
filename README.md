@@ -54,7 +54,36 @@ The cards for the remaining suspects, rooms and weapons are shuffled and distrib
 
 You will also be provided with a notebook that has all the characters, all the rooms and all the weapons with some boxes you can cross off when you consider they are *guilty*. It is advisable to cross off one’s cards upon receiving them as, if in your hand, they are not in the envelope. 
 
+**For example:**
+
+Suspects
+- [x] Professor Plum
+you can cross this because you have this card in you hand and *you know* the envelope cannot contain it.
+- [ ] Mr. Green 
+you decide not to cross this because you *do not know* if this card is in someone else's hand or in the envelope.
+
 
 ## Game Play
 Now the game starts!
 
+Miss Scarlett opens the game, the turns continue clockwise around the board. If no one chose Miss Scarlett, the choice is random. 
+
+On each turn, a player will try to reach a different room of the mansion to investigate. 
+
+To move your character, you need to either roll the die or use a Secret Passage when in a corner room.
+
+If you roll the die, you move however many spaces the die says. Your character can move horizontally or vertically, forward or backward, but never diagonally.
+
+If you move through a Secret Passage, you don't need to roll the dice, you just move to the other room, ending your movement.
+
+You are not allowed to enter the same room twice on the same turn nor pass through a square more than two times in the same turn.
+
+You are not allowed to jump or pass through another character. This includes if the character is blocking an entrance to a room. You also cannot get out of a room if all the entrances are blocked. If this were to happen, you need to wait until someone moves and un-blocks a door. 
+
+
+### Sugestions
+A sugestion is when
+
+
+### Accusing
+An accusation is when
