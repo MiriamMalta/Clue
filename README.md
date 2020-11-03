@@ -119,3 +119,11 @@ If not, you lose.
 You are only able to make **one** accusation per game, so make sure you are *certain* that you are right. 
 
 You need to be faster than the rest or they might find the killer sooner! 
+
+
+# Instalation of needed libraries
+
+## Allegro
+
+> Allegro is a cross-platform library mainly aimed at video game and multimedia programming. It handles common, low-level tasks such as creating windows, accepting user input, loading data, drawing images, playing sounds, etc. and generally abstracting away the underlying platform. However, Allegro is not a game engine: you are free to design and structure your program as you like. 
+> - https://liballeg.org/
