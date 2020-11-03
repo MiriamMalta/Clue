@@ -41,6 +41,7 @@ You choose one of the six characters, all represented with a color related to th
 - Mr. Green -> green
 - Mrs. White -> white 
 - Mrs. Peacock -> blue
+
 All the characters are to be present on the board, whether they represent a player or not. They all start at a specific place on the map.
 
 All weapons will be randomly placed on a room. 
