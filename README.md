@@ -5,9 +5,10 @@ All you need to do is answer who killed them, where and with what weapon.
 
 
 ## Base Information
+(sprites por hacer[son un mapa y son una carta])
 The mansion has 9 rooms.
-- Hall
-- Study
+- [x] Hall
+- [] Study
 - Library
 - Billiard Room
 - Conservatory
@@ -16,6 +17,7 @@ The mansion has 9 rooms.
 - Dining Room
 - Lounge
 
+(sprites por hacer)
 There are 6 suspects for the murder
 - Colonel Mustard
 - Miss Scarlet
@@ -24,6 +26,7 @@ There are 6 suspects for the murder
 - Mrs. White
 - Mrs. Peacock
 
+(sprites por hacer)
 There are 6 weapons
 - Rope
 - Lead Pipe
@@ -66,10 +69,19 @@ Suspects
 ## Game Play
 Now the game starts!
 
+(Escoger el personaje de los usuarios)
+(Turnos se mueven como las manecillas del reloj)
+(El orden de los personajes pueden ser aleatorios)
 Miss Scarlett opens the game, the turns continue clockwise around the board. If no one chose Miss Scarlett, the choice is random. 
 
+(Mecanica de movimiento)
+(Turnos)
+(Cuartos)
 On each turn, a player will try to reach a different room of the mansion to investigate. 
 
+(Mecanica de pasar por cuartos)
+(Mecanica de movimineto)
+(Mecanica de tirar dados) // (Minijuego de clickear rapido para crear la semilla de random)
 To move your character, you need to either roll the die or use a Secret Passage when in a corner room.
 
 If you roll the die, you move however many spaces the die says. Your character can move horizontally or vertically, forward or backward, but never diagonally.
@@ -120,6 +132,12 @@ You are only able to make **one** accusation per game, so make sure you are *cer
 
 You need to be faster than the rest or they might find the killer sooner! 
 
+# TODO
+-[] Mecanica de movimiento => move(int, int)
+-[] Mecanica de los dados => int dice(int) // (1234142214213) success: 5,6,4,3,2,1 || fail: 12, -1, 0
+-[] Mecanica de movimiento
+-[] Mecanica de movimiento
+-[] Mecanica de movimiento
 
 
 
