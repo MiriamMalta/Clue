@@ -132,14 +132,18 @@ You are only able to make **one** accusation per game, so make sure you are *cer
 
 You need to be faster than the rest or they might find the killer sooner! 
 
-# TODO
+# Requerimientos funcionales
 -[] Mecanica de movimiento => move(int, int)
 -[] Mecanica de los dados => int dice(int) // (1234142214213) success: 5,6,4,3,2,1 || fail: 12, -1, 0
 -[] Mecanica de movimiento
 -[] Mecanica de movimiento
 -[] Mecanica de movimiento
 
+# Requerimientos no funcionales
 
+-[] Sprites
+-[] Textos interesantes(de colores)
+-[] Mecanica de movimiento
 
 # Installation of needed libraries
 
