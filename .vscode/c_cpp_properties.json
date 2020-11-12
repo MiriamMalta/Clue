@@ -21,7 +21,7 @@
         {
             "name": "Mac",
             "includePath": [
-                "<path_to_raylib>/src/**",
+                "/Users/macbook/raylib/src/**",
                 "${workspaceFolder}/**"
             ],
             "defines": [
