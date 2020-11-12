@@ -12,6 +12,10 @@ Mr. Boddy is found death in one of the rooms of his mansion.
 All you need to do is answer who killed them, where and with what weapon.
 
 · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - ·
+## How to install
+
+
+· - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - ·
 
 ## Base Information
 ###### Sprites por hacer
