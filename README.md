@@ -14,23 +14,133 @@ All you need to do is answer who killed them, where and with what weapon.
 · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - ·
 ## How to install
 
+· - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - ·
+
+# Requerimientos 
+## Requerimientos funcionales
+
+| Area | Requirement | Notes | Pruebas | Done? |
+|-|-|-|-|-|
+| Graficos | Mostrar tablero | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
+| Mecanicas |  |  |  | No |
+| Manejo de Datos |  |  |  | No |
+| Eventos |  |  |  | No |
+| Graficos |  |  |  | No |
+| Graficos |  |  |  | No |
+| Graficos |  |  |  | No |
+| Graficos |  |  |  | No |
+| Graficos |  |  |  | No |
+| Graficos |  |  |  | No |
+| Graficos |  |  |  | No |
+| Graficos |  |  |  | No |
+| Graficos |  |  |  | No |
+
+
+- [ ] Mecanica de movimiento => move(int, int)
+- [ ] Mecanica de los dados => int dice(int) // (1234142214213) success: 5,6,4,3,2,1 || fail: 12, -1, 0
+- [ ] Mecanica de movimiento
+- [ ] Mecanica de movimiento
+- [ ] Mecanica de movimiento
+
+## Requerimientos no funcionales
+
+### Sprites
+- [ ] Mapa de clue tipo "The Skeld"
+- [ ] Pantalla de Shhh
+- [ ] Pantalla de Winner
+- [ ] Pantalla de Loser
+- [ ] Main Menu
+- [ ] Load
+- [ ] Settings
+- [ ] Credits
+- [ ] HUD
+- [ ] Notebook
+- [ ] Loader
+- [ ] Sprite Carta Reactor
+- [ ] Sprite Carta Navigation
+- [ ] Sprite Carta Shields
+- [ ] Sprite Carta Medbay
+- [ ] Sprite Carta Weapons
+- [ ] Sprite Carta Upper Engine
+- [ ] Sprite Carta Lower Engine
+- [ ] Sprite Carta Electrical
+- [ ] Sprite Carta Storage
+- [ ] Sprite Carta Cafeteria
+- [ ] Sprite Carta Yellow Astronaut
+- [ ] Sprite Carta Red Astronaut
+- [ ] Sprite Carta Purple Astronaut
+- [ ] Sprite Carta Green Astronaut
+- [ ] Sprite Carta White Astronaut
+- [ ] Sprite Carta Blue Astronaut
+- [ ] Sprite Carta Gun Shot
+- [ ] Sprite Carta Stabbing
+- [ ] Sprite Carta Neck snap
+- [ ] Sprite Carta Throat Saber
+- [ ] Sprite Carta Funado
+- [ ] Sprite Carta Disconected from the server
+- [ ] Spritesheet Yellow Astronaut
+- [ ] Spritesheet Red Astronaut
+- [ ] Spritesheet Purple Astronaut
+- [ ] Spritesheet Green Astronaut
+- [ ] Spritesheet White Astronaut
+- [ ] Spritesheet Blue Astronaut
+
+### Botones que envian a otras ventanas
+- [ ] New Game -> Ventana de Opciones de nuevo juego
+- [ ] New Game Options -> Ventana de Shhh(inicio de juego)
+- [ ] Load -> Ventana de Carga
+- [ ] Settings -> Ventana de Opciones
+- [ ] Credits -> Ventana de Creditos
+
+- [ ] Quit Game -> Main Menu
+- [ ] Save Game -> Ventana de Guardado
+- [ ] Load Game -> Juego Cargado
+- [ ] Options -> Ventana de Settings
+- [ ] Restart -> Volver a iniciar el juego desde el inicio
+- [ ] Cancel -> Volver al Juego
+
+
+### Funciones o Mecanicas
+- [ ] SaveGame()
+- [ ] LoadGame()
+- [ ] SetGame()
+- [ ] FillPackage()
+- [ ] Accusation(player,character, weapon, place)
+- [ ] Suggestion(self,character, weapon, place)
+- [ ] GenerateTurnGameList()
+- [ ] Movement()
+- [ ] Teletransport()
+- [ ] EnterRoom()
+- [ ] ExitRoom()
+- [ ] CalculateRandomMovements()
+- [ ] HatONames()
+
+### Estructuras necesarias
+- [ ] GameState
+- [ ] GameHistory
+- [ ] Board
+- [ ] Player
+
+
 
 · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - ·
 
+
+
 ## Base Information
-###### Sprites por hacer
-######      sprite en forma de el tablero
+
 ######      sprite en forma de carta manejable
-The mansion has 9 rooms.
-- Hall
-- Study
-- Library
-- Billiard Room
-- Conservatory
-- Ballroom
-- Kitchen
-- Dining Room
-- Lounge
+The mansion has 10 rooms.
+- Hall -> Reactor
+- Ballroom -> Navigation
+- Conservatory -> Shields
+- Dining Room -> Medbay
+- Kitchen -> Weapons
+- Lounge -> Upper Engine
+- Study -> Lower Engine
+- Library -> Electrical
+- Billiard Room -> Storage
+- Pool -> Cafeteria
 
 ###### Sprites por hacer
 ######      sprite en forma de figuras movibles por el juego sobre el tablero
@@ -426,26 +536,14 @@ You need to be faster than the rest or they might find the killer sooner!
 
 · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - ·
 
-# Requerimientos funcionales
-- [  ] Mecanica de movimiento => move(int, int)
-- [ ] Mecanica de los dados => int dice(int) // (1234142214213) success: 5,6,4,3,2,1 || fail: 12, -1, 0
-- [ ] Mecanica de movimiento
-- [ ] Mecanica de movimiento
-- [ ] Mecanica de movimiento
-
-# Requerimientos no funcionales
-
-- [ ] Sprites
-- [ ] Textos interesantes(de colores)
-- [ ] Mecanica de movimiento
-
-
-
 
 # Installation of needed libraries
 
-## Allegro
+## Raylib
 
-> Allegro is a cross-platform library mainly aimed at video game and multimedia programming. It handles common, low-level tasks such as creating windows, accepting user input, loading data, drawing images, playing sounds, etc. and generally abstracting away the underlying platform. However, Allegro is not a game engine: you are free to design and structure your program as you like. 
-> Allegro at https://liballeg.org/
+> Raylib is a simple and easy-to-use library to enjoy videogames programming. Raylib is highly inspired by Borland BGI graphics lib and by XNA framework. Do you want to see all functions available in raylib? [Check cheatsheet](https://www.raylib.com/cheatsheet/cheatsheet.html)
+
+> NOTE for ADVENTURERS: raylib is a programming library to enjoy videogames programming; no fancy interface, no visual helpers, no auto-debugging... just coding in the most pure spartan-programmers way. Are you ready to learn? Jump to [code examples!](http://www.raylib.com/examples.html)
+
+> Raylib at https://www.raylib.com/
 
