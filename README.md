@@ -14,6 +14,21 @@ All you need to do is answer who killed them, where and with what weapon.
 · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - ·
 ## How to install
 
+In Linux(Ubuntu):
+>sudo apt install build-essential git
+
+>sudo apt install cmake
+
+>sudo apt install libasound2-dev mesa-common-dev libx11-dev libxrandr-dev libxi-dev xorg-dev libgl1-mesa-dev libglu1-mesa-dev
+Then go to usr/local/lib and: 
+
+>git clone https://github.com/raysan5/raylib.git raylib
+>cd raylib
+>sudo mkdir build && cd build
+>sudo cmake -DSHARED=ON -DSTATIC=ON ..
+>sudo make
+>sudo make install
+
 · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - ·
 
 # Requerimientos 
