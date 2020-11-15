@@ -21,18 +21,13 @@ All you need to do is answer who killed them, where and with what weapon.
 
 | Area | Requirement | Notes | Pruebas | Done? |
 |-|-|-|-|-|
-| Graficos | Mostrar tablero | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
+| Graficos | Mostrar Menu de Inicio | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
+| Graficos | Mostrar Tablero | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
+| Graficos | Mostrar personajes en Tablero | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de los personajes | No |
+
 | Mecanicas |  |  |  | No |
 | Manejo de Datos |  |  |  | No |
 | Eventos |  |  |  | No |
-| Graficos |  |  |  | No |
-| Graficos |  |  |  | No |
-| Graficos |  |  |  | No |
-| Graficos |  |  |  | No |
-| Graficos |  |  |  | No |
-| Graficos |  |  |  | No |
-| Graficos |  |  |  | No |
-| Graficos |  |  |  | No |
 | Graficos |  |  |  | No |
 
 
@@ -49,6 +44,7 @@ All you need to do is answer who killed them, where and with what weapon.
 - [ ] Pantalla de Shhh
 - [ ] Pantalla de Winner
 - [ ] Pantalla de Loser
+- [ ] Pantalla de Funado
 - [ ] Main Menu
 - [ ] Load
 - [ ] Settings
@@ -85,6 +81,9 @@ All you need to do is answer who killed them, where and with what weapon.
 - [ ] Spritesheet White Astronaut
 - [ ] Spritesheet Blue Astronaut
 
+## Animaciones
+- [ ] Deaths
+
 ### Botones que envian a otras ventanas
 - [ ] New Game -> Ventana de Opciones de nuevo juego
 - [ ] New Game Options -> Ventana de Shhh(inicio de juego)
@@ -117,9 +116,12 @@ All you need to do is answer who killed them, where and with what weapon.
 
 ### Estructuras necesarias
 - [ ] GameState
+- [ ] GameInitialState
 - [ ] GameHistory
 - [ ] Board
 - [ ] Player
+- [ ] Notebook
+- [ ] Accusations
 
 
 
@@ -547,3 +549,10 @@ You need to be faster than the rest or they might find the killer sooner!
 
 > Raylib at https://www.raylib.com/
 
+## libmpeg2
+
+> http://bedroomcoders.co.uk/using-libmpeg2-with-raylib/
+
+## ulfius
+
+> https://github.com/babelouest/ulfius
