@@ -46,16 +46,16 @@ Then go to usr/local/lib and:
 @@ text in purple (and bold)@@
 ```
 
-Gráficos 
+Gráficos (red)
 ![#F0170F](https://via.placeholder.com/15/F0170F/000000?text=+) `No`
 
-Gráficos/Mecánico 
+Gráficos/Mecánico (orange)
 ![#F3871B](https://via.placeholder.com/15/F3871B/000000?text=+) `No`
 
-Mecánico
-![#EB47B4](https://via.placeholder.com/15/EB47B4/000000?text=+) `No`
+Mecánico (pink)
+![#F471CD](https://via.placeholder.com/15/F471CD/000000?text=+) `No`
 
-Manejo de Datos
+Manejo de Datos (purple)
 ![#B434F4](https://via.placeholder.com/15/B434F4/000000?text=+) `No`
 
 #### 'Start Menu'
