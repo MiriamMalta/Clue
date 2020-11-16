@@ -19,56 +19,49 @@
 *
 ********************************************************************************************/
 
+#include <stdio.h>
 #include "raylib.h"
+#include "impostorLib.h"
 
-int main() 
-{
+int main(){
     // Initialization
     //--------------------------------------------------------------------------------------
-    const int screenWidth = 1920;
-    const int screenHeight = 1080;
+    const int screenWidth = 1920, screenHeight = 1080; //monitor normal
+    //const int screenWidth = 1366, screenHeight = 768; //monitor lap
+    //const int screenWidth = 1024, screenHeight = 768; //monitor feo
+    //const int screenWidth = 1280, screenHeight = 800; //monitor mac
 
     InitWindow(screenWidth, screenHeight, "raylib");
+    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+ 
+    Texture2D player = LoadTexture("./res/assets/crewmates/red/left.png");
+    float frameWidth = (float)(player.width/12);
+    float frameHeight = (float)player.height;
+    int maxFrames = (int)(player.width/(int)frameWidth);
+    float timer = 0.0f;
+    int frame = 0;
+    Rectangle frameRec = {0,0,frameWidth,frameHeight};
+    Vector2 vec2 = {20,20};
 
-    Camera camera = { 0 };
-    camera.position = (Vector3){ 10.0f, 10.0f, 8.0f };
-    camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
-    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
-    camera.fovy = 60.0f;
-    camera.type = CAMERA_PERSPECTIVE;
-    
-    SetCameraMode(camera, CAMERA_ORBITAL);
-
-    Vector3 cubePosition = { 0 };
-
-    SetTargetFPS(30);               // Set our game to run at 60 frames-per-second
-    //--------------------------------------------------------------------------------------
-
-    // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
-    {
-        // Update
-        //----------------------------------------------------------------------------------
-        UpdateCamera(&camera);
-        //----------------------------------------------------------------------------------
-
-        // Draw
-        //----------------------------------------------------------------------------------
+    // Main game loop - Detect window close button or ESC key
+    while (!WindowShouldClose()){
         BeginDrawing();
-
-            ClearBackground(RAYWHITE);
-
-            BeginMode3D(camera);
-
-                DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
-                DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
-                DrawGrid(10, 1.0f);
-
-            EndMode3D();
-
-            DrawText("This is a raylib example", 10, 40, 20, DARKGRAY);
-
-            DrawFPS(10, 10);
+        ClearBackground(RAYWHITE);
+        
+        timer += GetFrameTime();
+        if(timer >= 0.05f){
+            timer = 0.0f;
+            frame += 1;
+        }
+        frame = frame % maxFrames;
+        printf("%d\n",frame);
+        frameRec.x = (frameRec.width*frame);
+        DrawTextureRec(
+            player,
+            frameRec,
+            vec2,
+            RAYWHITE
+        );
 
         EndDrawing();
         //----------------------------------------------------------------------------------
