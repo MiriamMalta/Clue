@@ -35,23 +35,25 @@ Then go to usr/local/lib and:
 # Requerimientos 
 ## Requerimientos funcionales
 
-![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `#Test`
-![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `Test`
-<div class="text-red">
-  Test
-</div>
+![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `Hello` 
+
+```diff
+- text in red
++ text in green
+! text in orange
+# text in gray
+@@ text in purple (and bold)@@
+```
 
 #### 'Tests'
 | Area | Requirement | Notes | Pruebas | Done? |
 |-|-|-|-|-|
-![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `| Test | Test | Test | Test| No |` 
-<div class="text-red">
-  | Test | Test | Test | Test| No |
-</div>
-| Test | Test | Test | Test| <div class="text-red"> No </div> |
-
-![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `| Test | Test | Test | Test| No |` 
-
+```diff
+- | Test | Test | Test | Test | No |
+```
+```diff 
++ | Test | Test | Test | Test | No |
+```
 
 #### 'Start Menu'
 | Area | Requirement | Notes | Pruebas | Done? |
