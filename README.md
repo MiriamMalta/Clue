@@ -97,7 +97,6 @@ Then go to usr/local/lib and:
 | Gráficos | Mostrar Menú de 'Loading' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
 | Gráficos | Mostrar Movimiento en el Menú de 'Loading' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
 | Gráficos/Mecánico | Menú de 'Loading' Funcional | Que el menú de 'Loading' lleve a la ventana indicada | Revisar que el menú de  'Loading' lleve a la ventana que deba de ir dependiendo de cual sea la situación | No |
-
 | Gráficos | Mostrar Menú de 'SHH' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
 | Gráficos/Mecánico | Menú de 'SHH' Funcional | Que el menú de 'SHH' lleve a la ventana indicada | Revisar que el menú de 'SHH' lleve a la ventana de 'Game' o a la ventana de 'Loading' | No |
 
