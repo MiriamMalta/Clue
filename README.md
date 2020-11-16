@@ -35,30 +35,25 @@ Then go to usr/local/lib and:
 # Requerimientos 
 ## Requerimientos funcionales
 
-#### 'Tests'
-![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `Hello` 
-
-```diff
-- text in red
-+ text in green
-! text in orange
-# text in gray
-@@ text in purple (and bold)@@
-```
+#### Color-code
 
 Gráficos (red) (green)
+
 ![#F0170F](https://via.placeholder.com/15/F0170F/000000?text=+) `No`
 ![#49F262](https://via.placeholder.com/15/49F262/000000?text=+) `Yes`
 
 Gráficos/Mecánico (orange) (blue)
+
 ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No`
 ![#5E6AF3](https://via.placeholder.com/15/5E6AF3/000000?text=+) `Yes`
 
 Mecánico (pink) (light green)
+
 ![#F471CD](https://via.placeholder.com/15/F471CD/000000?text=+) `No`
 ![#CDF471](https://via.placeholder.com/15/CDF471/000000?text=+) `Yes`
 
 Manejo de Datos (purple) (yellow)
+
 ![#B434F4](https://via.placeholder.com/15/B434F4/000000?text=+) `No`
 ![#F4D434](https://via.placeholder.com/15/F4D434/000000?text=+) `Yes`
 
@@ -120,7 +115,7 @@ Manejo de Datos (purple) (yellow)
 | Gráficos/Mecánico | 'Cards' en el Tablero en 'Game' Interactivo | Que las cartas en el tablero puedan ser seleccionadas | Revisar que el usuario pueda seleccionar las cartas en 'Cards' | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
 | Mecánico | 'Cards' dadas por el juego | Que las cartas en el tablero puedan ser seleccionadas | Revisar que el usuario pueda seleccionar las cartas en 'Cards' | ![#F471CD](https://via.placeholder.com/15/F471CD/000000?text=+) `No` |
 ...
-###### 'Pause' in 'Game'
+##### 'Pause' in 'Game'
 | Area | Requirement | Notes | Pruebas | Done? |
 |-|-|-|-|-|
 | Graficos | Mostrar botón de 'Pause' en 'Game' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia en la ventana | ![#F0170F](https://via.placeholder.com/15/F0170F/000000?text=+) `No` |
@@ -133,7 +128,7 @@ Manejo de Datos (purple) (yellow)
 | Gráficos/Mecánico | Botón de 'Return to Game' en 'Pause' Funcional | Que el botón de 'Return to Game' en 'Pause' pueda ser seleccionado y lleve a la pantalla indicada | Revisar que el botón pueda ser seleccionado y lleve a la ventana de 'Game' o 'Loading' | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
 | Gráficos/Mecánico | Botón de 'Restart' en 'Pause' Funcional | Que el botón de 'Restart' en 'Pause' pueda ser seleccionado y lleve a la pantalla indicada | Revisar que el botón pueda ser seleccionado y lleve a la ventana de 'Game' nueva o 'Loading' | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
 | Manejo de Datos | 'Botón de 'Restart' en 'Pause' Borre | Que el botón de 'Restart en 'Pause' borre los hechos realizados por el usuario | Revisar que los hechos que el usuario tenía se borren y reinicien, que empiece desde 0 y se cambién las cartas | ![#B434F4](https://via.placeholder.com/15/B434F4/000000?text=+) `No` |
-###### 'Notebook' in 'Game'
+##### 'Notebook' in 'Game'
 | Area | Requirement | Notes | Pruebas | Done? |
 |-|-|-|-|-|
 | Graficos | Mostrar botón de 'Notebook' en 'Game' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia del cuaderno | ![#F0170F](https://via.placeholder.com/15/F0170F/000000?text=+) `No` |
@@ -143,7 +138,7 @@ Manejo de Datos (purple) (yellow)
 | Gráficos/Mecánico | Botones en 'Notebook' Funcionales | Que los botones en 'Notebook' pueda ser seleccionados | Revisar que los botones hagan su función correspondiente | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
 | Gráficos/Mecánico | Botón de 'Return to Game' en 'Notebook' Funcional | Que el botón de 'Return to Game' en 'Notebook' pueda ser seleccionado y lleve a la pantalla indicada | Revisar que el botón pueda ser seleccionado y lleve a la ventana de 'Game' o 'Loading' | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
 | Manejo de Datos | Cambios hechos 'Notebook' Guardados | Que al hacer un cambio en 'Notebook' se tomen en cuenta las decisiones del usuario | Revisar que al salirse de 'Notebook' se guarde la información dada por el usuario | ![#B434F4](https://via.placeholder.com/15/B434F4/000000?text=+) `No` |
-###### In 'Game'
+##### In 'Game'
 | Area | Requirement | Notes | Pruebas | Done? |
 |-|-|-|-|-|
 | Gráficos/Mecánico | Dado Funcional | Que al precionar el dado este de un número | Revisar que al precionar el dado este de un número válido (1-6) el cual pueda ser usado por el usuario | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
@@ -151,7 +146,7 @@ Manejo de Datos (purple) (yellow)
 | Gráficos/Mecánico | Movimiento Único | Que el usuario solo pueda mover su personaje | Revisar que el usuario solo sea capaz de mover su personaje | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
 | Mecánico | Dado-Movimiento Funcional | Que el usuario solo se pueda mover la cantidad de espacios dada por el dado | Revisar que el usuario solo se pueda mover la cantidad de espacios que dio el dado | ![#F471CD](https://via.placeholder.com/15/F471CD/000000?text=+) `No` |
 ...
-###### 'Suggestion' in 'Game'
+##### 'Suggestion' in 'Game'
 | Area | Requirement | Notes | Pruebas | Done? |
 |-|-|-|-|-|
 | Graficos | Mostrar botón de 'Suggestion' en 'Game' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de 'suggestion' | ![#F0170F](https://via.placeholder.com/15/F0170F/000000?text=+) `No` |
@@ -167,7 +162,7 @@ Manejo de Datos (purple) (yellow)
 | Gráficos/Mecánico | Botón de 'Death' en 'Suggestion' Funcional | Que el botón de 'Death' en 'Suggestion' muestre las muertes y funcione como elección | Revisar que la información puesta en el botón se tome en cuenta | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
 | Manejo de Datos | 'Character' en 'Suggestion' Guardado | Que el input dado por el usuario sea tomado en cuenta para mostrar las cartas en 'Game' | Revisar que el valor dado por el usuario en 'Character' sea el correcto | ![#B434F4](https://via.placeholder.com/15/B434F4/000000?text=+) `No` |
 | Manejo de Datos | 'Death' en 'Suggestion' Guardado | Que el input dado por el usuario sea tomado en cuenta para mostrar las cartas en 'Game' | Revisar que el valor dado por el usuario en 'Death' sea el correcto | ![#B434F4](https://via.placeholder.com/15/B434F4/000000?text=+) `No` |
-###### 'Accusation' in 'Game'
+##### 'Accusation' in 'Game'
 | Area | Requirement | Notes | Pruebas | Done? |
 |-|-|-|-|-|
 | Graficos | Mostrar botón de 'Accusation' en 'Game' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de 'accusation' | ![#F0170F](https://via.placeholder.com/15/F0170F/000000?text=+) `No` |
@@ -186,6 +181,8 @@ Manejo de Datos (purple) (yellow)
 | Manejo de Datos | 'Death' en 'Accusation' Guardado | Que el input dado por el usuario sea tomado en cuenta para mostrar las cartas en 'Game' | Revisar que el valor dado por el usuario en 'Death' sea el correcto | ![#B434F4](https://via.placeholder.com/15/B434F4/000000?text=+) `No` |
 
 
+| Area | Requirement | Notes | Pruebas | Done? |
+|-|-|-|-|-|
 | Mecanicas |  |  |  | No |
 | Manejo de Datos |  |  |  | No |
 | Eventos |  |  |  | No |
@@ -194,9 +191,7 @@ Manejo de Datos (purple) (yellow)
 
 - [ ] Mecanica de movimiento => move(int, int)
 - [ ] Mecanica de los dados => int dice(int) // (1234142214213) success: 5,6,4,3,2,1 || fail: 12, -1, 0
-- [ ] Mecanica de movimiento
-- [ ] Mecanica de movimiento
-- [ ] Mecanica de movimiento
+
 
 ## Requerimientos no funcionales
 
