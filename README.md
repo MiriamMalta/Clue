@@ -47,13 +47,16 @@ Then go to usr/local/lib and:
 ```
 
 Gráficos 
-![#F0170F](https://via.placeholder.com/15/f03c15/000000?text=+) `No`
+![#F0170F](https://via.placeholder.com/15/F0170F/000000?text=+) `No`
+
 Gráficos/Mecánico 
-![#F3871B](https://via.placeholder.com/15/f03c15/000000?text=+) `No`
+![#F3871B](https://via.placeholder.com/15/F3871B/000000?text=+) `No`
+
 Mecánico
-![#EB47B4](https://via.placeholder.com/15/f03c15/000000?text=+) `No`
+![#EB47B4](https://via.placeholder.com/15/EB47B4/000000?text=+) `No`
+
 Manejo de Datos
-![#B434F4](https://via.placeholder.com/15/f03c15/000000?text=+) `No`
+![#B434F4](https://via.placeholder.com/15/B434F4/000000?text=+) `No`
 
 #### 'Start Menu'
 | Area | Requirement | Notes | Pruebas | Done? |
