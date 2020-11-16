@@ -230,12 +230,12 @@ Manejo de Datos (purple) (yellow)
 - [ ] Sprite Carta Throat Saber
 - [ ] Sprite Carta Funado
 - [ ] Sprite Carta Disconected from the server
-- [ ] Spritesheet Yellow Astronaut
-- [ ] Spritesheet Red Astronaut
-- [ ] Spritesheet Purple Astronaut
-- [ ] Spritesheet Green Astronaut
-- [ ] Spritesheet White Astronaut
-- [ ] Spritesheet Blue Astronaut
+- [x] Spritesheet Yellow Astronaut
+- [x] Spritesheet Red Astronaut
+- [x] Spritesheet Purple Astronaut
+- [x] Spritesheet Green Astronaut
+- [x] Spritesheet White Astronaut
+- [x] Spritesheet Blue Astronaut
 
 ## Animaciones
 - [ ] Deaths
