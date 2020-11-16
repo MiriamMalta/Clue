@@ -35,11 +35,147 @@ Then go to usr/local/lib and:
 # Requerimientos 
 ## Requerimientos funcionales
 
+![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `#Test`
+![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `Test`
+<div class="text-red">
+  Test
+</div>
+
+#### 'Tests'
 | Area | Requirement | Notes | Pruebas | Done? |
 |-|-|-|-|-|
-| Graficos | Mostrar Menu de Inicio | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
-| Graficos | Mostrar Tablero | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
-| Graficos | Mostrar personajes en Tablero | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de los personajes | No |
+![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `| Test | Test | Test | Test| No |` 
+<div class="text-red">
+  | Test | Test | Test | Test| No |
+</div>
+| Test | Test | Test | Test| <div class="text-red"> No </div> |
+
+![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `| Test | Test | Test | Test| No |` 
+
+
+#### 'Start Menu'
+| Area | Requirement | Notes | Pruebas | Done? |
+|-|-|-|-|-|
+| Gráficos | Mostrar Menú de 'Start Menu' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
+| Gráficos/Mecánico | Menú de 'Start Menu' Interactivo | Que el menú sea interactivo | Revisar que se vea el mouse y que se puedan seleccionar los botónes | No |
+| Gráficos/Mecánico | Botón de 'New Game' en 'Start Menu' Funcional | Que el botón de 'New Game' lleve a la ventana indicada | Revisar que el botón lleve a la ventana de 'New Menu' o a la ventana de 'Loading' | No |
+| Gráficos/Mecánico | Botón de 'Load Game' en 'Start Menu' Funcional | Que el botón de 'Load Game' lleve a la ventana indicada | Revisar que el botón lleve a la ventana de 'Load Menu' o a la ventana de 'Loading' | No |
+| Gráficos/Mecánico | Botón de 'Settings' en 'Start Menu' Funcional | Que el botón de 'Settings' lleve a la ventana indicada | Revisar que el botón lleve a la ventana de 'Settings' o a la ventana de 'Loading' | No |
+| Gráficos/Mecánico | Botones en 'Settings' Funcionales | Que los botones en 'Settings' puedan ser seleccionados | Revisar que los botones hagan su función correspondiente | No |
+| Manejo de Datos | Cambios hechos 'Settings' Guardados | Que al hacer un cambio en 'Settings' se tomen en cuenta las decisiones del usuario | Revisar que al salirse de 'Settings' se guarde la información dada por el usuario | No |
+| Gráficos/Mecánico | Botón de 'Return' en 'Settings' Funcional | Que el botón de 'Return' en 'Settings' pueda ser seleccionado y lleve a la pantalla indicada | Revisar que el botón pueda ser seleccionado y lleve a la ventana de 'Start Menu' o 'Loading' | No |
+| Gráficos/Mecánico | Botón de 'Credits' en 'Start Menu' Funcional | Que el botón de 'Credits' lleve a la ventana indicada | Revisar que el botón lleve a la ventana de 'Credits' o a la ventana de 'Loading' | No |
+| Gráficos/Mecánico | Botón de 'Return' en 'Credits' Funcional | Que el botón de 'Return' en 'Credits' pueda ser seleccionado y lleve a la pantalla indicada | Revisar que el botón pueda ser seleccionado y lleve a la ventana de 'Start Menu' o 'Loading' | No |
+
+#### 'New Menu'
+| Area | Requirement | Notes | Pruebas | Done? |
+|-|-|-|-|-|
+| Gráficos | Mostrar Menú de 'New Menu' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
+| Gráficos/Mecánico | Menú de 'New Menu' Interactivo | Que el menú sea interactivo | Revisar que se vea el mouse y que se puedan seleccionar los botónes | No |
+| Gráficos/Mecánico | Botones de 'New Menu' Funcionales | Que los botones en 'New Menu' puedan ser seleccionados | Revisar que los botones hagan su función correspondiente | No |
+| Gráficos/Mecánico | Botones de 'Characters' en 'New Menu' sean Únicos | Que los botones de 'Characters' en 'New Menu' solo contengan 1 personaje por usuario | Revisar que los botones solo puedan seleccionar 1 personaje y sea único por usuario | No |
+| Manejo de Datos | 'Characters' en 'New Menu' Guardado | Que los personajes ingresados en 'Characters' en 'New Menu' se guarden | Revisar que los personajes puestos en 'Characters' se guarden en el juego (todas las instancias) | No |
+| Gráficos/Mecánico | Botón de 'Name' en 'New Menu' Funcional | Que el botón de 'Name' en 'New Menu' sea funcional | Revisar que el botón de 'Name' funcione, que el usuario pueda ingresar su nombre | No |
+| Manejo de Datos | 'Name' en 'New Menu' Guardado | Que nombre ingresado en 'Name' en 'New Menu' se guarde | Revisar que el 'Name' se guarde en el juego (todas las instancias) | No |
+| Gráficos/Mecánico | Botón de 'Start Game' en 'New Menu' Funcional | Que el botón de 'Start Game' lleve a la ventana indicada | Revisar que el botón lleve a la ventana de 'SHH' o a la ventana de 'Loading' | No |
+| Manejo de Datos | 'Start Game' en 'New Menu' Guardado | Que al iniciar un 'Game' se tomen en cuenta las decisiones del usuario | Revisar que al iniciar el botón 'Start Game' se guarden toda la información dada por el usuario | No |
+| Gráficos/Mecánico | Botón de 'Cancel' en 'New Menu' Funcional | Que el botón de 'Cancel' en 'New Menu' pueda ser seleccionado y lleve a la pantalla indicada | Revisar que el botón pueda ser seleccionado y lleve a la ventana de 'Start Menu' o 'Loading' | No |
+
+#### 'Load Menu'
+| Area | Requirement | Notes | Pruebas | Done? |
+|-|-|-|-|-|
+| Gráficos | Mostrar Menú de 'Load Menu' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
+| Gráficos/Mecánico | Menú de 'Load Menu' Interactivo | Que el menú sea interactivo | Revisar que se vea el mouse y que se puedan seleccionar los botónes | No |
+| Gráficos/Mecánico | Botones de 'Load Menu' Funcionales | Que los botones en 'Load Menu' puedan ser seleccionados | Revisar que los botones hagan su función correspondiente | No |
+| Gráficos/Mecánico | Botones de 'Save...' en 'Load Menu' Funcionales | Que los botones de 'Save...' en 'Load Menu' lleven a la ventana indicada | Revisar que los botones lleven a la ventana de 'SHH' o a la ventada de 'Loading' | No |
+| Manejo de Datos | 'Save...' Guardado en 'Load Menu' Corre | Que el save hecho en 'Save...' hecho por el usuario este guardado y se pueda correr | Revisar que al precionar 'Save...' se pueda correr el juego seleccionado por el usuario | No |
+| Gráficos/Mecánico | Botón de 'Cancel' en 'Load Menu' Funcional | Que el botón de 'Cancel' en 'Load Menu' pueda ser seleccionado y lleve a la pantalla indicada | Revisar que el botón pueda ser seleccionado y lleve a la ventana de 'Start Menu' o 'Loading' | No |
+
+#### 'Extra'
+| Area | Requirement | Notes | Pruebas | Done? |
+|-|-|-|-|-|
+| Gráficos | Mostrar Menú de 'Loading' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
+| Gráficos | Mostrar Movimiento en el Menú de 'Loading' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
+| Gráficos/Mecánico | Menú de 'Loading' Funcional | Que el menú de 'Loading' lleve a la ventana indicada | Revisar que el menú de  'Loading' lleve a la ventana que deba de ir dependiendo de cual sea la situación | No |
+
+| Gráficos | Mostrar Menú de 'SHH' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
+| Gráficos/Mecánico | Menú de 'SHH' Funcional | Que el menú de 'SHH' lleve a la ventana indicada | Revisar que el menú de 'SHH' lleve a la ventana de 'Game' o a la ventana de 'Loading' | No |
+
+#### 'Game'
+| Area | Requirement | Notes | Pruebas | Done? |
+|-|-|-|-|-|
+| Graficos | Mostrar ventana de 'Game' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
+| Gráficos | Mostrar Tablero en 'Game' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
+| Graficos | Mostrar personajes en Tablero en 'Game' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de los personajes | No |
+| Gráficos | Mostrar 'Cards' en el Tablero en 'Game' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de las cartas | No |
+| Gráficos/Mecánico | 'Cards' en el Tablero en 'Game' Interactivo | Que las cartas en el tablero puedan ser seleccionadas | Revisar que el usuario pueda seleccionar las cartas en 'Cards' | No |
+| Mecánico | 'Cards' dadas por el juego | Que las cartas en el tablero puedan ser seleccionadas | Revisar que el usuario pueda seleccionar las cartas en 'Cards' | No |
+...
+###### 'Pause' in 'Game'
+| Area | Requirement | Notes | Pruebas | Done? |
+|-|-|-|-|-|
+| Graficos | Mostrar botón de 'Pause' en 'Game' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia en la ventana | No |
+| Gráficos/Mecánico | Botón de 'Pause' Interactivo | Que el menú sea interactivo | Revisar que se vea el mouse y que se puedan seleccionar el botón | No |
+| Graficos | Mostrar ventana de 'Pause' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
+| Gráficos/Mecánico | Botones en 'Pause' Funcionales | Que los botones en 'Pause' pueda ser seleccionado | Revisar que los botones hagan su función correspondiente | No |
+| Gráficos/Mecánico | Botón de 'Change Settings' en 'Pause' Funcional | Que el botón de 'Settings' en 'Pause' pueda ser seleccionado y lleve a la ventana correcta | Revisar que 'Change Settings' lleve a la ventana de 'Settings' | No |
+| Gráficos/Mecánico | Botón de 'Save' en 'Settings' Funcional | Que el botón de 'Save' en 'Settings' pueda ser seleccionado y lleve a la pantalla indicada | Revisar que el botón pueda ser seleccionado y lleve a la ventana de 'Pause' o 'Loading' | No |
+| Manejo de Datos | Cambios hechos 'Settings' Guardados | Que al hacer un cambio en 'Settings' se tomen en cuenta las decisiones del usuario | Revisar que al salirse de 'Settings' se guarde la información dada por el usuario | No |
+| Gráficos/Mecánico | Botón de 'Return to Game' en 'Pause' Funcional | Que el botón de 'Return to Game' en 'Pause' pueda ser seleccionado y lleve a la pantalla indicada | Revisar que el botón pueda ser seleccionado y lleve a la ventana de 'Game' o 'Loading' | No |
+| Gráficos/Mecánico | Botón de 'Restart' en 'Pause' Funcional | Que el botón de 'Restart' en 'Pause' pueda ser seleccionado y lleve a la pantalla indicada | Revisar que el botón pueda ser seleccionado y lleve a la ventana de 'Game' nueva o 'Loading' | No |
+| Manejo de Datos | 'Botón de 'Restart' en 'Pause' Borre | Que el botón de 'Restart en 'Pause' borre los hechos realizados por el usuario | Revisar que los hechos que el usuario tenía se borren y reinicien, que empiece desde 0 y se cambién las cartas | No |
+###### 'Notebook' in 'Game'
+| Area | Requirement | Notes | Pruebas | Done? |
+|-|-|-|-|-|
+| Graficos | Mostrar botón de 'Notebook' en 'Game' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia del cuaderno | No |
+| Gráficos/Mecánico | Botón en 'Notebook' en 'Game' Funcional | Que el botón de 'Notebook' en 'Game' sea funcional | Revisar que el botón de 'Notebook' lleve a la ventana de 'Notebook' o a 'Loading' | No |
+| Mecánico | Botón en 'Notebook' en 'Game' Funcional en TODO MOMENTO | Que el botón de 'Notebook' en 'Game' sea funcional en TODO MOMENTO | Revisar que el botón de 'Notebook' siempre funcione | No |
+| Graficos | Mostrar ventana de 'Notebook' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
+| Gráficos/Mecánico | Botones en 'Notebook' Funcionales | Que los botones en 'Notebook' pueda ser seleccionados | Revisar que los botones hagan su función correspondiente | No |
+| Gráficos/Mecánico | Botón de 'Return to Game' en 'Notebook' Funcional | Que el botón de 'Return to Game' en 'Notebook' pueda ser seleccionado y lleve a la pantalla indicada | Revisar que el botón pueda ser seleccionado y lleve a la ventana de 'Game' o 'Loading' | No |
+| Manejo de Datos | Cambios hechos 'Notebook' Guardados | Que al hacer un cambio en 'Notebook' se tomen en cuenta las decisiones del usuario | Revisar que al salirse de 'Notebook' se guarde la información dada por el usuario | No |
+###### In 'Game'
+| Area | Requirement | Notes | Pruebas | Done? |
+|-|-|-|-|-|
+| Gráficos/Mecánico | Dado Funcional | Que al precionar el dado este de un número | Revisar que al precionar el dado este de un número válido (1-6) el cual pueda ser usado por el usuario | No |
+| Gráficos/Mecánico | Movimiento Funcional | Que al precionar las teclas de movimiento el personaje se mueva | Revisar que al precionar las teclas el personaje se mueva a la dirección que el usuario indico | No |
+| Gráficos/Mecánico | Movimiento Único | Que el usuario solo pueda mover su personaje | Revisar que el usuario solo sea capaz de mover su personaje | No |
+| Mecánico | Dado-Movimiento Funcional | Que el usuario solo se pueda mover la cantidad de espacios dada por el dado | Revisar que el usuario solo se pueda mover la cantidad de espacios que dio el dado | No |
+...
+###### 'Suggestion' in 'Game'
+| Area | Requirement | Notes | Pruebas | Done? |
+|-|-|-|-|-|
+| Graficos | Mostrar botón de 'Suggestion' en 'Game' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de 'suggestion' | No |
+| Gráficos/Mecánico | Botón en 'Suggestion' en 'Game' Funcional | Que el botón de 'Suggestion' en 'Game' sea funcional | Revisar que el botón de 'Suggestion' lleve a la ventana de 'Suggestion' o a 'Loading' | No |
+| Mecánico | Botón en 'Suggestion' en 'Game' Funcional en MOMENTOS ESPECÍFICOS | Que el botón de 'Suggestion' en 'Game' sea funcional en momentos específicos | Revisar que el botón de 'Suggestion' funcione SOLO AL ENTRAR A 'Rooms' y que este NO sea Cafeteria | No |
+| Graficos | Mostrar ventana de 'Suggestion' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
+| Graficos | Mostrar 'Characters' y botones en la ventana de 'Suggestion' | De la siguiente manera (inserte imagen) | Revisar que se cree la personajes y botones | No |
+| Gráficos/Mecánico | Botones en 'Suggestion' Funcionales | Que los botones en 'Suggestion' pueda ser seleccionados | Revisar que los botones hagan su función correspondiente | No |
+| Gráficos/Mecánico | Botones de 'Character' en 'Suggestion' Único | Que solo se pueda cambiar los valores de un solo 'Character' a la vez | Revisar que solo se puedan cambiar los valores 1 personaje al la vez | No |
+| Gráficos/Mecánico | Botón de 'Place' en 'Suggestion' Estático | Que no se puedan modificar el valor | Revisar que no se pueda modificar el valor de 'Place' | No |
+| Gráficos/Mecánico | Botón de 'Place' en 'Suggestion' Correcto | Que 'Place' muestre el lugar donde esta el usuario | Revisar que en 'Place' diga el cuarto en donde esta el usuario | No |
+| Gráficos/Mecánico | Botón de 'Death' en 'Suggestion' Interactivo | Que el botón de 'Death' en 'Suggestion' pueda ser seleccionado | Revisar que el botón sea interactivo y cambie según el input del usuario | No |
+| Gráficos/Mecánico | Botón de 'Death' en 'Suggestion' Funcional | Que el botón de 'Death' en 'Suggestion' muestre las muertes y funcione como elección | Revisar que la información puesta en el botón se tome en cuenta | No |
+| Manejo de Datos | 'Character' en 'Suggestion' Guardado | Que el input dado por el usuario sea tomado en cuenta para mostrar las cartas en 'Game' | Revisar que el valor dado por el usuario en 'Character' sea el correcto | No |
+| Manejo de Datos | 'Death' en 'Suggestion' Guardado | Que el input dado por el usuario sea tomado en cuenta para mostrar las cartas en 'Game' | Revisar que el valor dado por el usuario en 'Death' sea el correcto | No |
+###### 'Accusation' in 'Game'
+| Area | Requirement | Notes | Pruebas | Done? |
+|-|-|-|-|-|
+| Graficos | Mostrar botón de 'Accusation' en 'Game' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de 'accusation' | No |
+| Gráficos/Mecánico | Botón en 'Accusation' en 'Game' Funcional | Que el botón de 'Accusation' en 'Game' sea funcional | Revisar que el botón de 'Accusation' lleve a la ventana de 'Accusation' o a 'Loading' | No |
+| Mecánico | Botón en 'Accusation' en 'Game' Funcional en CAFETERIA | Que el botón de 'Accusation' en 'Game' sea funcional en cafeteria | Revisar que el botón de 'Accusation' solo funcione cuando el usuario esta en CAFETERIA | No |
+| Graficos | Mostrar ventana de 'Accusation' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
+| Graficos | Mostrar 'Characters' y botones en la ventana de 'Suggestion' | De la siguiente manera (inserte imagen) | Revisar que se cree la personajes y botones | No |
+| Gráficos/Mecánico | Botones en 'Suggestion' Funcionales | Que los botones en 'Suggestion' pueda ser seleccionados | Revisar que los botones hagan su función correspondiente | No |
+| Gráficos/Mecánico | Botones de 'Character' en 'Accusation' Único | Que solo se pueda cambiar los valores de un solo 'Character' a la vez | Revisar que solo se puedan cambiar los valores 1 personaje al la vez | No |
+| Gráficos/Mecánico | Botón de 'Place' en 'Accusation' Interactivo | Que el botón de 'Place' en 'Accusation' pueda ser seleccionado | Revisar que el botón sea interactivo y cambie según el input del usuario | No |
+| Gráficos/Mecánico | Botón de 'Place' en 'Accusation' Funcional | Que el botón de 'Place' en 'Accusation' muestre los cuartos y funcione como elección | Revisar que la información puesta en el botón se tome en cuenta | No |
+| Gráficos/Mecánico | Botón de 'Death' en 'Accusation' Interactivo | Que el botón de 'Death' en 'Accusation' pueda ser seleccionado | Revisar que el botón sea interactivo y cambie según el input del usuario | No |
+| Gráficos/Mecánico | Botón de 'Death' en 'Accusation' Funcional | Que el botón de 'Death' en 'Accusation' muestre las muertes y funcione como elección | Revisar que la información puesta en el botón se tome en cuenta | No |
+| Manejo de Datos | 'Character' en 'Accusation' Guardado | Que el input dado por el usuario sea tomado en cuenta para mostrar las cartas en 'Game' | Revisar que el valor dado por el usuario en 'Character' sea el correcto | No |
+| Manejo de Datos | 'Place' en 'Accusation' Guardado | Que el input dado por el usuario sea tomado en cuenta para mostrar las cartas en 'Game' | Revisar que el valor dado por el usuario en 'Place' sea el correcto | No |
+| Manejo de Datos | 'Death' en 'Accusation' Guardado | Que el input dado por el usuario sea tomado en cuenta para mostrar las cartas en 'Game' | Revisar que el valor dado por el usuario en 'Death' sea el correcto | No |
+
 
 | Mecanicas |  |  |  | No |
 | Manejo de Datos |  |  |  | No |
@@ -114,7 +250,6 @@ Then go to usr/local/lib and:
 - [ ] Restart -> Volver a iniciar el juego desde el inicio
 - [ ] Cancel -> Volver al Juego
 
-
 ### Funciones o Mecanicas
 - [ ] SaveGame()
 - [ ] LoadGame()
@@ -140,9 +275,7 @@ Then go to usr/local/lib and:
 - [ ] Accusations
 
 
-
 · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - ·
-
 
 
 ## Base Information
