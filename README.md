@@ -45,11 +45,15 @@ Then go to usr/local/lib and:
 # text in gray
 @@ text in purple (and bold)@@
 ```
-
-
+| Area | Requirement | Notes | Pruebas | Done? |
+|-|-|-|-|-|
+| Gráficos | Mostrar Menú de 'Start Menu' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | 
 ```diff
-- #### 'Start Menu'
-```
+- No
+``` |
+
+
+#### 'Start Menu'
 | Area | Requirement | Notes | Pruebas | Done? |
 |-|-|-|-|-|
 | Gráficos | Mostrar Menú de 'Start Menu' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
