@@ -45,15 +45,20 @@ Then go to usr/local/lib and:
 # text in gray
 @@ text in purple (and bold)@@
 ```
-| Area | Requirement | Notes | Pruebas | Done? |
-|-|-|-|-|-|
-| Gráficos | Mostrar Menú de 'Start Menu' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `No` |
 
+Gráficos 
+![#F0170F](https://via.placeholder.com/15/f03c15/000000?text=+) `No`
+Gráficos/Mecánico 
+![#F3871B](https://via.placeholder.com/15/f03c15/000000?text=+) `No`
+Mecánico
+![#EB47B4](https://via.placeholder.com/15/f03c15/000000?text=+) `No`
+Manejo de Datos
+![#B434F4](https://via.placeholder.com/15/f03c15/000000?text=+) `No`
 
 #### 'Start Menu'
 | Area | Requirement | Notes | Pruebas | Done? |
 |-|-|-|-|-|
-| Gráficos | Mostrar Menú de 'Start Menu' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
+| Gráficos | Mostrar Menú de 'Start Menu' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | ![#F0170F](https://via.placeholder.com/15/f03c15/000000?text=+) `No` |
 | Gráficos/Mecánico | Menú de 'Start Menu' Interactivo | Que el menú sea interactivo | Revisar que se vea el mouse y que se puedan seleccionar los botónes | No |
 | Gráficos/Mecánico | Botón de 'New Game' en 'Start Menu' Funcional | Que el botón de 'New Game' lleve a la ventana indicada | Revisar que el botón lleve a la ventana de 'New Menu' o a la ventana de 'Loading' | No |
 | Gráficos/Mecánico | Botón de 'Load Game' en 'Start Menu' Funcional | Que el botón de 'Load Game' lleve a la ventana indicada | Revisar que el botón lleve a la ventana de 'Load Menu' o a la ventana de 'Loading' | No |
