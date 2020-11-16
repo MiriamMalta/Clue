@@ -47,10 +47,7 @@ Then go to usr/local/lib and:
 ```
 | Area | Requirement | Notes | Pruebas | Done? |
 |-|-|-|-|-|
-| Gráficos | Mostrar Menú de 'Start Menu' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | 
-```diff
-- No
-``` |
+| Gráficos | Mostrar Menú de 'Start Menu' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `No` |
 
 
 #### 'Start Menu'
