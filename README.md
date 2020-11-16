@@ -48,15 +48,20 @@ Then go to usr/local/lib and:
 
 Gráficos (red)
 ![#F0170F](https://via.placeholder.com/15/F0170F/000000?text=+) `No`
+![#0FF031](https://via.placeholder.com/15/0FF031/000000?text=+) `Yes`
 
 Gráficos/Mecánico (orange)
 ![#F3871B](https://via.placeholder.com/15/F3871B/000000?text=+) `No`
+![#5353F3](https://via.placeholder.com/15/5353F3/000000?text=+) `Yes`
 
 Mecánico (pink)
 ![#F471CD](https://via.placeholder.com/15/F471CD/000000?text=+) `No`
+![#CDF471](https://via.placeholder.com/15/CDF471/000000?text=+) `Yes`
 
 Manejo de Datos (purple)
 ![#B434F4](https://via.placeholder.com/15/B434F4/000000?text=+) `No`
+![#F4D434](https://via.placeholder.com/15/F4D434/000000?text=+) `Yes`
+
 
 #### 'Start Menu'
 | Area | Requirement | Notes | Pruebas | Done? |
