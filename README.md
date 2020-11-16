@@ -35,6 +35,7 @@ Then go to usr/local/lib and:
 # Requerimientos 
 ## Requerimientos funcionales
 
+#### 'Tests'
 ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `Hello` 
 
 ```diff
@@ -45,17 +46,10 @@ Then go to usr/local/lib and:
 @@ text in purple (and bold)@@
 ```
 
-#### 'Tests'
-| Area | Requirement | Notes | Pruebas | Done? |
-|-|-|-|-|-|
-```diff
-- | Test | Test | Test | Test | No |
-```
-```diff 
-+ | Test | Test | Test | Test | No |
-```
 
-#### 'Start Menu'
+```diff
+- #### 'Start Menu'
+```
 | Area | Requirement | Notes | Pruebas | Done? |
 |-|-|-|-|-|
 | Gráficos | Mostrar Menú de 'Start Menu' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | No |
