@@ -16,7 +16,7 @@
                 "args": [
                     "RAYLIB_PATH=C:/raylib/raylib",
                     "PROJECT_NAME=${fileBasenameNoExtension}",
-                    "OBJS=${fileBasenameNoExtension}.c",
+                    "OBJS=${fileBasenameNoExtension}.c src/gameLogic.c src/graphsLib.c src/impostorLib.c src/mecanicsLib.c src/test.c",
                     "BUILD_MODE=DEBUG"
                 ],
             },
@@ -24,7 +24,7 @@
                 "args": [
                     "RAYLIB_PATH=<path_to_raylib>/raylib",
                     "PROJECT_NAME=${fileBasenameNoExtension}",
-                    "OBJS=${fileBasenameNoExtension}.c",
+                    "OBJS=${fileBasenameNoExtension}.c src/gameLogic.c src/graphsLib.c src/impostorLib.c src/mecanicsLib.c src/test.c",
                     "BUILD_MODE=DEBUG"
                 ],
             },
