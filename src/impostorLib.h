@@ -1,7 +1,7 @@
-#include "raylib.h"
-
 #ifndef _IMPOSTOR_GUARD_H
 #define _IMPOSTOR_GUARD_H
+#include "raylib.h"
+#include "mecanicsLib.h"
 
 struct ImpostorGame{
     int screenWidth;
@@ -13,7 +13,7 @@ struct ImpostorGame{
 
 struct Player_ref{
     int                 isLive; 
-    int                 isMoving;  
+    int                 movingAnimate; 
     int                 cards[3];   // Deck of cards
     int                 frame;      // Visible frame
     int                 maxFrames;  // Frames in the Texture

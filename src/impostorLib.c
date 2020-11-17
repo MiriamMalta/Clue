@@ -5,6 +5,7 @@
 #include "raylib.h"
 #include "impostorLib.h"
 #include "mecanicsLib.h"
+#include "graphsLib.h"
 
 //Aqui juntamos todo el codigo
 
@@ -28,24 +29,12 @@ GameState newImpostorGame(){
     return game;
 }
 void playImpostor(GameState game){
-    Player red_player = newPlayer(game, "Red");
+    Player player = newPlayer(game, "White");
     while (!WindowShouldClose()){
         BeginDrawing();
         ClearBackground(RAYWHITE);
-
-        red_player->timer += GetFrameTime();
-        if(red_player->timer >= 0.05f){
-            red_player->timer = 0.0f;
-            red_player->frame += 1;
-        }
-        red_player->frame = red_player->frame % red_player->maxFrames;
-        red_player->frameRec.x = (red_player->frameRec.width*red_player->frame);
-        DrawTextureRec(
-            red_player->skin[0],
-            red_player->frameRec,
-            red_player->position,
-            RAYWHITE
-        );
+        Movement(player);
+        
 
         EndDrawing();
     }
@@ -75,9 +64,10 @@ Player newPlayer(GameState game,char color[10]){
     strcpy(urlPath,auxUrlPath);
     strcat(urlPath,"/left.png");
     player->skin[3] = LoadTexture(urlPath);
-    player->frameWidth = (float)(player->skin[0].width);
-    player->frameHeight = (float)(player->skin[0].height);
-    player->maxFrames = (int)(player->skin[0].width/(int)player->frameWidth);
+    player->movingAnimate = 0;
+    player->frameWidth = (float)(player->skin[player->movingAnimate].width/1);
+    player->frameHeight = (float)(player->skin[player->movingAnimate].height);
+    player->maxFrames = (int)(player->skin[player->movingAnimate].width/(int)player->frameWidth);
     player->timer = 0.0f;
     player->frame = 0;
     player->frameRec.x = 0;
