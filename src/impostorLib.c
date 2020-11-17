@@ -4,6 +4,7 @@
 #include <string.h>
 #include "raylib.h"
 #include "impostorLib.h"
+#include "mecanicsLib.h"
 
 //Aqui juntamos todo el codigo
 
@@ -14,6 +15,7 @@ GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));
     game->screenWidth = 1024;
     game->screenHeight = 768;
+    game->fps = 60;
     game->screenCenterWidth = (int)game->screenWidth/2;
     game->screenCenterHeight = (int)game->screenHeight/2;
     //const int screenWidth = 1920, screenHeight = 1080; //monitor normal
@@ -22,34 +24,26 @@ GameState newImpostorGame(){
     //const int screenWidth = 1280, screenHeight = 800; //monitor mac
 
     InitWindow(game->screenWidth,game->screenHeight, "raylib");
-    SetTargetFPS(60);
+    SetTargetFPS(game->fps);
     return game;
 }
 void playImpostor(GameState game){
-    Texture2D player = LoadTexture("./res/assets/crewmates/Yellow/right.png");
-    float frameWidth = (float)(player.width/12);
-    float frameHeight = (float)player.height;
-    int maxFrames = (int)(player.width/(int)frameWidth);
-    float timer = 0.0f;
-    int frame = 0;
-    Rectangle frameRec = {0,0,frameWidth,frameHeight};
-    Vector2 vec2 = {game->screenCenterWidth,game->screenCenterHeight};
+    Player red_player = newPlayer(game, "Red");
     while (!WindowShouldClose()){
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        timer += GetFrameTime();
-        if(timer >= 0.05f){
-            timer = 0.0f;
-            frame += 1;
+        red_player->timer += GetFrameTime();
+        if(red_player->timer >= 0.05f){
+            red_player->timer = 0.0f;
+            red_player->frame += 1;
         }
-        frame = frame % maxFrames;
-        printf("%d\n",frame);
-        frameRec.x = (frameRec.width*frame);
+        red_player->frame = red_player->frame % red_player->maxFrames;
+        red_player->frameRec.x = (red_player->frameRec.width*red_player->frame);
         DrawTextureRec(
-            player,
-            frameRec,
-            vec2,
+            red_player->skin[0],
+            red_player->frameRec,
+            red_player->position,
             RAYWHITE
         );
 
@@ -62,4 +56,26 @@ void endImpostor(){
 }
 void initImpostor(){
 
+}
+
+Player newPlayer(GameState game,char color[]){
+    Player player = malloc(sizeof(struct Player_ref));
+    char urlPath[100] = "./res/assets/crewmates/"; 
+    strcat(urlPath,color);
+    player->skin[0] = LoadTexture(strcat(urlPath,"/sright.png"));
+    player->skin[1] = LoadTexture(strcat(urlPath,"/sleft.png"));
+    player->skin[2] = LoadTexture(strcat(urlPath,"/right.png"));
+    player->skin[3] = LoadTexture(strcat(urlPath,"/left.png"));
+    player->frameWidth = (float)(player->skin[0].width/12);
+    player->frameHeight = (float)(player->skin[0].height);
+    player->maxFrames = (int)(player->skin[0].width/(int)player->frameWidth);
+    player->timer = 0.0f;
+    player->frame = 0;
+    player->frameRec.x = 0;
+    player->frameRec.y = 0;
+    player->frameRec.width = player->frameWidth; 
+    player->frameRec.height = player->frameHeight;
+    player->position.x = game->screenCenterWidth;
+    player->position.y = game->screenCenterHeight;
+    return player;
 }
