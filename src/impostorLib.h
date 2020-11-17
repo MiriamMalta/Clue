@@ -24,7 +24,7 @@ struct Player_ref{
     char*               name;       // Name of the player
     struct Rectangle    frameRec;   // Rectangle Frame Colider
     struct Vector2      position;   // Position in the window
-    struct Texture2D    skin[4];    // 0 = Stand Right || 1 = Stand Left || 2 = Walking Right || 3 = Walking Left  
+    Texture2D    skin[4];    // 0 = Stand Right || 1 = Stand Left || 2 = Walking Right || 3 = Walking Left  
     struct Player_ref*  next;       // Pointer To Create a CLL
 };
 typedef struct Player_ref* Player;
