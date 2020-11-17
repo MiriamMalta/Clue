@@ -13,8 +13,8 @@
 
 GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));
-    game->screenWidth = 1366;
-    game->screenHeight = 768;
+    game->screenWidth = 1280;
+    game->screenHeight = 800;
     game->fps = 60;
     game->screenCenterWidth = (int)game->screenWidth/2;
     game->screenCenterHeight = (int)game->screenHeight/2;

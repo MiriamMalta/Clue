@@ -30,6 +30,11 @@ Then go to usr/local/lib and:
 >sudo make
 >sudo make install
 
+Compile in MAC:
+>make clean
+>make 
+>./main 
+
 · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - ·
 
 # Requerimientos 
@@ -218,18 +223,18 @@ Manejo de Datos (purple) (yellow)
 - [ ] Sprite Carta Electrical
 - [ ] Sprite Carta Storage
 - [ ] Sprite Carta Cafeteria
-- [ ] Sprite Carta Yellow Astronaut
-- [ ] Sprite Carta Red Astronaut
-- [ ] Sprite Carta Purple Astronaut
-- [ ] Sprite Carta Green Astronaut
-- [ ] Sprite Carta White Astronaut
-- [ ] Sprite Carta Blue Astronaut
+- [ ] Sprite Carta Colonel Mustard
+- [ ] Sprite Carta Miss Scarlet
+- [ ] Sprite Carta Professor Plum
+- [ ] Sprite Carta Mr. Green
+- [ ] Sprite Carta Mrs. White
+- [ ] Sprite Carta Mrs. Peacock
 - [ ] Sprite Carta Gun Shot
 - [ ] Sprite Carta Stabbing
-- [ ] Sprite Carta Neck snap
+- [ ] Sprite Carta Neck Snap
 - [ ] Sprite Carta Throat Saber
-- [ ] Sprite Carta Funado
-- [ ] Sprite Carta Disconected from the server
+- [ ] Sprite Carta Thrown into Space
+- [ ] Sprite Carta Disconected from Server
 - [x] Spritesheet Yellow Astronaut
 - [x] Spritesheet Red Astronaut
 - [x] Spritesheet Purple Astronaut
