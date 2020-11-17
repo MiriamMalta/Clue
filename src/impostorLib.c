@@ -58,15 +58,24 @@ void initImpostor(){
 
 }
 
-Player newPlayer(GameState game,char color[]){
+Player newPlayer(GameState game,char color[10]){
     Player player = malloc(sizeof(struct Player_ref));
     char urlPath[100] = "./res/assets/crewmates/"; 
     strcat(urlPath,color);
-    player->skin[0] = LoadTexture(strcat(urlPath,"/sright.png"));
-    player->skin[1] = LoadTexture(strcat(urlPath,"/sleft.png"));
-    player->skin[2] = LoadTexture(strcat(urlPath,"/right.png"));
-    player->skin[3] = LoadTexture(strcat(urlPath,"/left.png"));
-    player->frameWidth = (float)(player->skin[0].width/12);
+    char auxUrlPath[100];
+    strcpy(auxUrlPath,urlPath);
+    strcat(urlPath,"/sright.png");
+    player->skin[0] = LoadTexture(urlPath);
+    strcpy(urlPath,auxUrlPath);
+    strcat(urlPath,"/sleft.png");
+    player->skin[1] = LoadTexture(urlPath);
+    strcpy(urlPath,auxUrlPath);
+    strcat(urlPath,"/right.png");
+    player->skin[2] = LoadTexture(urlPath);
+    strcpy(urlPath,auxUrlPath);
+    strcat(urlPath,"/left.png");
+    player->skin[3] = LoadTexture(urlPath);
+    player->frameWidth = (float)(player->skin[0].width);
     player->frameHeight = (float)(player->skin[0].height);
     player->maxFrames = (int)(player->skin[0].width/(int)player->frameWidth);
     player->timer = 0.0f;
