@@ -7,8 +7,10 @@
 
 //Aqui solamente funciones graficas
 
-void Movement(Player player)
+void Movement(GameState game,Player player,Camera2D* cam)
 {
+    Camera2D camera;
+    camera = *cam;
     if (IsKeyDown(KEY_W))
     {
         player->position.y += GetFrameTime() * -100.0f;
@@ -51,6 +53,9 @@ void Movement(Player player)
         player->frameWidth = (float)(player->skin[player->movingAnimate].width / 12);
         player->maxFrames = (int)(player->skin[player->movingAnimate].width / (int)player->frameWidth);
     }
+    camera.target = (Vector2) {player->position.x+43,player->position.y+50};
+    
+
     if (IsKeyReleased(KEY_D))
     {
         player->movingAnimate = 0;
@@ -103,8 +108,35 @@ void Movement(Player player)
         player->position,
         RAYWHITE
     );
+    DrawLine(camera.target.x,-game->screenHeight*10,camera.target.x,game->screenHeight*10,GREEN);
+    DrawLine(-game->screenWidth*10,camera.target.y,game->screenWidth*10,camera.target.y,GREEN);
+    *cam = camera;        
 }
-void Teletransport()
+void MapMovement(Texture2D map){
+    if (IsKeyDown(KEY_W))
+    {
+        //player->position.y += GetFrameTime() * -100.0f;
+        
+    }
+    if (IsKeyDown(KEY_S))
+    {
+        //player->position.y += GetFrameTime() * 100.0f;
+        
+    }
+    if (IsKeyDown(KEY_D))
+    {
+        //player->position.x += GetFrameTime() * 100.0f;
+        
+    }
+    if (IsKeyDown(KEY_A))
+    {
+        //player->position.x += GetFrameTime() * -100.0f;
+        
+    }
+    DrawTexture(map, 0, 0, WHITE);
+
+}
+void Teleport()
 {
 }
 void EnterRoom()

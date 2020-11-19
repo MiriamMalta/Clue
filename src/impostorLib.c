@@ -29,12 +29,26 @@ GameState newImpostorGame(){
     return game;
 }
 void playImpostor(GameState game){
+    Texture2D map = LoadTexture("./res/assets/map/Try_Map_1.png");
     Player player = newPlayer(game, "White");
+    Camera2D camera = { 0 };
+    camera.target = (Vector2) { player->position.x+20, player->position.y+20};
+    camera.offset = (Vector2) {game->screenCenterWidth,game->screenCenterHeight};
+    camera.rotation = 0.0f;
+    camera.zoom = 1.0f;
     while (!WindowShouldClose()){
         BeginDrawing();
-        ClearBackground(RAYWHITE);
-        Movement(player);
-        
+            ClearBackground(RAYWHITE);
+            BeginMode2D(camera);
+            //MapMovement(map);
+            DrawTexture(map, 0, 0, WHITE);
+            Movement(game,player,&camera);
+             // Camera zoom controls
+            camera.zoom += ((float)GetMouseWheelMove()*0.05f);
+
+            if (camera.zoom > 3.0f) camera.zoom = 3.0f;
+            else if (camera.zoom < 0.1f) camera.zoom = 0.1f;
+            EndMode2D();
 
         EndDrawing();
     }
