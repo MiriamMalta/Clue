@@ -3,12 +3,27 @@
 #include "raylib.h"
 #include "mecanicsLib.h"
 
+struct Box{
+    int                 isRoom;
+    char                status;         //t = taken; b = blocked; c = camera; p = player; and rooms
+    Vector2             tilePosition;
+};
+
+
+struct Board{
+    Texture2D           mapBackground;
+    Camera2D            camera;
+    struct Box          boxes[55][75];
+};
+
 struct ImpostorGame{
-    int screenWidth;
-    int screenHeight;
-    int screenCenterWidth;
-    int screenCenterHeight;
-    int fps;
+    int                 screenWidth;
+    int                 screenHeight;
+    int                 screenCenterWidth;
+    int                 screenCenterHeight;
+    int                 fps;
+    float               gameSpeed;
+    struct Board        board;
 };
 
 struct Player_ref{
@@ -34,9 +49,7 @@ struct GameHistory{
     
 };
 
-struct Board{
-    
-};
+
 
 
 struct Notebook{

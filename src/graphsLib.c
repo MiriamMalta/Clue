@@ -11,7 +11,7 @@ void Movement(GameState game,Player player,Camera2D* cam)
 {
     Camera2D camera;
     camera = *cam;
-    if (IsKeyDown(KEY_W))
+    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))
     {
         player->position.y += GetFrameTime() * -100.0f;
         if (player->movingAnimate == 0)
@@ -25,7 +25,7 @@ void Movement(GameState game,Player player,Camera2D* cam)
         player->frameWidth = (float)(player->skin[player->movingAnimate].width / 12);
         player->maxFrames = (int)(player->skin[player->movingAnimate].width / (int)player->frameWidth);
     }
-    if (IsKeyDown(KEY_S))
+    if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))
     {
         player->position.y += GetFrameTime() * 100.0f;
         if (player->movingAnimate == 0)
@@ -39,14 +39,14 @@ void Movement(GameState game,Player player,Camera2D* cam)
         player->frameWidth = (float)(player->skin[player->movingAnimate].width / 12);
         player->maxFrames = (int)(player->skin[player->movingAnimate].width / (int)player->frameWidth);
     }
-    if (IsKeyDown(KEY_D))
+    if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT))
     {
         player->position.x += GetFrameTime() * 100.0f;
         player->movingAnimate = 2;
         player->frameWidth = (float)(player->skin[player->movingAnimate].width / 12);
         player->maxFrames = (int)(player->skin[player->movingAnimate].width / (int)player->frameWidth);
     }
-    if (IsKeyDown(KEY_A))
+    if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))
     {
         player->position.x += GetFrameTime() * -100.0f;
         player->movingAnimate = 3;
@@ -54,21 +54,23 @@ void Movement(GameState game,Player player,Camera2D* cam)
         player->maxFrames = (int)(player->skin[player->movingAnimate].width / (int)player->frameWidth);
     }
     camera.target = (Vector2) {player->position.x+43,player->position.y+50};
-    
+    camera.zoom += ((float)GetMouseWheelMove()*0.05f);
+    if (camera.zoom > 3.0f) camera.zoom = 3.0f;
+    else if (camera.zoom < 1.0f) camera.zoom = 1.0f;
 
-    if (IsKeyReleased(KEY_D))
+    if (IsKeyReleased(KEY_D) || IsKeyReleased(KEY_RIGHT))
     {
         player->movingAnimate = 0;
         player->frameWidth = (float)(player->skin[player->movingAnimate].width / 1);
         player->maxFrames = (int)(player->skin[player->movingAnimate].width / (int)player->frameWidth);
     }
-    if (IsKeyReleased(KEY_A))
+    if (IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT))
     {
         player->movingAnimate = 1;
         player->frameWidth = (float)(player->skin[player->movingAnimate].width / 1);
         player->maxFrames = (int)(player->skin[player->movingAnimate].width / (int)player->frameWidth);
     }
-    if (IsKeyReleased(KEY_W))
+    if (IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP))
     {
         if (player->movingAnimate == 2)
         {
@@ -81,7 +83,7 @@ void Movement(GameState game,Player player,Camera2D* cam)
         player->frameWidth = (float)(player->skin[player->movingAnimate].width / 1);
         player->maxFrames = (int)(player->skin[player->movingAnimate].width / (int)player->frameWidth);
     }
-    if (IsKeyReleased(KEY_S))
+    if (IsKeyReleased(KEY_S) || IsKeyReleased(KEY_DOWN))
     {
         if (player->movingAnimate == 2)
         {
@@ -112,30 +114,7 @@ void Movement(GameState game,Player player,Camera2D* cam)
     DrawLine(-game->screenWidth*10,camera.target.y,game->screenWidth*10,camera.target.y,GREEN);
     *cam = camera;        
 }
-void MapMovement(Texture2D map){
-    if (IsKeyDown(KEY_W))
-    {
-        //player->position.y += GetFrameTime() * -100.0f;
-        
-    }
-    if (IsKeyDown(KEY_S))
-    {
-        //player->position.y += GetFrameTime() * 100.0f;
-        
-    }
-    if (IsKeyDown(KEY_D))
-    {
-        //player->position.x += GetFrameTime() * 100.0f;
-        
-    }
-    if (IsKeyDown(KEY_A))
-    {
-        //player->position.x += GetFrameTime() * -100.0f;
-        
-    }
-    DrawTexture(map, 0, 0, WHITE);
 
-}
 void Teleport()
 {
 }

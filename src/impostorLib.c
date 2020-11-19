@@ -14,8 +14,8 @@
 
 GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));
-    game->screenWidth = 1280;
-    game->screenHeight = 800;
+    game->screenWidth = 1920;
+    game->screenHeight = 1080;
     game->fps = 60;
     game->screenCenterWidth = (int)game->screenWidth/2;
     game->screenCenterHeight = (int)game->screenHeight/2;
@@ -30,7 +30,7 @@ GameState newImpostorGame(){
 }
 void playImpostor(GameState game){
     Texture2D map = LoadTexture("./res/assets/map/Try_Map_1.png");
-    Player player = newPlayer(game, "White");
+    Player player = newPlayer(game, "Yellow");
     Camera2D camera = { 0 };
     camera.target = (Vector2) { player->position.x+20, player->position.y+20};
     camera.offset = (Vector2) {game->screenCenterWidth,game->screenCenterHeight};
@@ -40,14 +40,9 @@ void playImpostor(GameState game){
         BeginDrawing();
             ClearBackground(RAYWHITE);
             BeginMode2D(camera);
-            //MapMovement(map);
             DrawTexture(map, 0, 0, WHITE);
             Movement(game,player,&camera);
-             // Camera zoom controls
-            camera.zoom += ((float)GetMouseWheelMove()*0.05f);
 
-            if (camera.zoom > 3.0f) camera.zoom = 3.0f;
-            else if (camera.zoom < 0.1f) camera.zoom = 0.1f;
             EndMode2D();
 
         EndDrawing();
@@ -79,9 +74,9 @@ Player newPlayer(GameState game,char color[10]){
     strcat(urlPath,"/left.png");
     player->skin[3] = LoadTexture(urlPath);
     player->movingAnimate = 0;
-    player->frameWidth = (float)(player->skin[player->movingAnimate].width/1);
-    player->frameHeight = (float)(player->skin[player->movingAnimate].height);
-    player->maxFrames = (int)(player->skin[player->movingAnimate].width/(int)player->frameWidth);
+    player->frameWidth = 86;//(float)(player->skin[player->movingAnimate].width/1);
+    player->frameHeight = 105;//(float)(player->skin[player->movingAnimate].height);
+    player->maxFrames = 1;//(int)(player->skin[player->movingAnimate].width/(int)player->frameWidth);
     player->timer = 0.0f;
     player->frame = 0;
     player->frameRec.x = 0;
