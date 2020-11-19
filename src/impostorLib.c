@@ -17,6 +17,7 @@ GameState newImpostorGame(){
     game->screenWidth = 1920;
     game->screenHeight = 1080;
     game->fps = 60;
+    game->speed = 200.0f;
     game->screenCenterWidth = (int)game->screenWidth/2;
     game->screenCenterHeight = (int)game->screenHeight/2;
     //const int screenWidth = 1920, screenHeight = 1080; //monitor normal
@@ -29,7 +30,7 @@ GameState newImpostorGame(){
     return game;
 }
 void playImpostor(GameState game){
-    Texture2D map = LoadTexture("./res/assets/map/Try_Map_1.png");
+    Texture2D map = LoadTexture("./res/assets/map/Board.png");
     Player player = newPlayer(game, "Yellow");
     Camera2D camera = { 0 };
     camera.target = (Vector2) { player->position.x+20, player->position.y+20};
@@ -54,6 +55,11 @@ void endImpostor(){
 }
 void initImpostor(){
 
+}
+
+Board NewBoard(){
+    Board board = malloc(sizeof(Board));
+    return board;
 }
 
 Player newPlayer(GameState game,char color[10]){

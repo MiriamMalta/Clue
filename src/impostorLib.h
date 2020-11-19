@@ -10,7 +10,7 @@ struct Box{
 };
 
 
-struct Board{
+struct BoardGame{
     Texture2D           mapBackground;
     Camera2D            camera;
     struct Box          boxes[55][75];
@@ -22,8 +22,7 @@ struct ImpostorGame{
     int                 screenCenterWidth;
     int                 screenCenterHeight;
     int                 fps;
-    float               gameSpeed;
-    struct Board        board;
+    float               speed;
 };
 
 struct Player_ref{
@@ -61,11 +60,13 @@ struct Accusations{
 };
 
 typedef struct ImpostorGame* GameState, GameInitialState;
+typedef struct BoardGame* Board;
 
 GameState newImpostorGame();
 Player newPlayer(GameState, char[10]);
 void playImpostor(GameState);
 void endImpostor();
+Board NewBoard();
 void initImpostor();
 
 #endif
