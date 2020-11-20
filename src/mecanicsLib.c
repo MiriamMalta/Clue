@@ -34,8 +34,6 @@ void HatONames(){
     // ... so, I end a lonely day feeling totally okay
 
 /*
-#include <stdio.h>
-#include "TurnList.h"
 
 int main(void) {
     YourTurn first = NULL; 
