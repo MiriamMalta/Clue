@@ -70,13 +70,10 @@ YourTurn newNode(int value, YourTurn *first){
     return chara;
 }
   
-/* Function to insert a node at the beginning of a Circular 
-   linked list */
 void addChara(YourTurn *first, int data) { 
     YourTurn newC = newNode(data, first);
     YourTurn temp = *first;
   
-    /* If list is not NULL then set the next of last node */
     if (*first != NULL){ 
         while (temp->next != *first){
             temp = temp->next;}
@@ -88,7 +85,6 @@ void addChara(YourTurn *first, int data) {
     *first = newC; 
 } 
   
-/* Function to print nodes in a given Circular linked list */
 void printList(YourTurn first){
     YourTurn temp = first;
     if (first != NULL){
