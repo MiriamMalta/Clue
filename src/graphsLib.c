@@ -7,112 +7,110 @@
 
 //Aqui solamente funciones graficas
 
-void Movement(GameState game,Player player,Camera2D* cam)
+void Movement(GameState game)
 {
-    Camera2D camera;
-    camera = *cam;
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))
     {
-        player->position.y += GetFrameTime() * -(game->speed);
-        if (player->movingAnimate == 0)
+        game->playerInTurn->position.y += GetFrameTime() * -(game->speed);
+        if (game->playerInTurn->movingAnimate == 0)
         {
-            player->movingAnimate = 2;
+            game->playerInTurn->movingAnimate = 2;
         }
-        else if (player->movingAnimate == 1)
+        else if (game->playerInTurn->movingAnimate == 1)
         {
-            player->movingAnimate = 3;
+            game->playerInTurn->movingAnimate = 3;
         }
-        player->frameWidth = (float)(player->skin[player->movingAnimate].width / 12);
-        player->maxFrames = (int)(player->skin[player->movingAnimate].width / (int)player->frameWidth);
+        game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 12);
+        game->playerInTurn->maxFrames = (int)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / (int)game->playerInTurn->frameWidth);
     }
     if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))
     {
-        player->position.y += GetFrameTime() * (game->speed);
-        if (player->movingAnimate == 0)
+        game->playerInTurn->position.y += GetFrameTime() * (game->speed);
+        if (game->playerInTurn->movingAnimate == 0)
         {
-            player->movingAnimate = 2;
+            game->playerInTurn->movingAnimate = 2;
         }
-        else if (player->movingAnimate == 1)
+        else if (game->playerInTurn->movingAnimate == 1)
         {
-            player->movingAnimate = 3;
+            game->playerInTurn->movingAnimate = 3;
         }
-        player->frameWidth = (float)(player->skin[player->movingAnimate].width / 12);
-        player->maxFrames = (int)(player->skin[player->movingAnimate].width / (int)player->frameWidth);
+        game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 12);
+        game->playerInTurn->maxFrames = (int)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / (int)game->playerInTurn->frameWidth);
     }
     if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT))
     {
-        player->position.x += GetFrameTime() * (game->speed);
-        player->movingAnimate = 2;
-        player->frameWidth = (float)(player->skin[player->movingAnimate].width / 12);
-        player->maxFrames = (int)(player->skin[player->movingAnimate].width / (int)player->frameWidth);
+        game->playerInTurn->position.x += GetFrameTime() * (game->speed);
+        game->playerInTurn->movingAnimate = 2;
+        game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 12);
+        game->playerInTurn->maxFrames = (int)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / (int)game->playerInTurn->frameWidth);
     }
     if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))
     {
-        player->position.x += GetFrameTime() * -(game->speed);
-        player->movingAnimate = 3;
-        player->frameWidth = (float)(player->skin[player->movingAnimate].width / 12);
-        player->maxFrames = (int)(player->skin[player->movingAnimate].width / (int)player->frameWidth);
+        game->playerInTurn->position.x += GetFrameTime() * -(game->speed);
+        game->playerInTurn->movingAnimate = 3;
+        game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 12);
+        game->playerInTurn->maxFrames = (int)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / (int)game->playerInTurn->frameWidth);
     }
-    camera.target = (Vector2) {player->position.x+43,player->position.y+50};
-    camera.zoom += ((float)GetMouseWheelMove()*0.05f);
-    if (camera.zoom > 3.0f) camera.zoom = 3.0f;
-    else if (camera.zoom < 1.0f) camera.zoom = 1.0f;
+    
+    game->board->camera.target = (Vector2) {game->playerInTurn->position.x+43,game->playerInTurn->position.y+50};
+    game->board->camera.zoom += ((float)GetMouseWheelMove()*0.05f);
+    if (game->board->camera.zoom > 3.0f) game->board->camera.zoom = 3.0f;
+    else if (game->board->camera.zoom < 1.0f) game->board->camera.zoom = 1.0f;
 
     if (IsKeyReleased(KEY_D) || IsKeyReleased(KEY_RIGHT))
     {
-        player->movingAnimate = 0;
-        player->frameWidth = (float)(player->skin[player->movingAnimate].width / 1);
-        player->maxFrames = (int)(player->skin[player->movingAnimate].width / (int)player->frameWidth);
+        game->playerInTurn->movingAnimate = 0;
+        game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 1);
+        game->playerInTurn->maxFrames = (int)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / (int)game->playerInTurn->frameWidth);
     }
     if (IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT))
     {
-        player->movingAnimate = 1;
-        player->frameWidth = (float)(player->skin[player->movingAnimate].width / 1);
-        player->maxFrames = (int)(player->skin[player->movingAnimate].width / (int)player->frameWidth);
+        game->playerInTurn->movingAnimate = 1;
+        game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 1);
+        game->playerInTurn->maxFrames = (int)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / (int)game->playerInTurn->frameWidth);
     }
     if (IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP))
     {
-        if (player->movingAnimate == 2)
+        if (game->playerInTurn->movingAnimate == 2)
         {
-            player->movingAnimate = 0;
+            game->playerInTurn->movingAnimate = 0;
         }
-        else if (player->movingAnimate == 3)
+        else if (game->playerInTurn->movingAnimate == 3)
         {
-            player->movingAnimate = 1;
+            game->playerInTurn->movingAnimate = 1;
         }
-        player->frameWidth = (float)(player->skin[player->movingAnimate].width / 1);
-        player->maxFrames = (int)(player->skin[player->movingAnimate].width / (int)player->frameWidth);
+        game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 1);
+        game->playerInTurn->maxFrames = (int)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / (int)game->playerInTurn->frameWidth);
     }
     if (IsKeyReleased(KEY_S) || IsKeyReleased(KEY_DOWN))
     {
-        if (player->movingAnimate == 2)
+        if (game->playerInTurn->movingAnimate == 2)
         {
-            player->movingAnimate = 0;
+            game->playerInTurn->movingAnimate = 0;
         }
-        else if (player->movingAnimate == 3)
+        else if (game->playerInTurn->movingAnimate == 3)
         {
-            player->movingAnimate = 1;
+            game->playerInTurn->movingAnimate = 1;
         }
-        player->frameWidth = (float)(player->skin[player->movingAnimate].width / 1);
-        player->maxFrames = (int)(player->skin[player->movingAnimate].width / (int)player->frameWidth);
+        game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 1);
+        game->playerInTurn->maxFrames = (int)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / (int)game->playerInTurn->frameWidth);
     }
-    player->timer += GetFrameTime();
-    if (player->timer >= 0.05f)
+    game->playerInTurn->timer += GetFrameTime();
+    if (game->playerInTurn->timer >= 0.05f)
     {
-        player->timer = 0.0f;
-        player->frame += 1;
+        game->playerInTurn->timer = 0.0f;
+        game->playerInTurn->frame += 1;
     }
-    player->frame = player->frame % player->maxFrames;
-    player->frameRec.x = (player->frameRec.width * player->frame);
+    game->playerInTurn->frame = game->playerInTurn->frame % game->playerInTurn->maxFrames;
+    game->playerInTurn->frameRec.x = (game->playerInTurn->frameRec.width * game->playerInTurn->frame);
     DrawTextureRec(
-        player->skin[player->movingAnimate],
-        player->frameRec,
-        player->position,
+        game->playerInTurn->skin[game->playerInTurn->movingAnimate],
+        game->playerInTurn->frameRec,
+        game->playerInTurn->position,
         RAYWHITE
     );
-    DrawLine(camera.target.x,-game->screenHeight*10,camera.target.x,game->screenHeight*10,GREEN);
-    DrawLine(-game->screenWidth*10,camera.target.y,game->screenWidth*10,camera.target.y,GREEN);
-    *cam = camera;        
+    DrawLine(game->board->camera.target.x,-game->screenHeight*10,game->board->camera.target.x,game->screenHeight*10,GREEN);
+    DrawLine(-game->screenWidth*10,game->board->camera.target.y,game->screenWidth*10,game->board->camera.target.y,GREEN);    
 }
 
 void Teleport()

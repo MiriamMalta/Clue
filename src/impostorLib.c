@@ -20,6 +20,7 @@ GameState newImpostorGame(){
     game->speed = 200.0f;
     game->screenCenterWidth = (int)game->screenWidth/2;
     game->screenCenterHeight = (int)game->screenHeight/2;
+    game->gameScreen = LOGO;
     //const int screenWidth = 1920, screenHeight = 1080; //monitor normal
     //const int screenWidth = 1366, screenHeight = 768; //monitor lap
     //const int screenWidth = 1024, screenHeight = 768; //monitor feo
@@ -30,19 +31,14 @@ GameState newImpostorGame(){
     return game;
 }
 void playImpostor(GameState game){
-    Texture2D map = LoadTexture("./res/assets/map/Board.png");
-    Player player = newPlayer(game, "Yellow");
-    Camera2D camera = { 0 };
-    camera.target = (Vector2) { player->position.x+20, player->position.y+20};
-    camera.offset = (Vector2) {game->screenCenterWidth,game->screenCenterHeight};
-    camera.rotation = 0.0f;
-    camera.zoom = 1.0f;
+    initImpostor(game);
+
     while (!WindowShouldClose()){
         BeginDrawing();
             ClearBackground(RAYWHITE);
-            BeginMode2D(camera);
-            DrawTexture(map, 0, 0, WHITE);
-            Movement(game,player,&camera);
+            BeginMode2D(game->board->camera);
+            DrawTexture(game->board->mapBackground, 0, 0, WHITE);
+            Movement(game);
 
             EndMode2D();
 
@@ -53,12 +49,19 @@ void playImpostor(GameState game){
 void endImpostor(){
     CloseWindow();
 }
-void initImpostor(){
-
+void initImpostor(GameState game){
+    game->playerInTurn = newPlayer(game, "Yellow");
+    game->board = NewBoard(game);
 }
 
-Board NewBoard(){
-    Board board = malloc(sizeof(Board));
+Board NewBoard(GameState game){
+    Board board = malloc(sizeof(struct BoardGame));
+    board->mapBackground = LoadTexture("./res/assets/map/Board.png");
+    board->camera.target = (Vector2) {game->playerInTurn->position.x+20,game->playerInTurn->position.y+20};
+    board->camera.offset = (Vector2) {game->screenCenterWidth,game->screenCenterHeight};
+    board->camera.rotation = 0.0f;
+    board->camera.zoom = 1.0f;
+
     return board;
 }
 

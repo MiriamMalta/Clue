@@ -3,6 +3,27 @@
 #include "raylib.h"
 #include "mecanicsLib.h"
 
+typedef enum {
+    LOGO, 
+    TRIBUTE, 
+    DISCLAIMER, 
+    MENU1, MENU2, MENU3, MENU4, MENU5, MENU6,
+    NEWGAME,
+    LOADGAME,
+    SETTINGS,
+    CREDITS,
+
+    } GameScreen;
+
+struct GameSceneData{
+    GameScreen          gameScreen;
+    int                 state;
+    float               alpha;
+};
+
+typedef struct GameSceneData* GameScene;
+
+
 struct Box{
     int                 isRoom;
     char                status;         //t = taken; b = blocked; c = camera; p = player; and rooms
@@ -16,14 +37,9 @@ struct BoardGame{
     struct Box          boxes[55][75];
 };
 
-struct ImpostorGame{
-    int                 screenWidth;
-    int                 screenHeight;
-    int                 screenCenterWidth;
-    int                 screenCenterHeight;
-    int                 fps;
-    float               speed;
-};
+typedef struct BoardGame* Board;
+
+
 
 struct Player_ref{
     int                 isLive; 
@@ -43,6 +59,18 @@ struct Player_ref{
 };
 typedef struct Player_ref* Player;
 
+struct ImpostorGame{
+    int                 screenWidth;
+    int                 screenHeight;
+    int                 screenCenterWidth;
+    int                 screenCenterHeight;
+    int                 fps;
+    int                 gameScreen;
+    float               speed;
+    GameScene           gameScene;
+    Board               board;
+    Player              playerInTurn;
+};
 
 struct GameHistory{
     
@@ -60,13 +88,12 @@ struct Accusations{
 };
 
 typedef struct ImpostorGame* GameState, GameInitialState;
-typedef struct BoardGame* Board;
 
 GameState newImpostorGame();
 Player newPlayer(GameState, char[10]);
 void playImpostor(GameState);
 void endImpostor();
-Board NewBoard();
-void initImpostor();
+Board NewBoard(GameState);
+void initImpostor(GameState);
 
 #endif
