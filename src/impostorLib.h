@@ -13,15 +13,13 @@ typedef enum {
     SETTINGS,
     CREDITS,
 
-    } GameScreen;
+} GameScreen;
 
 struct GameSceneData{
     GameScreen          gameScreen;
     int                 state;
     float               alpha;
-};
-
-typedef struct GameSceneData* GameScene;
+}; typedef struct GameSceneData* GameScene;
 
 
 struct Box{
@@ -35,15 +33,12 @@ struct BoardGame{
     Texture2D           mapBackground;
     Camera2D            camera;
     struct Box          boxes[55][75];
-};
-
-typedef struct BoardGame* Board;
-
+}; typedef struct BoardGame* Board;
 
 
 struct Player_ref{
     int                 isLive; 
-    int                 movingAnimate; 
+    int                 movingAnimate;
     int                 cards[3];   // Deck of cards
     int                 frame;      // Visible frame
     int                 maxFrames;  // Frames in the Texture
@@ -56,8 +51,8 @@ struct Player_ref{
     struct Vector2      position;   // Position in the window
     Texture2D           skin[4];    // 0 = Stand Right || 1 = Stand Left || 2 = Walking Right || 3 = Walking Left  
     struct Player_ref*  next;       // Pointer To Create a CLL
-};
-typedef struct Player_ref* Player;
+};typedef struct Player_ref* Player;
+
 
 struct ImpostorGame{
     int                 screenWidth;
@@ -71,6 +66,7 @@ struct ImpostorGame{
     Board               board;
     Player              playerInTurn;
 };
+
 
 struct GameHistory{
     
