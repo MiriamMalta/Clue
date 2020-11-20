@@ -27,8 +27,11 @@ void CalculateRandomMovements(){
 void HatONames(){
 }
 
-// Skeleton (spooky scary skeletons)
-    // ... send shivers down your spine
+// Another litte abuse, another pointless excuse
+    // ... another day feeling like i don't belong
+    // ... a better day, happy that i won't belong
+    // ... does anyone, belong?
+    // ... so, I end a lonely day feeling totally okay
 
 /*
 #include <stdio.h>
@@ -42,22 +45,29 @@ int main(void) {
     addChara(&first, 2); 
     addChara(&first, 11); 
   
-    printf("Contents of Circular Linked List:\n"); 
     printList(first); 
-
     printf("\n");print(first);
 
-    printf("\n");printf("\n%d :3", peek(first));
-    //printf("\n%d D,", poop(&first));
-    printf("\n");printList(first);
-    printf("\n%d :3", peek(first));
+    //printf("\n");printf("\n%d", peek(first));
+    //printf("\n%d", poop(&first));
+    //printf("\n");printList(first);
+    //printf("\n%d", peek(first));
 
-    printf("\n");printf("\n%d :P", move(&first));
-    printf("\n%d :P", move(&first));
-    printf("\n%d :P", move(&first));
-    printf("\n%d :P", move(&first));
-    printf("\n%d :P", move(&first));
-    printf("\n%d :P", move(&first));
+    printf("\n");printf("\n%d", move(&first));
+    printf("\n%d", move(&first));
+    printf("\n%d", move(&first));
+    printf("\n%d", move(&first));
+    printf("\n%d", move(&first));
+    printf("\n%d", move(&first));
+
+    printf("\n");printf("\n%d :3", peek(first));
+    printf("\n");print(first);
+
+    //printf("\t");printf("\n%d D,", pop(&first, peek(first)));
+    //printf("\t");deleteNode(first, peek(first));
+    printf("\t");printf("\n%d D,", poop(&first, peek(first)));
+
+    printf("\n");print(first);
 
     return 0;
 }
@@ -115,4 +125,45 @@ int peek(YourTurn first){
     if(first->next != NULL)
         val = first->data;
     return val;
+}
+
+int poop(YourTurn *first, int key){
+    YourTurn toDelete = *first;
+    YourTurn prev = *first;
+    int val = 0; 
+    if(toDelete != NULL){
+        char turn = toDelete->data;
+        while (prev->next != *first){prev = prev->next;}
+        *first = toDelete->next;
+        prev->next = *first;
+        free(toDelete);
+        return turn;
+    }
+    return 0;
+}
+
+int pop(YourTurn *first, int key){
+    YourTurn toDelete = *first;
+    int val = 0; 
+    if(toDelete != NULL){
+        char dataToReturn = toDelete->data;
+        *first = toDelete->next;
+        free(toDelete);
+        return dataToReturn;
+    }
+    return 0;
+}
+
+void deleteNode(YourTurn first, int key){
+    YourTurn toDelete = first, prev;
+    if (first == NULL)
+        return;
+    if (toDelete == first) {
+        prev = first;
+        while (prev->next != first)
+            prev = prev->next;
+        first = toDelete->next;
+        prev->next = first;
+        free(toDelete);
+    }
 }
