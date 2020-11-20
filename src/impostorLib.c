@@ -9,31 +9,6 @@
 
 //Aqui juntamos todo el codigo
 
-
-
-
-GameState newImpostorGame(){
-    GameState game = malloc(sizeof(struct ImpostorGame));
-    //Rick
-    //game->screenWidth = 1920;
-    //game->screenHeight = 1080;
-    //M
-    game->screenWidth = 1280;
-    game->screenHeight = 800;
-    game->fps = 60;
-    game->speed = 200.0f;
-    game->screenCenterWidth = (int)game->screenWidth/2;
-    game->screenCenterHeight = (int)game->screenHeight/2;
-    game->gameScreen = LOGO;
-    //const int screenWidth = 1920, screenHeight = 1080; //monitor normal
-    //const int screenWidth = 1366, screenHeight = 768; //monitor lap
-    //const int screenWidth = 1024, screenHeight = 768; //monitor feo
-    //const int screenWidth = 1280, screenHeight = 800; //monitor mac
-
-    InitWindow(game->screenWidth,game->screenHeight, "raylib");
-    SetTargetFPS(game->fps);
-    return game;
-}
 void playImpostor(GameState game){
     initImpostor(game);
 
@@ -50,14 +25,34 @@ void playImpostor(GameState game){
     }
     
 }
-void endImpostor(){
+void endImpostor(GameState game){
+    free(game->board);
+    free(game->playerInTurn);
+    free(game);
     CloseWindow();
 }
 void initImpostor(GameState game){
     game->playerInTurn = newPlayer(game, "Yellow");
     game->board = NewBoard(game);
 }
+GameState newImpostorGame(){
+    GameState game = malloc(sizeof(struct ImpostorGame));
+    game->screenWidth = 1920;
+    game->screenHeight = 1080;
+    game->fps = 60;
+    game->speed = 200.0f;
+    game->screenCenterWidth = (int)game->screenWidth/2;
+    game->screenCenterHeight = (int)game->screenHeight/2;
+    game->gameScreen = LOGO;
+    //const int screenWidth = 1920, screenHeight = 1080; //monitor normal
+    //const int screenWidth = 1366, screenHeight = 768; //monitor lap
+    //const int screenWidth = 1024, screenHeight = 768; //monitor feo
+    //const int screenWidth = 1280, screenHeight = 800; //monitor mac
 
+    InitWindow(game->screenWidth,game->screenHeight, "raylib");
+    SetTargetFPS(game->fps);
+    return game;
+}
 Board NewBoard(GameState game){
     Board board = malloc(sizeof(struct BoardGame));
     board->mapBackground = LoadTexture("./res/assets/map/Board.png");
@@ -68,7 +63,6 @@ Board NewBoard(GameState game){
 
     return board;
 }
-
 Player newPlayer(GameState game,char color[10]){
     Player player = malloc(sizeof(struct Player_ref));
     char urlPath[100] = "./res/assets/crewmates/"; 
@@ -87,9 +81,9 @@ Player newPlayer(GameState game,char color[10]){
     strcat(urlPath,"/left.png");
     player->skin[3] = LoadTexture(urlPath);
     player->movingAnimate = 0;
-    player->frameWidth = 86;//(float)(player->skin[player->movingAnimate].width/1);
-    player->frameHeight = 105;//(float)(player->skin[player->movingAnimate].height);
-    player->maxFrames = 1;//(int)(player->skin[player->movingAnimate].width/(int)player->frameWidth);
+    player->frameWidth = 86;
+    player->frameHeight = 105;
+    player->maxFrames = 1;
     player->timer = 0.0f;
     player->frame = 0;
     player->frameRec.x = 0;

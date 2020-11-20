@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include "impostorLib.h"
 #include "mecanicsLib.h"
 
 //Este seria el Backend del juego, solamente 
@@ -26,12 +27,6 @@ void CalculateRandomMovements(){
 }
 void HatONames(){
 }
-
-// Another litte abuse, another pointless excuse
-    // ... another day feeling like i don't belong
-    // ... a better day, happy that i won't belong
-    // ... does anyone, belong?
-    // ... so, I end a lonely day feeling totally okay
 
 /*
 

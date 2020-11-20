@@ -92,7 +92,7 @@ typedef struct ImpostorGame* GameState, GameInitialState;
 GameState newImpostorGame();
 Player newPlayer(GameState, char[10]);
 void playImpostor(GameState);
-void endImpostor();
+void endImpostor(GameState);
 Board NewBoard(GameState);
 void initImpostor(GameState);
 
