@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-#include "impostorLib.h"
 #include "mecanicsLib.h"
 
 //Este seria el Backend del juego, solamente 
@@ -65,6 +64,8 @@ int main(void) {
     return 0;
 }
 */
+
+//Skeleon
 
 YourTurn newNode(int value, YourTurn *first){
     YourTurn chara = malloc(sizeof(YourTurn));
@@ -157,6 +158,98 @@ void deleteNode(YourTurn first, int key){
             prev = prev->next;
         first = toDelete->next;
         prev->next = first;
+        free(toDelete);
+    }
+}
+
+
+//First-try of right
+
+NextCharacterTurn makeNewCharacter(NextCharacterTurn *theCharacter, Player fullCharacter){
+    NextCharacterTurn newCharacter = malloc(sizeof(NextCharacterTurn));
+    newCharacter->character = fullCharacter;
+    newCharacter->nextTurn = *theCharacter;
+    return newCharacter;
+}
+  
+void addCharacter(NextCharacterTurn *theCharacter, Player fullCharacter){ 
+    NextCharacterTurn newCharacter = makeNewCharacter(theCharacter, fullCharacter);
+    NextCharacterTurn temporalCharacter = *theCharacter;
+  
+    if (*theCharacter != NULL){ 
+        while (temporalCharacter->nextTurn != *theCharacter){
+            temporalCharacter = temporalCharacter->nextTurn;}
+        temporalCharacter->nextTurn = newCharacter;
+    } 
+    else{
+        newCharacter->nextTurn = newCharacter;
+    }
+    *theCharacter = newCharacter; 
+} 
+  
+void printListC(NextCharacterTurn theCharacter){
+    NextCharacterTurn temporalCharacter = theCharacter;
+    if (theCharacter != NULL){
+        do{
+            printf("[%s]->", theCharacter->character->name);
+            temporalCharacter = temporalCharacter->nextTurn;
+        } while(temporalCharacter != theCharacter);
+    }
+}
+
+void printC(NextCharacterTurn theCharacter){
+    for (int i = 0; i <= 8; i++){
+        printf("[%s]->", theCharacter->character->name);
+        theCharacter = theCharacter->nextTurn;
+    }
+}
+
+void moveAlongInTurns(NextCharacterTurn *theCharacter){
+    char* nameOfChar;
+    if((*theCharacter)->nextTurn != NULL)
+        nameOfChar = (*theCharacter)->character->name;
+        *theCharacter = (*theCharacter)->nextTurn;
+}
+
+void peekWhoSNext(NextCharacterTurn theCharacter){
+    char* nameOfChar;
+    if(theCharacter->nextTurn != NULL)
+        nameOfChar = theCharacter->character->name;
+}
+
+void takeOutCharacter(NextCharacterTurn *theCharacter, Player fullCharacter){
+    NextCharacterTurn charactertoDelete = *theCharacter;
+    NextCharacterTurn prevCharacter = *theCharacter;
+    char* nameOfChar; 
+    if(charactertoDelete != NULL){
+        nameOfChar = charactertoDelete->character->name;
+        while (prevCharacter->nextTurn != *theCharacter){prevCharacter = prevCharacter->nextTurn;}
+        *theCharacter = charactertoDelete->nextTurn;
+        prevCharacter->nextTurn = *theCharacter;
+        free(charactertoDelete);
+    }
+}
+
+void popC(NextCharacterTurn *theCharacter, Player fullCharacter){
+    NextCharacterTurn charactertoDelete = *theCharacter;
+    char* nameOfChar; 
+    if(charactertoDelete != NULL){
+        nameOfChar = charactertoDelete->character->name;
+        *theCharacter = charactertoDelete->nextTurn;
+        free(charactertoDelete);
+    }
+}
+
+void deleteNodeC(NextCharacterTurn theCharacter, Player fullCharacter){
+    NextCharacterTurn toDelete = theCharacter, prev;
+    if (theCharacter == NULL)
+        return;
+    if (toDelete == theCharacter) {
+        prev = theCharacter;
+        while (prev->nextTurn != theCharacter)
+            prev = prev->nextTurn;
+        theCharacter = toDelete->nextTurn;
+        prev->nextTurn = theCharacter;
         free(toDelete);
     }
 }
