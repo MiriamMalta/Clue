@@ -26,46 +26,7 @@ void CalculateRandomMovements(){
 }
 void HatONames(){
 }
-
 /*
-
-int main(void) {
-    YourTurn first = NULL; 
-  
-    addChara(&first, 12); 
-    addChara(&first, 56); 
-    addChara(&first, 2); 
-    addChara(&first, 11); 
-  
-    printList(first); 
-    printf("\n");print(first);
-
-    //printf("\n");printf("\n%d", peek(first));
-    //printf("\n%d", poop(&first));
-    //printf("\n");printList(first);
-    //printf("\n%d", peek(first));
-
-    printf("\n");printf("\n%d", move(&first));
-    printf("\n%d", move(&first));
-    printf("\n%d", move(&first));
-    printf("\n%d", move(&first));
-    printf("\n%d", move(&first));
-    printf("\n%d", move(&first));
-
-    printf("\n");printf("\n%d :3", peek(first));
-    printf("\n");print(first);
-
-    //printf("\t");printf("\n%d D,", pop(&first, peek(first)));
-    //printf("\t");deleteNode(first, peek(first));
-    printf("\t");printf("\n%d D,", poop(&first, peek(first)));
-
-    printf("\n");print(first);
-
-    return 0;
-}
-*/
-
-//Skeleon
 
 YourTurn newNode(int value, YourTurn *first){
     YourTurn chara = malloc(sizeof(YourTurn));
@@ -80,7 +41,8 @@ void addChara(YourTurn *first, int data) {
   
     if (*first != NULL){ 
         while (temp->next != *first){
-            temp = temp->next;}
+            temp = temp->next;
+        }
         temp->next = newC;
     } 
     else{
@@ -178,7 +140,8 @@ void addCharacter(NextCharacterTurn *theCharacter, Player fullCharacter){
   
     if (*theCharacter != NULL){ 
         while (temporalCharacter->nextTurn != *theCharacter){
-            temporalCharacter = temporalCharacter->nextTurn;}
+            temporalCharacter = temporalCharacter->nextTurn;
+        }
         temporalCharacter->nextTurn = newCharacter;
     } 
     else{
@@ -253,3 +216,4 @@ void deleteNodeC(NextCharacterTurn theCharacter, Player fullCharacter){
         free(toDelete);
     }
 }
+*/

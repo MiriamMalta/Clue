@@ -32,7 +32,7 @@ void endImpostor(GameState game){
     CloseWindow();
 }
 void initImpostor(GameState game){
-    game->playerInTurn = newPlayer(game, "Yellow");
+    newPlayerList(game);
     game->board = NewBoard(game);
 }
 GameState newImpostorGame(){
@@ -80,6 +80,7 @@ Player newPlayer(GameState game,char color[10]){
     strcpy(urlPath,auxUrlPath);
     strcat(urlPath,"/left.png");
     player->skin[3] = LoadTexture(urlPath);
+    player->c_player = color;
     player->movingAnimate = 0;
     player->frameWidth = 86;
     player->frameHeight = 105;
@@ -93,4 +94,30 @@ Player newPlayer(GameState game,char color[10]){
     player->position.x = game->screenCenterWidth;
     player->position.y = game->screenCenterHeight;
     return player;
+}
+void addPlayer(GameState game,Player player){
+    Player temp = game->playerInTurn;
+    if(game->playerInTurn != NULL){
+        while(temp->next != game->playerInTurn){
+            temp = temp->next;
+        }
+        temp->next = player;
+    }else{
+        player->next = player;
+    }
+    game->playerInTurn = player;
+}
+void newPlayerList(GameState game){
+    game->playerInTurn = NULL;
+    char colorsArray[6][10] = {
+        "Blue",
+        "Green",
+        "Purple",
+        "Red",
+        "White",
+        "Yellow"
+    };
+    for(int i = 0;i<6;i++){
+        addPlayer(game,newPlayer(game,colorsArray[i]));
+    }
 }

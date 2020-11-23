@@ -21,7 +21,7 @@ void HatONames();
     // ... 'cause there's nothing wrong with me
 
 // Skeleton
-
+/*
 struct Node { 
     int data; 
     struct Node *next; 
@@ -63,5 +63,5 @@ void popC(NextCharacterTurn *theCharacter, Player fullCharacter);
 void deleteNodeC(NextCharacterTurn theCharacter, Player fullCharacter);
 
 void takeOutCharacter(NextCharacterTurn *theCharacter, Player fullCharacter);
-
+*/
 #endif

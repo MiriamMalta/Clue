@@ -51,7 +51,8 @@ struct Player_ref{
     struct Vector2      position;   // Position in the window
     Texture2D           skin[4];    // 0 = Stand Right || 1 = Stand Left || 2 = Walking Right || 3 = Walking Left  
     struct Player_ref*  next;       // Pointer To Create a CLL
-};typedef struct Player_ref* Player;
+};
+typedef struct Player_ref* Player;
 
 
 struct ImpostorGame{
@@ -87,9 +88,13 @@ typedef struct ImpostorGame* GameState, GameInitialState;
 
 GameState newImpostorGame();
 Player newPlayer(GameState, char[10]);
+Board NewBoard(GameState);
+
+void newPlayerList(GameState);
+void addPlayer(GameState, Player);
+
 void playImpostor(GameState);
 void endImpostor(GameState);
-Board NewBoard(GameState);
 void initImpostor(GameState);
 
 #endif
