@@ -9,6 +9,9 @@
 
 void Movement(GameState game)
 {
+    if(IsKeyDown(KEY_K)){
+        game->playerInTurn = game->playerInTurn->next;
+    }
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))
     {
         game->playerInTurn->position.y += GetFrameTime() * -(game->speed);
