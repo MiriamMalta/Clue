@@ -38,7 +38,6 @@ YourTurn newNode(int value, YourTurn *first){
 void addChara(YourTurn *first, int data) { 
     YourTurn newC = newNode(data, first);
     YourTurn temp = *first;
-  
     if (*first != NULL){ 
         while (temp->next != *first){
             temp = temp->next;
@@ -48,7 +47,7 @@ void addChara(YourTurn *first, int data) {
     else{
         newC->next = newC;
     }
-    *first = newC; 
+    *first = newC->next; 
 } 
   
 void printList(YourTurn first){
@@ -137,47 +136,25 @@ NextCharacterTurn makeNewCharacter(NextCharacterTurn *theCharacter, Player fullC
 void addCharacter(NextCharacterTurn *theCharacter, Player fullCharacter){ 
     NextCharacterTurn newCharacter = makeNewCharacter(theCharacter, fullCharacter);
     NextCharacterTurn temporalCharacter = *theCharacter;
-  
     if (*theCharacter != NULL){ 
-        while (temporalCharacter->nextTurn != *theCharacter){
-            temporalCharacter = temporalCharacter->nextTurn;
-        }
+        while (temporalCharacter->nextTurn != *theCharacter){temporalCharacter = temporalCharacter->nextTurn;}
         temporalCharacter->nextTurn = newCharacter;
     } 
-    else{
-        newCharacter->nextTurn = newCharacter;
-    }
-    *theCharacter = newCharacter; 
+    else{newCharacter->nextTurn = newCharacter;}
+    *theCharacter = newCharacter->nextTurn;
 } 
-  
-void printListC(NextCharacterTurn theCharacter){
-    NextCharacterTurn temporalCharacter = theCharacter;
-    if (theCharacter != NULL){
-        do{
-            printf("[%s]->", theCharacter->character->name);
-            temporalCharacter = temporalCharacter->nextTurn;
-        } while(temporalCharacter != theCharacter);
-    }
-}
-
-void printC(NextCharacterTurn theCharacter){
-    for (int i = 0; i <= 8; i++){
-        printf("[%s]->", theCharacter->character->name);
-        theCharacter = theCharacter->nextTurn;
-    }
-}
 
 void moveAlongInTurns(NextCharacterTurn *theCharacter){
     char* nameOfChar;
-    if((*theCharacter)->nextTurn != NULL)
+    if((*theCharacter)->nextTurn != NULL){
         nameOfChar = (*theCharacter)->character->name;
-        *theCharacter = (*theCharacter)->nextTurn;
+        *theCharacter = (*theCharacter)->nextTurn;}
 }
 
 void peekWhoSNext(NextCharacterTurn theCharacter){
     char* nameOfChar;
-    if(theCharacter->nextTurn != NULL)
-        nameOfChar = theCharacter->character->name;
+    if(theCharacter->nextTurn != NULL){
+        nameOfChar = theCharacter->character->name;}
 }
 
 void takeOutCharacter(NextCharacterTurn *theCharacter, Player fullCharacter){
@@ -216,4 +193,72 @@ void deleteNodeC(NextCharacterTurn theCharacter, Player fullCharacter){
         free(toDelete);
     }
 }
+
+void printListC(NextCharacterTurn theCharacter){
+    NextCharacterTurn temporalCharacter = theCharacter;
+    if (theCharacter != NULL){
+        do{
+            printf("[%s]->", theCharacter->character->name);
+            temporalCharacter = temporalCharacter->nextTurn;
+        } while(temporalCharacter != theCharacter);
+    }
+}
+
+void printC(NextCharacterTurn theCharacter){
+    for (int i = 0; i <= 8; i++){
+        printf("[%s]->", theCharacter->character->name);
+        theCharacter = theCharacter->nextTurn;
+    }
+}
+
+
+// First traduction try
+
+void addCharacter(GameState game, Player fullCharacter){
+    //*theCharacter = game->playerInTurn
+    Player temp = game->playerInTurn;
+    if(game->playerInTurn != NULL){
+        while(temp->next != game->playerInTurn){
+            temp = temp->next;
+        }
+        temp->next = fullCharacter;
+    }else{
+        fullCharacter->next = fullCharacter;
+    }
+    game->playerInTurn = fullCharacter->next;
+}
+
+Player moveAlongInTurns(GameState game){
+    //*theCharacter = game->playerInTurn
+    char* nameOfChar;
+    if(game->playerInTurn->next != NULL){
+        nameOfChar = game->playerInTurn->name;
+        game->playerInTurn = game->playerInTurn->next;
+    }
+    return nameOfChar;
+}
+
+Player peekWhoSNext(GameState game){
+    //*theCharacter = game->playerInTurn
+    char* nameOfChar;
+    if(game->playerInTurn->next != NULL){
+        nameOfChar = game->playerInTurn->name;
+    }
+    return nameOfChar;
+}
+
+void takeOutCharacter(GameState game, Player fullCharacter){
+    //*theCharacter = game->playerInTurn
+    Player charactertoDelete = game->playerInTurn;
+    Player prevCharacter = game->playerInTurn;
+    if(charactertoDelete != NULL){
+        while (prevCharacter->next != game->playerInTurn){
+            prevCharacter = prevCharacter->next;
+        }
+        game->playerInTurn = charactertoDelete->next;
+        prevCharacter->nextTurn = game->playerInTurn;
+        free(charactertoDelete);
+    }
+}
+
 */

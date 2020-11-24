@@ -14,14 +14,9 @@ void GenerateTurnList();
 void CalculateRandomMovements();
 void HatONames();
 
-// Another litte abuse, another pointless excuse
-    // ... and i don't know, if they still love me
-    // ... and i don't know, if they still care
-    // ... i'm alone and i'm free
-    // ... 'cause there's nothing wrong with me
-
-// Skeleton
 /*
+// Skeleton
+
 struct Node { 
     int data; 
     struct Node *next; 
@@ -42,7 +37,7 @@ void deleteNode(YourTurn first, int key);
 int poop(YourTurn *first, int key);
 
 
-//First-try of right
+// First-try of right
 
 struct NodeCharacter { 
     Player character; 
@@ -63,5 +58,17 @@ void popC(NextCharacterTurn *theCharacter, Player fullCharacter);
 void deleteNodeC(NextCharacterTurn theCharacter, Player fullCharacter);
 
 void takeOutCharacter(NextCharacterTurn *theCharacter, Player fullCharacter);
+
+
+// First traduction try
+
+void addCharacter(GameState game, Player fullCharacter);
+
+Player moveAlongInTurns(GameState game);
+
+Player peekWhoSNext(GameState game);
+
+void takeOutCharacter(GameState game, Player fullCharacter);
+
 */
 #endif
