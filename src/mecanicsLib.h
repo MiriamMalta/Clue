@@ -2,6 +2,7 @@
 #define _MECANICS_GUARD_H
 #include <stdio.h>
 #include <stdlib.h>
+#include "raylib.h"
 #include "impostorLib.h"
 
 void SaveGame();
@@ -59,16 +60,15 @@ void deleteNodeC(NextCharacterTurn theCharacter, Player fullCharacter);
 
 void takeOutCharacter(NextCharacterTurn *theCharacter, Player fullCharacter);
 
-
+*/
 // First traduction try
 
 void addCharacter(GameState game, Player fullCharacter);
 
-Player moveAlongInTurns(GameState game);
+char* moveAlongInTurns(GameState game);
 
-Player peekWhoSNext(GameState game);
+char* peekWhoSNext(GameState game);
 
 void takeOutCharacter(GameState game, Player fullCharacter);
 
-*/
 #endif

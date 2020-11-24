@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include "raylib.h"
 #include "mecanicsLib.h"
 
 //Este seria el Backend del juego, solamente 
@@ -211,7 +212,7 @@ void printC(NextCharacterTurn theCharacter){
     }
 }
 
-
+*/
 // First traduction try
 
 void addCharacter(GameState game, Player fullCharacter){
@@ -226,23 +227,26 @@ void addCharacter(GameState game, Player fullCharacter){
         fullCharacter->next = fullCharacter;
     }
     game->playerInTurn = fullCharacter->next;
+    //fprintf(stdout, "see if it prints something!\n");
 }
 
-Player moveAlongInTurns(GameState game){
+char* moveAlongInTurns(GameState game){
     //*theCharacter = game->playerInTurn
-    char* nameOfChar;
+    char* nameOfChar = NULL;
     if(game->playerInTurn->next != NULL){
         nameOfChar = game->playerInTurn->name;
         game->playerInTurn = game->playerInTurn->next;
     }
+    //fprintf(stdout, "%s\n", nameOfChar);
     return nameOfChar;
 }
 
-Player peekWhoSNext(GameState game){
+char* peekWhoSNext(GameState game){
     //*theCharacter = game->playerInTurn
-    char* nameOfChar;
+    char* nameOfChar = NULL;
     if(game->playerInTurn->next != NULL){
-        nameOfChar = game->playerInTurn->name;
+        //nameOfChar = game->playerInTurn->name;
+        nameOfChar = game->playerInTurn->c_player;
     }
     return nameOfChar;
 }
@@ -256,9 +260,7 @@ void takeOutCharacter(GameState game, Player fullCharacter){
             prevCharacter = prevCharacter->next;
         }
         game->playerInTurn = charactertoDelete->next;
-        prevCharacter->nextTurn = game->playerInTurn;
+        prevCharacter->next = game->playerInTurn;
         free(charactertoDelete);
     }
 }
-
-*/

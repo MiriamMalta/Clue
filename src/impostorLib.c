@@ -37,8 +37,10 @@ void initImpostor(GameState game){
 }
 GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));
-    game->screenWidth = 1920;
-    game->screenHeight = 1080;
+    //game->screenWidth = 1920;
+    //game->screenHeight = 1080;
+    game->screenWidth = 1280;
+    game->screenHeight = 700;
     game->fps = 60;
     game->speed = 200.0f;
     game->screenCenterWidth = (int)game->screenWidth/2;
@@ -105,19 +107,20 @@ void addPlayer(GameState game,Player player){
     }else{
         player->next = player;
     }
-    game->playerInTurn = player;
+    game->playerInTurn = player->next;
+    //fprintf(stdout, "{{{{%s}}}}\n", peekWhoSNext(game));
 }
 void newPlayerList(GameState game){
     game->playerInTurn = NULL;
     char colorsArray[6][10] = {
-        "Blue",
-        "Green",
-        "Purple",
-        "Red",
+        //"Blue",
+        //"Green",
+        //"Purple",
+        //"Red",
         "White",
-        "Yellow"
+        //"Yellow"
     };
-    for(int i = 0;i<6;i++){
+    for(int i = 0;i<1;i++){
         addPlayer(game,newPlayer(game,colorsArray[i]));
     }
 }

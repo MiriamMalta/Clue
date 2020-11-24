@@ -1,7 +1,7 @@
 #ifndef _IMPOSTOR_GUARD_H
 #define _IMPOSTOR_GUARD_H
 #include "raylib.h"
-#include "mecanicsLib.h"
+//#include "mecanicsLib.h"
 
 typedef enum {
     LOGO, 
