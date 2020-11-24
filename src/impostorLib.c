@@ -97,30 +97,31 @@ Player newPlayer(GameState game,char color[10]){
     player->position.y = game->screenCenterHeight;
     return player;
 }
-void addPlayer(GameState game,Player player){
+void addPlayerToList(GameState game,Player player){
     Player temp = game->playerInTurn;
-    if(game->playerInTurn != NULL){
+    if(game->playerInTurn == NULL){
+        game->playerInTurn = player;
+        game->playerInTurn->next = player;
+    }else{
         while(temp->next != game->playerInTurn){
             temp = temp->next;
         }
         temp->next = player;
-    }else{
-        player->next = player;
+        player->next = game->playerInTurn;
+
     }
-    game->playerInTurn = player->next;
-    //fprintf(stdout, "{{{{%s}}}}\n", peekWhoSNext(game));
 }
 void newPlayerList(GameState game){
     game->playerInTurn = NULL;
     char colorsArray[6][10] = {
-        //"Blue",
-        //"Green",
-        //"Purple",
-        //"Red",
+        "Blue",
+        "Green",
+        "Purple",
+        "Red",
         "White",
-        //"Yellow"
+        "Yellow"
     };
-    for(int i = 0;i<1;i++){
-        addPlayer(game,newPlayer(game,colorsArray[i]));
+    for(int i = 0;i<6;i++){
+        addPlayerToList(game,newPlayer(game,colorsArray[i]));
     }
 }

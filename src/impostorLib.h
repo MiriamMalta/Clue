@@ -91,7 +91,7 @@ Player newPlayer(GameState, char[10]);
 Board NewBoard(GameState);
 
 void newPlayerList(GameState);
-void addPlayer(GameState, Player);
+void addPlayerToList(GameState, Player);
 
 void playImpostor(GameState);
 void endImpostor(GameState);
