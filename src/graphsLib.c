@@ -9,7 +9,7 @@
 
 void Movement(GameState game)
 {
-    if(IsKeyDown(KEY_K)){
+    if(IsKeyReleased(KEY_K)){
         game->playerInTurn = game->playerInTurn->next;
     }
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))
