@@ -46,4 +46,10 @@ set(WANT_ZLIB FALSE)
 
 
 add_executable(Impostor main.c src/graphsLib.c src/impostorLib.c src/mecanicsLib.c src/test.c)
-target_link_libraries(Impostor raylib GL X11 glfw pthread)
+if (WIN32)
+    target_link_libraries(Impostor raylib)
+elseif (APPLE)
+    target_link_libraries(Impostor raylib pthread)
+else()
+    target_link_libraries(Impostor raylib GL X11 glfw pthread)
+endif()
