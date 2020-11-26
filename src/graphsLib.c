@@ -98,6 +98,7 @@ void Movement(GameState game)
         game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 1);
         game->playerInTurn->maxFrames = (int)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / (int)game->playerInTurn->frameWidth);
     }
+    fprintf(stdout, "-----CORDS: x->%f y->%f\n",game->playerInTurn->position.x,game->playerInTurn->position.y);
     game->playerInTurn->timer += GetFrameTime();
     if (game->playerInTurn->timer >= 0.05f)
     {
