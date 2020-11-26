@@ -62,7 +62,19 @@ Board NewBoard(GameState game){
     board->camera.offset = (Vector2) {game->screenCenterWidth,game->screenCenterHeight};
     board->camera.rotation = 0.0f;
     board->camera.zoom = 1.0f;
+    
+    float initialX = 0.0f, intialY =0.0f;
+    for(int x=0;x<24;x++){
+        for(int y=0;y<24;y++){
+            board->boxes[x][y].tilePosition = (Vector2){initialX*(x*86),intialY*(y*86)};
+            board->boxes[x][y].status = 'b';
+            board->boxes[x][y].isRoom = 0;
+            fprintf(stdout, "[%c] ",board->boxes[x][y].status);
 
+        }
+        fprintf(stdout, "\n");
+    }
+    
     return board;
 }
 Player newPlayer(GameState game,char color[10]){

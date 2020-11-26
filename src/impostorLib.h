@@ -32,7 +32,7 @@ struct Box{
 struct BoardGame{
     Texture2D           mapBackground;
     Camera2D            camera;
-    struct Box          boxes[25][24];
+    struct Box          boxes[24][24];
 }; typedef struct BoardGame* Board;
 
 
