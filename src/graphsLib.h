@@ -3,6 +3,11 @@
 #include "impostorLib.h"
 
 void Movement(GameState game);
+void MovementInBoard(GameState game);
+void SelectAnimation(GameState game, int Selection, int isStill);
+void UpdateAnimation(GameState game);
+void UpdateCameraPosition(GameState game);
+
 void Teletransport();
 void EnterRoom();
 void ExitRoom();
