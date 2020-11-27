@@ -7,94 +7,161 @@
 
 //Aqui solamente funciones graficas
 
-void Movement(GameState game)
-{
-    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))
-    {
+void Movement(GameState game){
+    if(IsKeyReleased(KEY_K)){
+        game->playerInTurn = game->playerInTurn->next;
+    }
+    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)){
         game->playerInTurn->position.y += GetFrameTime() * -(game->speed);
-        if (game->playerInTurn->movingAnimate == 0)
-        {
-            game->playerInTurn->movingAnimate = 2;
-        }
-        else if (game->playerInTurn->movingAnimate == 1)
-        {
-            game->playerInTurn->movingAnimate = 3;
-        }
-        game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 12);
-        game->playerInTurn->maxFrames = (int)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / (int)game->playerInTurn->frameWidth);
+        SelectAnimation(game,1,false);
     }
-    if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))
-    {
+    if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)){
         game->playerInTurn->position.y += GetFrameTime() * (game->speed);
-        if (game->playerInTurn->movingAnimate == 0)
-        {
-            game->playerInTurn->movingAnimate = 2;
-        }
-        else if (game->playerInTurn->movingAnimate == 1)
-        {
-            game->playerInTurn->movingAnimate = 3;
-        }
-        game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 12);
-        game->playerInTurn->maxFrames = (int)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / (int)game->playerInTurn->frameWidth);
+        SelectAnimation(game,2,false);
     }
-    if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT))
-    {
+    if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)){
         game->playerInTurn->position.x += GetFrameTime() * (game->speed);
-        game->playerInTurn->movingAnimate = 2;
-        game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 12);
-        game->playerInTurn->maxFrames = (int)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / (int)game->playerInTurn->frameWidth);
+        SelectAnimation(game,3,false);
     }
-    if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))
-    {
+    if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)){
         game->playerInTurn->position.x += GetFrameTime() * -(game->speed);
-        game->playerInTurn->movingAnimate = 3;
-        game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 12);
-        game->playerInTurn->maxFrames = (int)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / (int)game->playerInTurn->frameWidth);
+        SelectAnimation(game,4,false);
     }
     
-    game->board->camera.target = (Vector2) {game->playerInTurn->position.x+43,game->playerInTurn->position.y+50};
-    game->board->camera.zoom += ((float)GetMouseWheelMove()*0.05f);
-    if (game->board->camera.zoom > 3.0f) game->board->camera.zoom = 3.0f;
-    else if (game->board->camera.zoom < 1.0f) game->board->camera.zoom = 1.0f;
+    UpdateCameraPosition(game);
 
-    if (IsKeyReleased(KEY_D) || IsKeyReleased(KEY_RIGHT))
-    {
-        game->playerInTurn->movingAnimate = 0;
+    if (IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP)){
+        SelectAnimation(game,1,true);
+    }
+    if (IsKeyReleased(KEY_S) || IsKeyReleased(KEY_DOWN)){
+        SelectAnimation(game,2,true);
+    }
+    if (IsKeyReleased(KEY_D) || IsKeyReleased(KEY_RIGHT)){
+        SelectAnimation(game,3,true);
+    }
+    if (IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT)){
+        SelectAnimation(game,4,true);
+    }
+    //fprintf(stdout, "-----CORDS: x->[%f] y->[%f]\n",game->playerInTurn->position.x,game->playerInTurn->position.y);
+    UpdateAnimation(game);
+}
+
+void MovementInBoard(GameState game){
+    if(IsKeyReleased(KEY_K)){
+        game->playerInTurn = game->playerInTurn->next;
+    }
+    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)){
+        SelectAnimation(game,1,false);
+    }
+    if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)){
+        SelectAnimation(game,2,false);
+    }
+    if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)){
+        SelectAnimation(game,3,false);
+    }
+    if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)){
+        SelectAnimation(game,4,false);
+    }
+    
+    UpdateCameraPosition(game);
+
+    if (IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP)){
+        if((game->playerInTurn->y-1 >= 0) && game->board->boxes[game->playerInTurn->x][game->playerInTurn->y-1].status == 'f'){
+            game->playerInTurn->x;
+            game->playerInTurn->y--;
+        }
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        SelectAnimation(game,1,true);
+    }
+    if (IsKeyReleased(KEY_S) || IsKeyReleased(KEY_DOWN)){
+        if((game->playerInTurn->y+1 < 24) && game->board->boxes[game->playerInTurn->x][game->playerInTurn->y+1].status == 'f'){
+            game->playerInTurn->x;
+            game->playerInTurn->y++;
+        }
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        SelectAnimation(game,2,true);
+    }
+    if (IsKeyReleased(KEY_D) || IsKeyReleased(KEY_RIGHT)){
+        if((game->playerInTurn->x+1 < 24) && game->board->boxes[game->playerInTurn->x+1][game->playerInTurn->y].status == 'f'){
+            game->playerInTurn->x++;
+            game->playerInTurn->y;
+        }
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        SelectAnimation(game,3,true);
+    }
+    if (IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT)){
+        if((game->playerInTurn->x-1 >= 0) && game->board->boxes[game->playerInTurn->x-1][game->playerInTurn->y].status == 'f'){
+            game->playerInTurn->x--;
+            game->playerInTurn->y;
+        }
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        SelectAnimation(game,4,true);
+    }
+    //fprintf(stdout, "-----CORDS: x->%d y->%d\n",game->playerInTurn->x,game->playerInTurn->y);
+    UpdateAnimation(game);
+}
+
+void SelectAnimation(GameState game, int Selection,int isStill){
+    if(isStill){
+        switch (Selection){
+            case 1: // Up
+                if (game->playerInTurn->movingAnimate == 2){
+                    game->playerInTurn->movingAnimate = 0;
+                }else if (game->playerInTurn->movingAnimate == 3){
+                    game->playerInTurn->movingAnimate = 1;
+                }
+                break;
+            case 2: // Down
+                if (game->playerInTurn->movingAnimate == 2){
+                    game->playerInTurn->movingAnimate = 0;
+                }else if (game->playerInTurn->movingAnimate == 3){
+                    game->playerInTurn->movingAnimate = 1;
+                }
+                break;
+            case 3: // Right
+                game->playerInTurn->movingAnimate = 0; 
+                break;
+            case 4: // Left
+                game->playerInTurn->movingAnimate = 1;
+                break;
+            default:
+                break;
+        }
         game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 1);
         game->playerInTurn->maxFrames = (int)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / (int)game->playerInTurn->frameWidth);
     }
-    if (IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT))
-    {
-        game->playerInTurn->movingAnimate = 1;
-        game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 1);
+    else{
+        switch (Selection){
+            case 1: // Up
+                if (game->playerInTurn->movingAnimate == 0){
+                    game->playerInTurn->movingAnimate = 2;
+                }else if (game->playerInTurn->movingAnimate == 1){
+                    game->playerInTurn->movingAnimate = 3;
+                }
+                break;
+            case 2: // Down
+                if (game->playerInTurn->movingAnimate == 0){
+                    game->playerInTurn->movingAnimate = 2;
+                }else if (game->playerInTurn->movingAnimate == 1){
+                    game->playerInTurn->movingAnimate = 3;
+                }
+                break;
+            case 3: // Right
+                game->playerInTurn->movingAnimate = 2; 
+                break;
+            case 4: // Left
+                game->playerInTurn->movingAnimate = 3;
+                break;
+            default:
+                break;
+        }
+        game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 12);
         game->playerInTurn->maxFrames = (int)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / (int)game->playerInTurn->frameWidth);
     }
-    if (IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP))
-    {
-        if (game->playerInTurn->movingAnimate == 2)
-        {
-            game->playerInTurn->movingAnimate = 0;
-        }
-        else if (game->playerInTurn->movingAnimate == 3)
-        {
-            game->playerInTurn->movingAnimate = 1;
-        }
-        game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 1);
-        game->playerInTurn->maxFrames = (int)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / (int)game->playerInTurn->frameWidth);
-    }
-    if (IsKeyReleased(KEY_S) || IsKeyReleased(KEY_DOWN))
-    {
-        if (game->playerInTurn->movingAnimate == 2)
-        {
-            game->playerInTurn->movingAnimate = 0;
-        }
-        else if (game->playerInTurn->movingAnimate == 3)
-        {
-            game->playerInTurn->movingAnimate = 1;
-        }
-        game->playerInTurn->frameWidth = (float)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / 1);
-        game->playerInTurn->maxFrames = (int)(game->playerInTurn->skin[game->playerInTurn->movingAnimate].width / (int)game->playerInTurn->frameWidth);
-    }
+
+}
+
+void UpdateAnimation(GameState game){
     game->playerInTurn->timer += GetFrameTime();
     if (game->playerInTurn->timer >= 0.05f)
     {
@@ -109,8 +176,31 @@ void Movement(GameState game)
         game->playerInTurn->position,
         RAYWHITE
     );
+}
+
+void UpdateCameraPosition(GameState game){
+    game->board->camera.target = (Vector2) {game->playerInTurn->position.x+43,game->playerInTurn->position.y+50};
+    game->board->camera.zoom += ((float)GetMouseWheelMove()*0.05f);
+    if (game->board->camera.zoom > 3.0f) game->board->camera.zoom = 3.0f;
+    else if (game->board->camera.zoom < 1.0f) game->board->camera.zoom = 1.0f;
     DrawLine(game->board->camera.target.x,-game->screenHeight*10,game->board->camera.target.x,game->screenHeight*10,GREEN);
-    DrawLine(-game->screenWidth*10,game->board->camera.target.y,game->screenWidth*10,game->board->camera.target.y,GREEN);    
+    DrawLine(-game->screenWidth*10,game->board->camera.target.y,game->screenWidth*10,game->board->camera.target.y,GREEN);  
+}
+
+void InitCamera(GameState game){
+    game->board->camera.target = (Vector2) {game->playerInTurn->position.x+20,game->playerInTurn->position.y+20};
+    game->board->camera.offset = (Vector2) {game->screenCenterWidth,game->screenCenterHeight};
+    game->board->camera.rotation = 0.0f;
+    game->board->camera.zoom = 1.0f;
+}
+
+void SetPlayersInBoard(GameState game){
+    for(int i=0;i<game->playersAlive;i++){
+        game->playerInTurn->x = 0;
+        game->playerInTurn->y = 0;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        game->playerInTurn = game->playerInTurn->next;
+    }
 }
 
 void Teleport()

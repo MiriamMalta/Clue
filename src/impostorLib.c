@@ -9,36 +9,17 @@
 
 //Aqui juntamos todo el codigo
 
-
-
-
-GameState newImpostorGame(){
-    GameState game = malloc(sizeof(struct ImpostorGame));
-    game->screenWidth = 1920;
-    game->screenHeight = 1080;
-    game->fps = 60;
-    game->speed = 200.0f;
-    game->screenCenterWidth = (int)game->screenWidth/2;
-    game->screenCenterHeight = (int)game->screenHeight/2;
-    game->gameScreen = LOGO;
-    //const int screenWidth = 1920, screenHeight = 1080; //monitor normal
-    //const int screenWidth = 1366, screenHeight = 768; //monitor lap
-    //const int screenWidth = 1024, screenHeight = 768; //monitor feo
-    //const int screenWidth = 1280, screenHeight = 800; //monitor mac
-
-    InitWindow(game->screenWidth,game->screenHeight, "raylib");
-    SetTargetFPS(game->fps);
-    return game;
-}
 void playImpostor(GameState game){
     initImpostor(game);
+    Texture2D black = LoadTexture("./res/assets/map/Space.png");
 
     while (!WindowShouldClose()){
         BeginDrawing();
             ClearBackground(RAYWHITE);
             BeginMode2D(game->board->camera);
+            DrawTexture(black, 0, 0, WHITE);
             DrawTexture(game->board->mapBackground, 0, 0, WHITE);
-            Movement(game);
+            MovementInBoard(game);
 
             EndMode2D();
 
@@ -46,25 +27,115 @@ void playImpostor(GameState game){
     }
     
 }
-void endImpostor(){
+void endImpostor(GameState game){
+    free(game->board);
+    free(game->playerInTurn);
+    free(game);
     CloseWindow();
 }
 void initImpostor(GameState game){
-    game->playerInTurn = newPlayer(game, "Yellow");
+    newPlayerList(game);
     game->board = NewBoard(game);
-}
+    SetPlayersInBoard(game);
+    InitCamera(game);
 
+}
+GameState newImpostorGame(){
+    GameState game = malloc(sizeof(struct ImpostorGame));
+    //game->screenWidth = 1920;
+    //game->screenHeight = 1080;
+    game->screenWidth = 1280;
+    game->screenHeight = 700;
+    game->fps = 60;
+    game->speed = 200.0f;
+    game->screenCenterWidth = (int)game->screenWidth/2;
+    game->screenCenterHeight = (int)game->screenHeight/2;
+    game->gameScreen = LOGO;
+    game->playersAlive = 0;
+    //const int screenWidth = 1920, screenHeight = 1080; //monitor normal
+    //const int screenWidth = 1366, screenHeight = 768; //monitor lap
+    //const int screenWidth = 1024, screenHeight = 768; //monitor feo
+    //const int screenWidth = 1280, screenHeight = 800; //monitor mac
+    InitWindow(game->screenWidth,game->screenHeight, "raylib");
+    SetTargetFPS(game->fps);
+    return game;
+}
 Board NewBoard(GameState game){
     Board board = malloc(sizeof(struct BoardGame));
     board->mapBackground = LoadTexture("./res/assets/map/Board.png");
-    board->camera.target = (Vector2) {game->playerInTurn->position.x+20,game->playerInTurn->position.y+20};
-    board->camera.offset = (Vector2) {game->screenCenterWidth,game->screenCenterHeight};
-    board->camera.rotation = 0.0f;
-    board->camera.zoom = 1.0f;
-
+    float initialX = 1723.0f, intialY = 1699.0f;
+    for(int x=0;x<24;x++){
+        for(int y=0;y<24;y++){
+            board->boxes[x][y].tilePosition = (Vector2){initialX+(x*86),intialY+(y*86)};
+            board->boxes[x][y].status = '-';
+            board->boxes[x][y].isRoom = 0;
+        }
+    }
+    for(int x=0;x<24;x++){
+        if(x == 0 || x == 1 || x == 11 || x == 12 || x == 22 || x == 23 ){
+            for(int y=0;y<24;y++){
+                board->boxes[y][x].status = 'f';
+            }
+        }else if((x > 1 && x <= 8)|| x == 16){
+            board->boxes[0][x].status = 'f';
+            board->boxes[1][x].status = 'f';
+            board->boxes[6][x].status = 'f';
+            board->boxes[11][x].status = 'f';
+            board->boxes[12][x].status = 'f';
+            board->boxes[17][x].status = 'f';
+            board->boxes[22][x].status = 'f';
+            board->boxes[23][x].status = 'f';
+        }else if(x > 17 && x < 22){
+            board->boxes[0][x].status = 'f';
+            board->boxes[1][x].status = 'f';
+            board->boxes[11][x].status = 'f';
+            board->boxes[12][x].status = 'f';
+            board->boxes[22][x].status = 'f';
+            board->boxes[23][x].status = 'f';
+        }else if(x >= 9 && x < 16){
+            board->boxes[0][x].status = 'f';
+            board->boxes[1][x].status = 'f';
+            board->boxes[6][x].status = 'f';
+            board->boxes[8][x].status = 'f';
+            board->boxes[9][x].status = 'f';
+            board->boxes[10][x].status = 'f';
+            board->boxes[11][x].status = 'f';
+            board->boxes[12][x].status = 'f';
+            board->boxes[13][x].status = 'f';
+            board->boxes[14][x].status = 'f';
+            board->boxes[15][x].status = 'f';
+            board->boxes[17][x].status = 'f';
+            board->boxes[22][x].status = 'f';
+            board->boxes[23][x].status = 'f';
+        }else if(x == 17){
+            board->boxes[0][x].status = 'f';
+            board->boxes[1][x].status = 'f';
+            board->boxes[6][x].status = 'f';
+            board->boxes[7][x].status = 'f';
+            board->boxes[8][x].status = 'f';
+            board->boxes[9][x].status = 'f';
+            board->boxes[10][x].status = 'f';
+            board->boxes[11][x].status = 'f';
+            board->boxes[12][x].status = 'f';
+            board->boxes[13][x].status = 'f';
+            board->boxes[14][x].status = 'f';
+            board->boxes[15][x].status = 'f';
+            board->boxes[16][x].status = 'f';
+            board->boxes[17][x].status = 'f';
+            board->boxes[22][x].status = 'f';
+            board->boxes[23][x].status = 'f';
+        }
+    }
+    
+    for(int x=0;x<24;x++){
+        for(int y=0;y<24;y++){
+            fprintf(stdout, "[%c] ",board->boxes[y][x].status);
+        }
+        fprintf(stdout, "\n");
+    }
+    
     return board;
 }
-
 Player newPlayer(GameState game,char color[10]){
     Player player = malloc(sizeof(struct Player_ref));
     char urlPath[100] = "./res/assets/crewmates/"; 
@@ -82,17 +153,48 @@ Player newPlayer(GameState game,char color[10]){
     strcpy(urlPath,auxUrlPath);
     strcat(urlPath,"/left.png");
     player->skin[3] = LoadTexture(urlPath);
+    player->c_player = color;
     player->movingAnimate = 0;
-    player->frameWidth = 86;//(float)(player->skin[player->movingAnimate].width/1);
-    player->frameHeight = 105;//(float)(player->skin[player->movingAnimate].height);
-    player->maxFrames = 1;//(int)(player->skin[player->movingAnimate].width/(int)player->frameWidth);
+    player->frameWidth = 86;
+    player->frameHeight = 105;
+    player->maxFrames = 1;
     player->timer = 0.0f;
     player->frame = 0;
     player->frameRec.x = 0;
     player->frameRec.y = 0;
     player->frameRec.width = player->frameWidth; 
     player->frameRec.height = player->frameHeight;
-    player->position.x = game->screenCenterWidth;
-    player->position.y = game->screenCenterHeight;
+    player->position.x = 1723;//game->screenCenterWidth;
+    player->position.y = 1699;//game->screenCenterHeight;
     return player;
+}
+void addPlayerToList(GameState game,Player player){
+    Player temp = game->playerInTurn;
+    if(game->playerInTurn == NULL){
+        game->playerInTurn = player;
+        game->playerInTurn->next = player;
+    }else{
+        while(temp->next != game->playerInTurn){
+            temp = temp->next;
+        }
+        temp->next = player;
+        player->next = game->playerInTurn;
+
+    }
+}
+void newPlayerList(GameState game){
+    game->playerInTurn = NULL;
+    // Aqui debe haber una funcion con los datos de los personajes escogidos
+    char colorsArray[6][10] = {
+        "Blue",
+        "Green",
+        "Purple",
+        "Red",
+        "White",
+        "Yellow"
+    };
+    for(int i = 0;i<6;i++){
+        addPlayerToList(game,newPlayer(game,colorsArray[i]));
+        game->playersAlive++;
+    }
 }

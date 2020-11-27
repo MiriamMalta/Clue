@@ -1,7 +1,7 @@
 #ifndef _IMPOSTOR_GUARD_H
 #define _IMPOSTOR_GUARD_H
 #include "raylib.h"
-#include "mecanicsLib.h"
+//#include "mecanicsLib.h"
 
 typedef enum {
     LOGO, 
@@ -13,20 +13,18 @@ typedef enum {
     SETTINGS,
     CREDITS,
 
-    } GameScreen;
+} GameScreen;
 
 struct GameSceneData{
     GameScreen          gameScreen;
     int                 state;
     float               alpha;
-};
-
-typedef struct GameSceneData* GameScene;
+}; typedef struct GameSceneData* GameScene;
 
 
 struct Box{
     int                 isRoom;
-    char                status;         //t = taken; b = blocked; c = camera; p = player; and rooms
+    char                status;         //f = free; b = blocked; p = player; and rooms
     Vector2             tilePosition;
 };
 
@@ -34,19 +32,18 @@ struct Box{
 struct BoardGame{
     Texture2D           mapBackground;
     Camera2D            camera;
-    struct Box          boxes[55][75];
-};
-
-typedef struct BoardGame* Board;
-
+    struct Box          boxes[24][24];
+}; typedef struct BoardGame* Board;
 
 
 struct Player_ref{
     int                 isLive; 
-    int                 movingAnimate; 
+    int                 movingAnimate;
     int                 cards[3];   // Deck of cards
     int                 frame;      // Visible frame
     int                 maxFrames;  // Frames in the Texture
+    int                 x;
+    int                 y;
     float               frameWidth; // Width of the Colider
     float               frameHeight;// Height of the Colider
     float               timer;      // Helper Timer for animation
@@ -59,6 +56,7 @@ struct Player_ref{
 };
 typedef struct Player_ref* Player;
 
+
 struct ImpostorGame{
     int                 screenWidth;
     int                 screenHeight;
@@ -66,11 +64,13 @@ struct ImpostorGame{
     int                 screenCenterHeight;
     int                 fps;
     int                 gameScreen;
+    int                 playersAlive;
     float               speed;
     GameScene           gameScene;
     Board               board;
     Player              playerInTurn;
 };
+
 
 struct GameHistory{
     
@@ -91,9 +91,13 @@ typedef struct ImpostorGame* GameState, GameInitialState;
 
 GameState newImpostorGame();
 Player newPlayer(GameState, char[10]);
-void playImpostor(GameState);
-void endImpostor();
 Board NewBoard(GameState);
+
+void newPlayerList(GameState);
+void addPlayerToList(GameState, Player);
+
+void playImpostor(GameState);
+void endImpostor(GameState);
 void initImpostor(GameState);
 
 #endif
