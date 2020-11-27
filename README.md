@@ -125,7 +125,6 @@ Manejo de Datos (purple) (yellow)
 | Gráficos | Mostrar 'Cards' en el Tablero en 'Game' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de las cartas | ![#F0170F](https://via.placeholder.com/15/F0170F/000000?text=+) `No` |
 | Gráficos/Mecánico | 'Cards' en el Tablero en 'Game' Interactivo | Que las cartas en el tablero puedan ser seleccionadas | Revisar que el usuario pueda seleccionar las cartas en 'Cards' | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
 | Mecánico | 'Cards' dadas por el juego | Que las cartas en el tablero puedan ser seleccionadas | Revisar que el usuario pueda seleccionar las cartas en 'Cards' | ![#F471CD](https://via.placeholder.com/15/F471CD/000000?text=+) `No` |
-...
 ##### 'Pause' in 'Game'
 | Area | Requirement | Notes | Pruebas | Done? |
 |-|-|-|-|-|
@@ -152,10 +151,18 @@ Manejo de Datos (purple) (yellow)
 ##### In 'Game'
 | Area | Requirement | Notes | Pruebas | Done? |
 |-|-|-|-|-|
-| Gráficos/Mecánico | Dado Funcional | Que al precionar el dado este de un número | Revisar que al precionar el dado este de un número válido (1-6) el cual pueda ser usado por el usuario | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
+| Gráficos | Mostrar 'Moves' en el Tablero en 'Game' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de 'Moves' | ![#F0170F](https://via.placeholder.com/15/F0170F/000000?text=+) `No` |
+| Gráficos/Mecánico | 'Moves' en el Tablero en 'Game' Funcional | Que los 'Moves' que se mostrados correspondan al número de movimientos que tiene el usuario | Revisar que se muestre el número correcto de movimientos | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
+| Gráficos | Mostrar 'Dice' en el Tablero en 'Game' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de 'Dice' | ![#F0170F](https://via.placeholder.com/15/F0170F/000000?text=+) `No` |
+| Gráficos/Mecánico | 'Dice' Funcional | Que al precionar el 'Dice' este de un número | Revisar que al precionar 'Dice' este de un número válido (1-6) el cual pueda ser usado por el usuario | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
+| Gráficos/Mecánico | 'Moves' en Tablero en 'Game' dados por 'Dice' | Que los números dados por 'Dice' se reflejen y correspondan al número de 'Moves' disponibles | Revisar que el número de 'Moves' disponibles sea el mismo al dado por 'Dice' | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
+| Mecánico | 'Dice'-'Moves' Funcional | Que el usuario solo se pueda mover la cantidad de espacios dada por 'Dice' | Revisar que el usuario solo se pueda mover la cantidad de espacios que dio el 'Dice' | ![#F471CD](https://via.placeholder.com/15/F471CD/000000?text=+) `No` |
 | Gráficos/Mecánico | Movimiento Funcional | Que al precionar las teclas de movimiento el personaje se mueva | Revisar que al precionar las teclas el personaje se mueva a la dirección que el usuario indico | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
 | Gráficos/Mecánico | Movimiento Único | Que el usuario solo pueda mover su personaje | Revisar que el usuario solo sea capaz de mover su personaje | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
-| Mecánico | Dado-Movimiento Funcional | Que el usuario solo se pueda mover la cantidad de espacios dada por el dado | Revisar que el usuario solo se pueda mover la cantidad de espacios que dio el dado | ![#F471CD](https://via.placeholder.com/15/F471CD/000000?text=+) `No` |
+| Gráficos/Mecánico | 'Moves' en Tablero en 'Game' Decreciente | Que la cantidad de 'Moves' restante decrezca cada vez que el usuario se mueva a través del tablero | Revisar que el número de 'Moves' bajen cada vez que se mueva | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
+| Gráficos/Mecánico | Sin 'Moves' en Tablero en 'Game' Correcto | Que si el usuario se queda sin 'Moves', este ya no se pueda mover a traves del tablero | Revisar que si el usuario ya no tiene movimientos disponibles, ya no se pueda mover | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
+| Gráficos | Sin 'Moves' en Tablero en 'Game' Retardo | Mostrar 0 movimientos y mostrar delay para que el usuario sepa que ya no tiene movimientos | Revisar que se muestren la falta de movimientos disponibles y que el usuario entienda que ya termino su turno | ![#F0170F](https://via.placeholder.com/15/F0170F/000000?text=+) `No` |
+| Gráficos/Mecánico | 'Turns' Funcional | Que si el usuario se queda sin movimientos, se pase al siguiente turno | Revisar que si el usuario no tiene movimientos disponibles, se mueva al siguiente turno | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
 ...
 ##### 'Suggestion' in 'Game'
 | Area | Requirement | Notes | Pruebas | Done? |
@@ -190,14 +197,20 @@ Manejo de Datos (purple) (yellow)
 | Manejo de Datos | 'Character' en 'Accusation' Guardado | Que el input dado por el usuario sea tomado en cuenta para mostrar las cartas en 'Game' | Revisar que el valor dado por el usuario en 'Character' sea el correcto | ![#B434F4](https://via.placeholder.com/15/B434F4/000000?text=+) `No` |
 | Manejo de Datos | 'Place' en 'Accusation' Guardado | Que el input dado por el usuario sea tomado en cuenta para mostrar las cartas en 'Game' | Revisar que el valor dado por el usuario en 'Place' sea el correcto | ![#B434F4](https://via.placeholder.com/15/B434F4/000000?text=+) `No` |
 | Manejo de Datos | 'Death' en 'Accusation' Guardado | Que el input dado por el usuario sea tomado en cuenta para mostrar las cartas en 'Game' | Revisar que el valor dado por el usuario en 'Death' sea el correcto | ![#B434F4](https://via.placeholder.com/15/B434F4/000000?text=+) `No` |
+| Manejo de Datos | 'Correct' en 'Accusation' Valorado | Que el input dado por el usuario sea valorado, y si el usuario da las opciones correctas se termina el juego y gana dicho usuario | Revisar que el valor dado por el usuario, si es correcto, cause el fin del juego y un 'ganar' del juego | ![#B434F4](https://via.placeholder.com/15/B434F4/000000?text=+) `No` |
+| Mecánico | 'Win' causa el fin del 'Game' | Sí un usuario da un 'Accusation' correcto, 'Game' termina | Revisar que si un usuario da un 'Accusation' donde todos sus datos son correctos, 'Game' termina | ![#F471CD](https://via.placeholder.com/15/F471CD/000000?text=+) `No` |
+| Gráficos/Mecánico | 'Ganar' lleva al usuario a pantalla de 'Win' | Que al ganar el juego, lo lleve a la pantalla de 'Win' | Revisar que el usuario sea llevado a la pantalla de 'Win' | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
+| Graficos | Mostrar pantalla de 'Win' | De la siguiente manera (inserte imagen) | Revisar que se cree la instancia de ventana | ![#F0170F](https://via.placeholder.com/15/F0170F/000000?text=+) `No` |
+| Manejo de Datos | 'Incorrect' en 'Accusation' Valorado | Que el input dado por el usuario sea valorado, y si el usuario da las opciones incorrectas se termina los turnos por el usuario y este pierde | Revisar que el valor dado por el usuario, si es incorrecto, cause el fin de sus turnos y un 'perder' del juego | ![#B434F4](https://via.placeholder.com/15/B434F4/000000?text=+) `No` |
+| Mecánico | 'Lose' causa el fin de turnos para el usuario en 'Game' | Sí un usuario da un 'Accusation' incorrecto, ya no tiene turnos en 'Game' | Revisar que si un usuario da un 'Accusation' donde todos sus datos son incorrectos, sus turnos en 'Game' terminan | ![#F471CD](https://via.placeholder.com/15/F471CD/000000?text=+) `No` |
 
 
 | Area | Requirement | Notes | Pruebas | Done? |
 |-|-|-|-|-|
-| Mecanicas |  |  |  | No |
-| Manejo de Datos |  |  |  | No |
-| Eventos |  |  |  | No |
-| Graficos |  |  |  | No |
+| Graficos | ... | ... | ... | ![#F0170F](https://via.placeholder.com/15/F0170F/000000?text=+) `No` |
+| Mecánico | ... | ... | ... | ![#F471CD](https://via.placeholder.com/15/F471CD/000000?text=+) `No` |
+| Gráficos/Mecánico | ... | ... | ... | ![#F4993E](https://via.placeholder.com/15/F4993E/000000?text=+) `No` |
+| Manejo de Datos | ... | ... | ... | ![#B434F4](https://via.placeholder.com/15/B434F4/000000?text=+) `No` |
 
 
 - [ ] Mecanica de movimiento => move(int, int)
@@ -219,16 +232,17 @@ Manejo de Datos (purple) (yellow)
 - [ ] HUD
 - [ ] Notebook
 - [ ] Loader
-- [ ] Sprite Carta Reactor
-- [ ] Sprite Carta Navigation
-- [ ] Sprite Carta Shields
-- [ ] Sprite Carta Medbay
-- [ ] Sprite Carta Weapons
 - [ ] Sprite Carta Upper Engine
-- [ ] Sprite Carta Lower Engine
-- [ ] Sprite Carta Electrical
+- [ ] Sprite Carta Weapons
+- [ ] Sprite Carta Medbay
 - [ ] Sprite Carta Storage
+- [ ] Sprite Carta Reactor
 - [ ] Sprite Carta Cafeteria
+- [ ] Sprite Carta Navigation
+- [ ] Sprite Carta Admin
+- [ ] Sprite Carta Electrical
+- [ ] Sprite Carta Lower Engine
+- [ ] Sprite Carta Shields
 - [ ] Sprite Carta Colonel Mustard
 - [ ] Sprite Carta Miss Scarlet
 - [ ] Sprite Carta Professor Plum
