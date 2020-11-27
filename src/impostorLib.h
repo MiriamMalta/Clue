@@ -24,7 +24,7 @@ struct GameSceneData{
 
 struct Box{
     int                 isRoom;
-    char                status;         //t = taken; b = blocked; c = camera; p = player; and rooms
+    char                status;         //f = free; b = blocked; p = player; and rooms
     Vector2             tilePosition;
 };
 
@@ -42,6 +42,8 @@ struct Player_ref{
     int                 cards[3];   // Deck of cards
     int                 frame;      // Visible frame
     int                 maxFrames;  // Frames in the Texture
+    int                 x;
+    int                 y;
     float               frameWidth; // Width of the Colider
     float               frameHeight;// Height of the Colider
     float               timer;      // Helper Timer for animation
@@ -62,6 +64,7 @@ struct ImpostorGame{
     int                 screenCenterHeight;
     int                 fps;
     int                 gameScreen;
+    int                 playersAlive;
     float               speed;
     GameScene           gameScene;
     Board               board;

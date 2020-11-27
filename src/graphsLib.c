@@ -42,7 +42,7 @@ void Movement(GameState game){
     if (IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT)){
         SelectAnimation(game,4,true);
     }
-    //fprintf(stdout, "-----CORDS: x->%f y->%f\n",game->playerInTurn->position.x,game->playerInTurn->position.y);
+    //fprintf(stdout, "-----CORDS: x->[%f] y->[%f]\n",game->playerInTurn->position.x,game->playerInTurn->position.y);
     UpdateAnimation(game);
 }
 
@@ -51,37 +51,53 @@ void MovementInBoard(GameState game){
         game->playerInTurn = game->playerInTurn->next;
     }
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)){
-        game->playerInTurn->position.y += GetFrameTime() * -(game->speed);
         SelectAnimation(game,1,false);
     }
     if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)){
-        game->playerInTurn->position.y += GetFrameTime() * (game->speed);
         SelectAnimation(game,2,false);
     }
     if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)){
-        game->playerInTurn->position.x += GetFrameTime() * (game->speed);
         SelectAnimation(game,3,false);
     }
     if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)){
-        game->playerInTurn->position.x += GetFrameTime() * -(game->speed);
         SelectAnimation(game,4,false);
     }
     
     UpdateCameraPosition(game);
 
     if (IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP)){
+        if((game->playerInTurn->y-1 >= 0) && game->board->boxes[game->playerInTurn->x][game->playerInTurn->y-1].status == 'f'){
+            game->playerInTurn->x;
+            game->playerInTurn->y--;
+        }
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,1,true);
     }
     if (IsKeyReleased(KEY_S) || IsKeyReleased(KEY_DOWN)){
+        if((game->playerInTurn->y+1 < 24) && game->board->boxes[game->playerInTurn->x][game->playerInTurn->y+1].status == 'f'){
+            game->playerInTurn->x;
+            game->playerInTurn->y++;
+        }
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,2,true);
     }
     if (IsKeyReleased(KEY_D) || IsKeyReleased(KEY_RIGHT)){
+        if((game->playerInTurn->x+1 < 24) && game->board->boxes[game->playerInTurn->x+1][game->playerInTurn->y].status == 'f'){
+            game->playerInTurn->x++;
+            game->playerInTurn->y;
+        }
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,3,true);
     }
     if (IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT)){
+        if((game->playerInTurn->x-1 >= 0) && game->board->boxes[game->playerInTurn->x-1][game->playerInTurn->y].status == 'f'){
+            game->playerInTurn->x--;
+            game->playerInTurn->y;
+        }
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,4,true);
     }
-    //fprintf(stdout, "-----CORDS: x->%f y->%f\n",game->playerInTurn->position.x,game->playerInTurn->position.y);
+    //fprintf(stdout, "-----CORDS: x->%d y->%d\n",game->playerInTurn->x,game->playerInTurn->y);
     UpdateAnimation(game);
 }
 
@@ -169,6 +185,22 @@ void UpdateCameraPosition(GameState game){
     else if (game->board->camera.zoom < 1.0f) game->board->camera.zoom = 1.0f;
     DrawLine(game->board->camera.target.x,-game->screenHeight*10,game->board->camera.target.x,game->screenHeight*10,GREEN);
     DrawLine(-game->screenWidth*10,game->board->camera.target.y,game->screenWidth*10,game->board->camera.target.y,GREEN);  
+}
+
+void InitCamera(GameState game){
+    game->board->camera.target = (Vector2) {game->playerInTurn->position.x+20,game->playerInTurn->position.y+20};
+    game->board->camera.offset = (Vector2) {game->screenCenterWidth,game->screenCenterHeight};
+    game->board->camera.rotation = 0.0f;
+    game->board->camera.zoom = 1.0f;
+}
+
+void SetPlayersInBoard(GameState game){
+    for(int i=0;i<game->playersAlive;i++){
+        game->playerInTurn->x = 0;
+        game->playerInTurn->y = 0;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        game->playerInTurn = game->playerInTurn->next;
+    }
 }
 
 void Teleport()
