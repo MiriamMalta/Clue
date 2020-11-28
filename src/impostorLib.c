@@ -159,7 +159,7 @@ GameState newImpostorGame(){
 Board NewBoard(GameState game){
     Board board = malloc(sizeof(struct BoardGame));
     board->mapBackground = LoadTexture("./res/assets/map/Space.png");
-    board->map = LoadTexture("./res/assets/map/Board.png");
+    board->map = LoadTexture("./res/assets/map/Sketch.png");
     float initialX = 1723.0f, intialY = 1699.0f;
     for(int x=0;x<24;x++){
         for(int y=0;y<24;y++){
