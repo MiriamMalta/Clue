@@ -4,7 +4,7 @@
 #include <string.h>
 #include "raylib.h"
 #include "impostorLib.h"
-#include "mecanicsLib.h"
+#include "mechanicsLib.h"
 #include "graphsLib.h"
 
 //Aqui juntamos todo el codigo

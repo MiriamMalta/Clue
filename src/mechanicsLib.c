@@ -3,7 +3,7 @@
 #include <time.h>
 #include <string.h>
 #include "raylib.h"
-#include "mecanicsLib.h"
+#include "mechanicsLib.h"
 
 //Este seria el Backend del juego, solamente 
 //codigo funcional
