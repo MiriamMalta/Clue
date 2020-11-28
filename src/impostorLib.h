@@ -5,21 +5,18 @@
 
 typedef enum {
     LOGO, 
-    TRIBUTE, 
+    POWERED, 
     DISCLAIMER, 
-    MENU1, MENU2, MENU3, MENU4, MENU5, MENU6,
+    MENU,
+    GAME,
     NEWGAME,
     LOADGAME,
     SETTINGS,
     CREDITS,
+    GREETIGS,
+    EXIT
 
 } GameScreen;
-
-struct GameSceneData{
-    GameScreen          gameScreen;
-    int                 state;
-    float               alpha;
-}; typedef struct GameSceneData* GameScene;
 
 
 struct Box{
@@ -31,6 +28,7 @@ struct Box{
 
 struct BoardGame{
     Texture2D           mapBackground;
+    Texture2D           map;
     Camera2D            camera;
     struct Box          boxes[24][24];
 }; typedef struct BoardGame* Board;
@@ -63,10 +61,8 @@ struct ImpostorGame{
     int                 screenCenterWidth;
     int                 screenCenterHeight;
     int                 fps;
-    int                 gameScreen;
     int                 playersAlive;
     float               speed;
-    GameScene           gameScene;
     Board               board;
     Player              playerInTurn;
 };

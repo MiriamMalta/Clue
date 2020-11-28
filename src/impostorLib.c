@@ -10,19 +10,116 @@
 //Aqui juntamos todo el codigo
 
 void playImpostor(GameState game){
+    GameScreen  gameScene = LOGO;
+    int         state = 0;
+    int         splashCounter = 0;
+    int         transCounter = 0; 
+    float       alpha = 0.0f;
+    Texture2D logo = LoadTexture("./res/animations/Logo2.png");
+    Texture2D black = LoadTexture("./res/animations/black.png");
     initImpostor(game);
-    Texture2D black = LoadTexture("./res/assets/map/Space.png");
-
+    
     while (!WindowShouldClose()){
+        // Calculos de transiciones
+        splashCounter +=4;
+        transCounter ++;
+        switch (gameScene){
+            case LOGO:
+                if(state == 0) {
+                    if(alpha<1.0)alpha += 0.05;
+                    else state = 1;
+                }
+                else if (state == 1){
+                    alpha = 1.0;
+                    if(transCounter % 350==0) state = 2;
+                }
+                else if (state == 2){
+                    if(alpha>0.0)alpha -= 0.05;
+                    else{
+                        gameScene = GAME;
+                        state = 0;
+                    }
+                }
+                break;
+            case POWERED:
+                break;
+            case DISCLAIMER:
+                break;
+            case MENU:
+                break;
+            case GAME:
+                
+                break;
+            case NEWGAME:
+                break;
+
+            case LOADGAME:
+                break;
+
+            case SETTINGS:
+                break;
+
+            case CREDITS:
+                break;
+
+            case GREETIGS:
+                break;
+
+            case EXIT:
+                break;
+            default:
+                break;
+        }
         BeginDrawing();
             ClearBackground(RAYWHITE);
-            BeginMode2D(game->board->camera);
-            DrawTexture(black, 0, 0, WHITE);
-            DrawTexture(game->board->mapBackground, 0, 0, WHITE);
-            MovementInBoard(game);
+            switch (gameScene){
+                case LOGO:
+                    switch(state)   {
+                        case 0 : 
+                            DrawTexture(black,0,0,Fade(BLACK,alpha));
+                            break;
+                        case 1 :
+                            DrawText(TextSubtext("DK SS",0,splashCounter/13),game->screenWidth/3 + 25, game->screenHeight*2/3 + 18, 23, BLACK);
+                            DrawTexture(logo,game->screenWidth/3 + 25, game->screenHeight/4,RAYWHITE);
+                            break;
+                        case 2 : 
+                            DrawTexture(black,0,0,Fade(BLACK,alpha));
+                            break;
+                    }
+                    break;
+                case POWERED:
+                    break;
+                case DISCLAIMER:
+                    break;
+                case MENU:
+                    break;
+                case GAME:
+                    BeginMode2D(game->board->camera);
+                        DrawTexture(game->board->mapBackground, 0, 0, WHITE);
+                        DrawTexture(game->board->map, 0, 0, WHITE);
+                        MovementInBoard(game);
+                    EndMode2D();
+                    break;
+                case NEWGAME:
+                    break;
 
-            EndMode2D();
+                case LOADGAME:
+                    break;
 
+                case SETTINGS:
+                    break;
+
+                case CREDITS:
+                    break;
+
+                case GREETIGS:
+                    break;
+
+                case EXIT:
+                    break;
+                default:
+                    break;
+            }
         EndDrawing();
     }
     
@@ -42,15 +139,14 @@ void initImpostor(GameState game){
 }
 GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));
-    //game->screenWidth = 1920;
-    //game->screenHeight = 1080;
-    game->screenWidth = 1280;
-    game->screenHeight = 700;
+    game->screenWidth = 1920;
+    game->screenHeight = 1080;
+    //game->screenWidth = 1280;
+    //game->screenHeight = 700;
     game->fps = 60;
     game->speed = 200.0f;
     game->screenCenterWidth = (int)game->screenWidth/2;
     game->screenCenterHeight = (int)game->screenHeight/2;
-    game->gameScreen = LOGO;
     game->playersAlive = 0;
     //const int screenWidth = 1920, screenHeight = 1080; //monitor normal
     //const int screenWidth = 1366, screenHeight = 768; //monitor lap
@@ -62,7 +158,8 @@ GameState newImpostorGame(){
 }
 Board NewBoard(GameState game){
     Board board = malloc(sizeof(struct BoardGame));
-    board->mapBackground = LoadTexture("./res/assets/map/Board.png");
+    board->mapBackground = LoadTexture("./res/assets/map/Space.png");
+    board->map = LoadTexture("./res/assets/map/Board.png");
     float initialX = 1723.0f, intialY = 1699.0f;
     for(int x=0;x<24;x++){
         for(int y=0;y<24;y++){
