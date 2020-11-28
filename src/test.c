@@ -5,4 +5,4 @@
 #include "test.h"
 #include "graphsLib.h"
 #include "impostorLib.h"
-#include "mecanicsLib.h"
+#include "mechanicsLib.h"

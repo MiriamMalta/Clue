@@ -3,7 +3,7 @@
 #include <time.h>
 #include <string.h>
 #include "raylib.h"
-#include "mecanicsLib.h"
+#include "mechanicsLib.h"
 
 //Este seria el Backend del juego, solamente 
 //codigo funcional
@@ -16,14 +16,20 @@ void LoadGame(){
 void SetGame(){
 }
 void FillPackage(){
+    // package
+    // add TO ImpostorGame
 }
+// THIS
 void Accusation(){
 }
+// THIS
 void Suggestion(){
 }
 void GenerateTurnList(){
 }
+// THIS
 void CalculateRandomMovements(){
+    // dice
 }
 void HatONames(){
 }
@@ -227,7 +233,6 @@ void addCharacter(GameState game, Player fullCharacter){
         fullCharacter->next = fullCharacter;
     }
     game->playerInTurn = fullCharacter->next;
-    //fprintf(stdout, "see if it prints something!\n");
 }
 
 char* moveAlongInTurns(GameState game){

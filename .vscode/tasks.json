@@ -16,7 +16,7 @@
                 "args": [
                     "RAYLIB_PATH=C:/raylib/raylib",
                     "PROJECT_NAME=${fileBasenameNoExtension}",
-                    "OBJS=${fileBasenameNoExtension}.c src/graphsLib.c src/impostorLib.c src/mecanicsLib.c src/test.c",
+                    "OBJS=${fileBasenameNoExtension}.c src/graphsLib.c src/impostorLib.c src/mechanicsLib.c src/test.c",
                     "BUILD_MODE=DEBUG"
                 ],
             },
@@ -24,7 +24,7 @@
                 "args": [
                     "RAYLIB_PATH=/Users/macbook/raylib",
                     "PROJECT_NAME=${fileBasenameNoExtension}",
-                    "OBJS=${fileBasenameNoExtension}.c src/graphsLib.c src/impostorLib.c src/mecanicsLib.c src/test.c",
+                    "OBJS=${fileBasenameNoExtension}.c src/graphsLib.c src/impostorLib.c src/mechanicsLib.c src/test.c",
                     "BUILD_MODE=DEBUG"
                 ],
             },
@@ -48,14 +48,14 @@
                 "args": [
                     "RAYLIB_PATH=C:/raylib/raylib",
                     "PROJECT_NAME=${fileBasenameNoExtension}",
-                    "OBJS=${fileBasenameNoExtension}.c src/graphsLib.c src/impostorLib.c src/mecanicsLib.c src/test.c"
+                    "OBJS=${fileBasenameNoExtension}.c src/graphsLib.c src/impostorLib.c src/mechanicsLib.c src/test.c"
                 ],
             },
             "osx": {
                 "args": [
                     "RAYLIB_PATH=/Users/macbook/raylib",
                     "PROJECT_NAME=${fileBasenameNoExtension}",
-                    "OBJS=${fileBasenameNoExtension}.c src/graphsLib.c src/impostorLib.c src/mecanicsLib.c src/test.c"
+                    "OBJS=${fileBasenameNoExtension}.c src/graphsLib.c src/impostorLib.c src/mechanicsLib.c src/test.c"
                 ],
             },
             "group": "build",

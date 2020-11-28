@@ -45,7 +45,7 @@ endif()
 set(WANT_ZLIB FALSE)
 
 
-add_executable(Impostor main.c src/graphsLib.c src/impostorLib.c src/mecanicsLib.c src/test.c)
+add_executable(Impostor main.c src/graphsLib.c src/impostorLib.c src/mechanicsLib.c src/test.c)
 if (WIN32)
     target_link_libraries(Impostor raylib)
 elseif (APPLE)

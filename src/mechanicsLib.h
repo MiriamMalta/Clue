@@ -1,5 +1,5 @@
-#ifndef _MECANICS_GUARD_H
-#define _MECANICS_GUARD_H
+#ifndef _MECHANICS_GUARD_H
+#define _MECHANICS_GUARD_H
 #include <stdio.h>
 #include <stdlib.h>
 #include "raylib.h"
