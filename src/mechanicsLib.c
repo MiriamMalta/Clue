@@ -24,7 +24,7 @@ void GenerateTurnList(){
 }
 // This is the Dice of 6 sides
 int CalculateRandomMovements(){
-    return (rand()%6) + 1;
+    return (rand()%9) + 1;
 }
 // This is
 int CalculateRandomPlacements(){
