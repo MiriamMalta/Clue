@@ -16,6 +16,7 @@ void Accusation();
 void Suggestion();
 void GenerateTurnList();
 int CalculateRandomMovements();
+int CalculateRandomPlacements();
 void HatONames();
 
 void addCharacter(GameState game, Player fullCharacter);

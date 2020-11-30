@@ -26,6 +26,10 @@ void GenerateTurnList(){
 int CalculateRandomMovements(){
     return (rand()%6) + 1;
 }
+// This is
+int CalculateRandomPlacements(){
+    return (rand()%8) + 8;
+}
 void HatONames(){
 }
 
