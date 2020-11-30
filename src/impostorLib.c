@@ -107,6 +107,7 @@ void playImpostor(GameState game){
 
             case GREETIGS:
                 break;
+
             case THANKS:
                 if(state == 0) {
                     if(alpha<1.0)alpha += 0.05;
@@ -167,7 +168,8 @@ void playImpostor(GameState game){
                             DrawTexture(black,0,0,BLACK);
                             DrawText(
                                 "This Game is for Educational purposes. No nos demanden pliz.", 
-                                game->screenCenterWidth/2, 
+                                //(game->screenCenterWidth/2)-150, 
+                                game->screenCenterWidth/2,  
                                 game->screenCenterHeight, 
                                 30, 
                                 WHITE
@@ -180,26 +182,31 @@ void playImpostor(GameState game){
                     break;
                 case MENU:
                     DrawTexture(menu,0, 0,RAYWHITE);
+                    //game->screenCenterWidth-225, 280, 450, 70
                     if (GuiButton((Rectangle){ game->screenCenterWidth-230, 410, 460, 90 }, "New Game")) { 
                         fprintf(stdout,"New Game\n"); 
                         gameScene = GAME;
                         state = 0;
                     }
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 530, 460, 90 }, "Load Game")) { 
+                    //game->screenCenterWidth-225, 362, 450, 70
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 530, 460, 90 }, "Load Game")) {
                         fprintf(stdout,"Load Game\n");
                         gameScene = LOADGAME;
                         state = 0; 
                     }
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 650, 460, 90 }, "Settings")) { 
+                    //game->screenCenterWidth-225, 444, 450, 70
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 650, 460, 90 }, "Settings")) {
                         fprintf(stdout,"Settings\n"); 
                         gameScene = SETTINGS;
                         state = 0;
                     }
+                    //game->screenCenterWidth-225, 526, 450, 70
                     if (GuiButton((Rectangle){ game->screenCenterWidth-230, 770, 460, 90 }, "Credits")) { 
                         fprintf(stdout,"Credits\n"); 
                         gameScene = CREDITS;
                         state = 0;
                     }
+                    //game->screenCenterWidth-225, 608, 450, 70
                     if (GuiButton((Rectangle){ game->screenCenterWidth-230, 890, 460, 90 }, "Exit")) { 
                         fprintf(stdout,"Exit\n"); 
                         gameScene = THANKS;
@@ -219,27 +226,32 @@ void playImpostor(GameState game){
 
                 case LOADGAME:
                     DrawTexture(save,0, 0,RAYWHITE);
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 410, 460, 90 }, "Slot 1")) { 
+                    //game->screenCenterWidth-225, 280, 450, 70
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 410, 460, 90 }, "Slot 1")) {  
                         fprintf(stdout,"Slot 1\n"); 
                         gameScene = GAME;
                         state = 0;
                     }
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 530, 460, 90 }, "Slot 2")) { 
+                    //game->screenCenterWidth-225, 362, 450, 70
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 530, 460, 90 }, "Slot 2")) {
                         fprintf(stdout,"Slot 2\n");
                         gameScene = GAME;
                         state = 0; 
                     }
+                    //game->screenCenterWidth-225, 444, 450, 70
                     if (GuiButton((Rectangle){ game->screenCenterWidth-230, 650, 460, 90 }, "Slot 3")) { 
                         fprintf(stdout,"Slot 3\n"); 
                         gameScene = GAME;
                         state = 0;
                     }
+                    //game->screenCenterWidth-225, 526, 450, 70
                     if (GuiButton((Rectangle){ game->screenCenterWidth-230, 770, 460, 90 }, "Menu")) { 
                         fprintf(stdout,"Menu\n"); 
                         gameScene = MENU;
                         state = 0;
                     }
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 890, 460, 90 }, "Exit")) { 
+                    //game->screenCenterWidth-225, 608, 450, 70
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 890, 460, 90 }, "Exit")) {
                         fprintf(stdout,"Exit\n"); 
                         gameScene = THANKS;
                         state = 0;
@@ -247,27 +259,32 @@ void playImpostor(GameState game){
                     break;
                 case SAVEGAME:
                     DrawTexture(save,0, 0,RAYWHITE);
+                    //game->screenCenterWidth-225, 280, 450, 70
                     if (GuiButton((Rectangle){ game->screenCenterWidth-230, 410, 460, 90 }, "Slot 1")) { 
                         fprintf(stdout,"Slot 1\n"); 
                         gameScene = GAME;
                         state = 0;
                     }
+                    //game->screenCenterWidth-225, 362, 450, 70
                     if (GuiButton((Rectangle){ game->screenCenterWidth-230, 530, 460, 90 }, "Slot 2")) { 
                         fprintf(stdout,"Slot 2\n");
                         gameScene = GAME;
                         state = 0; 
                     }
+                    //game->screenCenterWidth-225, 444, 450, 70
                     if (GuiButton((Rectangle){ game->screenCenterWidth-230, 650, 460, 90 }, "Slot 3")) { 
                         fprintf(stdout,"Slot 3\n"); 
                         gameScene = GAME;
                         state = 0;
                     }
+                    //game->screenCenterWidth-225, 526, 450, 70
                     if (GuiButton((Rectangle){ game->screenCenterWidth-230, 770, 460, 90 }, "Menu")) { 
                         fprintf(stdout,"Menu\n"); 
                         gameScene = MENU;
                         state = 0;
                     }
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 890, 460, 90 }, "Exit")) { 
+                    //game->screenCenterWidth-225, 608, 450, 70
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 890, 460, 90 }, "Exit")) {
                         fprintf(stdout,"Exit\n"); 
                         gameScene = THANKS;
                         state = 0;
@@ -278,12 +295,14 @@ void playImpostor(GameState game){
 
                 case CREDITS:
                     DrawTexture(credits,0, 0,RAYWHITE);
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 770, 460, 90 }, "Menu")) { 
+                    //game->screenCenterWidth-225, 526, 450, 70
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 770, 460, 90 }, "Menu")) {  
                         fprintf(stdout,"Menu\n"); 
                         gameScene = MENU;
                         state = 0;
                     }
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 890, 460, 90 }, "Exit")) { 
+                    // game->screenCenterWidth-225, 608, 450, 70
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 890, 460, 90 }, "Exit")) {  
                         fprintf(stdout,"Exit\n"); 
                         gameScene = THANKS;
                         state = 0;
@@ -301,6 +320,7 @@ void playImpostor(GameState game){
                             DrawTexture(black,0,0,BLACK);
                             DrawText(
                                 "Gracias por jugar esta basura.", 
+                                //(game->screenCenterWidth/2)+100
                                 (game->screenCenterWidth/4)*3, 
                                 game->screenCenterHeight, 
                                 30, 
@@ -354,7 +374,7 @@ GameState newImpostorGame(){
             break;
         case 4:     // Monitor Mac
             game->screenWidth = 1280;
-            game->screenHeight = 800;
+            game->screenHeight = 700;
             break;
         default:    // Default normal
             game->screenWidth = 1920;
