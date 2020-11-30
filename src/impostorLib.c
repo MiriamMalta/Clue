@@ -328,8 +328,9 @@ void endImpostor(GameState game){
     free(game);
     CloseWindow();
 }
+// Initialization (called one time)
 void initImpostor(GameState game){
-    newPlayerList(game);
+    srand(time(NULL));    newPlayerList(game);
     game->board = NewBoard(game);
     SetPlayersInBoard(game);
     InitCamera(game);
@@ -337,7 +338,7 @@ void initImpostor(GameState game){
 }
 GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));
-    int res = 0;
+    int res = 4;
     switch(res){
         case 1:     // Monitor normal
             game->screenWidth = 1920;
@@ -442,15 +443,12 @@ Board NewBoard(GameState game){
                     board->boxes[y][x].status = 'd';
         }
     }
-    board->boxes[1][0].status = 'f'; //erase later
-    board->boxes[2][0].status = 'f'; //erase later
     for(int x=0;x<24;x++){
         for(int y=0;y<24;y++){
             fprintf(stdout, "[%c] ",board->boxes[y][x].status);
         }
         fprintf(stdout, "\n");
     }
-    
     return board;
 }
 Player newPlayer(GameState game,char color[10]){
@@ -472,6 +470,7 @@ Player newPlayer(GameState game,char color[10]){
     player->skin[3] = LoadTexture(urlPath);
     player->c_player = color;
     player->movingAnimate = 0;
+    player->movesLeft = 0;
     player->frameWidth = 86;
     player->frameHeight = 105;
     player->maxFrames = 1;

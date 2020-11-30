@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
 #include "graphsLib.h"
 #include "impostorLib.h"
 
@@ -42,13 +38,16 @@ void Movement(GameState game){
     if (IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT)){
         SelectAnimation(game,4,true);
     }
-    //fprintf(stdout, "-----CORDS: x->[%f] y->[%f]\n",game->playerInTurn->position.x,game->playerInTurn->position.y);
     UpdateAnimation(game);
 }
 
 void MovementInBoard(GameState game){
     if(IsKeyReleased(KEY_K)){
         game->playerInTurn = game->playerInTurn->next;
+    }
+    if (IsKeyReleased(KEY_SPACE)){
+        game->playerInTurn->movesLeft = CalculateRandomMovements();  
+        fprintf(stdout, "%d\n", game->playerInTurn->movesLeft); //Left here for now to know what number we got on the dice
     }
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)){
         SelectAnimation(game,1,false);
@@ -65,39 +64,42 @@ void MovementInBoard(GameState game){
     
     UpdateCameraPosition(game);
 
-    if (IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP)){
-        if((game->playerInTurn->y-1 >= 0) && game->board->boxes[game->playerInTurn->x][game->playerInTurn->y-1].status == 'f'){
+    if ((IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP)) && (game->playerInTurn->movesLeft > 0)){
+        if((game->playerInTurn->y-1 >= 0) && (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y-1].status == 'f' || game->board->boxes[game->playerInTurn->x][game->playerInTurn->y-1].status == 'd')){
             game->playerInTurn->x;
             game->playerInTurn->y--;
+            game->playerInTurn->movesLeft--;
         }
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,1,true);
     }
-    if (IsKeyReleased(KEY_S) || IsKeyReleased(KEY_DOWN)){
-        if((game->playerInTurn->y+1 < 24) && game->board->boxes[game->playerInTurn->x][game->playerInTurn->y+1].status == 'f'){
+    if ((IsKeyReleased(KEY_S) || IsKeyReleased(KEY_DOWN)) && (game->playerInTurn->movesLeft > 0)){
+        if((game->playerInTurn->y+1 < 24) && (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y+1].status == 'f' || game->board->boxes[game->playerInTurn->x][game->playerInTurn->y+1].status == 'd')){
             game->playerInTurn->x;
             game->playerInTurn->y++;
+            game->playerInTurn->movesLeft--;
         }
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,2,true);
     }
-    if (IsKeyReleased(KEY_D) || IsKeyReleased(KEY_RIGHT)){
-        if((game->playerInTurn->x+1 < 24) && game->board->boxes[game->playerInTurn->x+1][game->playerInTurn->y].status == 'f'){
+    if ((IsKeyReleased(KEY_D) || IsKeyReleased(KEY_RIGHT)) && (game->playerInTurn->movesLeft > 0)){
+        if((game->playerInTurn->x+1 < 24) && (game->board->boxes[game->playerInTurn->x+1][game->playerInTurn->y].status == 'f' || game->board->boxes[game->playerInTurn->x+1][game->playerInTurn->y].status == 'd')){
             game->playerInTurn->x++;
             game->playerInTurn->y;
+            game->playerInTurn->movesLeft--;
         }
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,3,true);
     }
-    if (IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT)){
-        if((game->playerInTurn->x-1 >= 0) && game->board->boxes[game->playerInTurn->x-1][game->playerInTurn->y].status == 'f'){
+    if ((IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT)) && (game->playerInTurn->movesLeft > 0)){
+        if((game->playerInTurn->x-1 >= 0) && (game->board->boxes[game->playerInTurn->x-1][game->playerInTurn->y].status == 'f' || game->board->boxes[game->playerInTurn->x-1][game->playerInTurn->y].status == 'd')){
             game->playerInTurn->x--;
             game->playerInTurn->y;
+            game->playerInTurn->movesLeft--;
         }
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,4,true);
     }
-    //fprintf(stdout, "-----CORDS: x->%d y->%d\n",game->playerInTurn->x,game->playerInTurn->y);
     UpdateAnimation(game);
 }
 
@@ -196,8 +198,8 @@ void InitCamera(GameState game){
 
 void SetPlayersInBoard(GameState game){
     for(int i=0;i<game->playersAlive;i++){
-        game->playerInTurn->x = 0;
-        game->playerInTurn->y = 0;
+        game->playerInTurn->x = 7; //0
+        game->playerInTurn->y = 12; //0
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         game->playerInTurn = game->playerInTurn->next;
     }

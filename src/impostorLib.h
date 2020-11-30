@@ -1,7 +1,10 @@
 #ifndef _IMPOSTOR_GUARD_H
 #define _IMPOSTOR_GUARD_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
 #include "raylib.h"
-//#include "mechanicsLib.h"
 
 typedef enum {
     LOGO, 
@@ -44,6 +47,7 @@ struct Player_ref{
     int                 maxFrames;  // Frames in the Texture
     int                 x;
     int                 y;
+    int                 movesLeft;
     float               frameWidth; // Width of the Colider
     float               frameHeight;// Height of the Colider
     float               timer;      // Helper Timer for animation
