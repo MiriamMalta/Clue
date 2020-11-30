@@ -7,19 +7,29 @@
 #include "mechanicsLib.h"
 #include "graphsLib.h"
 
+#define RAYGUI_IMPLEMENTATION
+#define RAYGUI_SUPPORT_ICONS
+#include "raygui.h"
+#undef RAYGUI_IMPLEMENTATION            // Avoid including raygui implementation again
+
+
 //Aqui juntamos todo el codigo
 
 void playImpostor(GameState game){
+    GuiLoadStyle("./res/styles/impostor/impostor.rgs");
     GameScreen  gameScene = LOGO;
     int         state = 0;
     int         splashCounter = 0;
     int         transCounter = 0; 
+    int         exit = true;
     float       alpha = 0.0f;
     Texture2D logo = LoadTexture("./res/animations/Logo2.png");
+    Texture2D menu = LoadTexture("./res/animations/Menu.png");
     Texture2D black = LoadTexture("./res/animations/black.png");
+    Texture2D RL = LoadTexture("./res/animations/raylib_logo.png");   
     initImpostor(game);
     
-    while (!WindowShouldClose()){
+    while (!WindowShouldClose() && exit){
         // Calculos de transiciones
         splashCounter +=4;
         transCounter ++;
@@ -36,16 +46,47 @@ void playImpostor(GameState game){
                 else if (state == 2){
                     if(alpha>0.0)alpha -= 0.05;
                     else{
-                        gameScene = GAME;
+                        gameScene = POWERED;
                         state = 0;
                     }
                 }
                 break;
             case POWERED:
+                if(state == 0) {
+                    if(alpha<1.0)alpha += 0.05;
+                    else state = 1;
+                }
+                else if (state == 1){
+                    alpha = 1.0;
+                    if(transCounter % 350==0) state = 2;
+                }
+                else if (state == 2){
+                    if(alpha>0.0)alpha -= 0.05;
+                    else{
+                        gameScene = DISCLAIMER;
+                        state = 0;
+                    }
+                }
                 break;
             case DISCLAIMER:
+                if(state == 0) {
+                    if(alpha<1.0)alpha += 0.05;
+                    else state = 1;
+                }
+                else if (state == 1){
+                    alpha = 1.0;
+                    if(transCounter % 350==0) state = 2;
+                }
+                else if (state == 2){
+                    if(alpha>0.0)alpha -= 0.05;
+                    else{
+                        gameScene = MENU;
+                        state = 0;
+                    }
+                }
                 break;
             case MENU:
+                
                 break;
             case GAME:
                 
@@ -79,19 +120,68 @@ void playImpostor(GameState game){
                             DrawTexture(black,0,0,Fade(BLACK,alpha));
                             break;
                         case 1 :
-                            DrawText(TextSubtext("DK SS",0,splashCounter/13),game->screenWidth/3 + 25, game->screenHeight*2/3 + 18, 23, BLACK);
+                            DrawTexture(black,0,0,BLACK);
+                            DrawText(TextSubtext("DK SS",0,splashCounter/13),game->screenWidth/3 + 25, game->screenHeight*2/3 + 18, 23, WHITE);
                             DrawTexture(logo,game->screenWidth/3 + 25, game->screenHeight/4,RAYWHITE);
                             break;
                         case 2 : 
-                            DrawTexture(black,0,0,Fade(BLACK,alpha));
+                            DrawTexture(black,0,0,BLACK);
                             break;
                     }
                     break;
                 case POWERED:
+                    switch(state){
+                        case 1 :
+                            DrawText("Powered by", game->screenWidth/3 + 25, game->screenHeight/5 - 5, 20, BLACK);
+                            DrawTexture(RL, game->screenWidth/2 - RL.width/2 + 5, game->screenHeight/2 - RL.height/2 + game->screenHeight/35, RAYWHITE);
+                            break;
+                        case 2 :
+                            DrawTexture(black,0,0,Fade(BLACK,alpha));
+                            break;
+                    }
                     break;
                 case DISCLAIMER:
+                    switch(state){
+                        case 0 : 
+                            DrawTexture(black,0,0,Fade(BLACK,alpha));
+                            break;
+                        case 1 :
+                            DrawTexture(black,0,0,BLACK);
+                            DrawText("This Game is for Educational purposes. No nos demanden pliz.", game->screenWidth/3 + 25, game->screenHeight/5 - 5, 20, WHITE);
+                            break;
+                        case 2 :
+                            DrawTexture(black,0,0,Fade(BLACK,alpha));
+                            break;
+                    }
                     break;
                 case MENU:
+                    DrawTexture(menu,0, 0,RAYWHITE);
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 410, 460, 90 }, "New Game")) { 
+                        fprintf(stdout,"New Game\n"); 
+                        gameScene = GAME;
+                        state = 0;
+                    }
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 530, 460, 90 }, "Load Game")) { 
+                        fprintf(stdout,"Load Game\n");
+                        gameScene = LOADGAME;
+                        state = 0; 
+                    }
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 650, 460, 90 }, "Settings")) { 
+                        fprintf(stdout,"Settings\n"); 
+                        gameScene = SETTINGS;
+                        state = 0;
+                    }
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 770, 460, 90 }, "Credits")) { 
+                        fprintf(stdout,"Credits\n"); 
+                        gameScene = CREDITS;
+                        state = 0;
+                    }
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-230, 890, 460, 90 }, "Exit")) { 
+                        fprintf(stdout,"Exit\n"); 
+                        gameScene = EXIT;
+                        state = 0;
+                    }
+            
                     break;
                 case GAME:
                     BeginMode2D(game->board->camera);
@@ -116,6 +206,7 @@ void playImpostor(GameState game){
                     break;
 
                 case EXIT:
+                    exit = false;
                     break;
                 default:
                     break;
