@@ -11,9 +11,11 @@ typedef enum {
     GAME,
     NEWGAME,
     LOADGAME,
+    SAVEGAME,
     SETTINGS,
     CREDITS,
     GREETIGS,
+    THANKS,
     EXIT
 
 } GameScreen;
