@@ -12,7 +12,8 @@ if (NOT raylib_FOUND)
 
     FetchContent_Declare(
             raylib
-            URL https://github.com/raysan5/raylib/archive/master.tar.gz
+            GIT_REPOSITORY https://github.com/raysan5/raylib.git
+            GIT_TAG 3.0.0
     )
 
     FetchContent_GetProperties(raylib)
