@@ -23,6 +23,13 @@ void playImpostor(GameState game){
     int         transCounter = 0; 
     int         exit = true;
     float       alpha = 0.0f;
+    Music ostMenu = LoadMusicStream("./res/music/ost_menu.mp3");
+    Music ostGame = LoadMusicStream("./res/music/ost_game.mp3");
+    SetMusicVolume(ostMenu,1.0);
+    SetMusicVolume(ostGame,1.0);
+    PlayMusicStream(ostMenu);
+    float timePlayed = 0.0f;
+    int musicFlag = 0;
     Texture2D logo = LoadTexture("./res/animations/Logo2.png");
     Texture2D menu = LoadTexture("./res/animations/Menu.png");
     Texture2D black = LoadTexture("./res/animations/black.png");
@@ -88,10 +95,31 @@ void playImpostor(GameState game){
                 }
                 break;
             case MENU:
-                
+                if(musicFlag == 0){
+                    StopMusicStream(ostMenu);
+                    PlayMusicStream(ostMenu);
+                    musicFlag = 1;
+                    timePlayed = 0.0;
+
+                }else if (timePlayed >= 99.0){
+                    musicFlag = 0;
+                }else{
+                    UpdateMusicStream(ostMenu);
+                    timePlayed = GetMusicTimePlayed(ostMenu)/GetMusicTimeLength(ostMenu)*100;
+                }
                 break;
             case GAME:
-                
+                if(musicFlag == 0 ){
+                    StopMusicStream(ostGame);
+                    PlayMusicStream(ostGame);
+                    musicFlag = 1;
+                    timePlayed = 0.0;
+                }else if(timePlayed >= 99.0){
+                    musicFlag = 0;
+                }else{
+                    UpdateMusicStream(ostGame);
+                    timePlayed = GetMusicTimePlayed(ostGame)/GetMusicTimeLength(ostGame)*100;
+                }
                 break;
             case NEWGAME:
                 break;
@@ -109,6 +137,7 @@ void playImpostor(GameState game){
                 break;
 
             case THANKS:
+                CloseAudioDevice();
                 if(state == 0) {
                     if(alpha<1.0)alpha += 0.05;
                     else state = 1;
@@ -185,6 +214,10 @@ void playImpostor(GameState game){
                     //game->screenCenterWidth-225, 280, 450, 70
                     if (GuiButton((Rectangle){ game->screenCenterWidth-230, 410, 460, 90 }, "New Game")) { 
                         fprintf(stdout,"New Game\n"); 
+                        UnloadMusicStream(ostMenu);
+                        PlayMusicStream(ostGame);
+                        musicFlag = 0;
+                        timePlayed = 0.0;
                         gameScene = GAME;
                         state = 0;
                     }
@@ -215,11 +248,33 @@ void playImpostor(GameState game){
             
                     break;
                 case GAME:
+                    
+                    
                     BeginMode2D(game->board->camera);
                         DrawTexture(game->board->mapBackground, 0, 0, WHITE);
                         DrawTexture(game->board->map, 0, 0, WHITE);
                         MovementInBoard(game);
+                        //fprintf(stdout,"x=[%f] y=[%f]||x=[%d] y=[%d]\n",game->board->camera.target.x,game->board->camera.target.y,(int)((game->board->camera.target.x)*.5),(int)((game->board->camera.target.y)*1.1));
                     EndMode2D();
+                        if(IsKeyDown(KEY_P)){
+                            int initXHUD = (int)((game->board->camera.target.x)-960);
+                            int initYHUD = (int)((game->board->camera.target.y)+270);
+                            //DrawRectangle(initXHUD,initYHUD,game->screenWidth,game->screenHeight/4,DARKGRAY);
+                                
+                            //GuiGroupBox((Rectangle){ initXHUD + 25, initYHUD + 30, 125, 150 }, "OPTIONS");
+                            if (GuiButton((Rectangle){ initXHUD + 30, initYHUD + 40, 115, 30 }, "Tirar Dado")) {
+                                fprintf(stdout,"Hola");
+                            }
+                            if (GuiButton((Rectangle){ initXHUD + 30, initYHUD + 75, 115, 30 }, "Suggest")) { 
+                                fprintf(stdout,"Hola");
+
+                            }
+                            if (GuiButton((Rectangle){ initXHUD + 30, initYHUD + 110, 115, 30 }, "Notebook")) {
+                                fprintf(stdout,"Hola");
+
+                            }
+                        }
+                    
                     break;
                 case NEWGAME:
                     break;
@@ -358,7 +413,7 @@ void initImpostor(GameState game){
 }
 GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));
-    int res = 4;
+    int res = 1;
     switch(res){
         case 1:     // Monitor normal
             game->screenWidth = 1920;
@@ -388,6 +443,7 @@ GameState newImpostorGame(){
     game->playersAlive = 0;
     InitWindow(game->screenWidth,game->screenHeight, "raylib");
     SetTargetFPS(game->fps);
+    InitAudioDevice();
     return game;
 }
 Board NewBoard(GameState game){

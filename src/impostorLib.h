@@ -66,6 +66,8 @@ struct ImpostorGame{
     int                 screenHeight;
     int                 screenCenterWidth;
     int                 screenCenterHeight;
+    int                 relScreenX;
+    int                 relScreenY;
     int                 fps;
     int                 playersAlive;
     float               speed;

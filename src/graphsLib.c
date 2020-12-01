@@ -62,8 +62,7 @@ void MovementInBoard(GameState game){
         SelectAnimation(game,4,false);
     }
     
-    UpdateCameraPosition(game);
-
+    
     if ((IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP)) && (game->playerInTurn->movesLeft > 0)){
         if((game->playerInTurn->y-1 >= 0) && (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y-1].status == 'f' || game->board->boxes[game->playerInTurn->x][game->playerInTurn->y-1].status == 'd')){
             game->playerInTurn->x;
@@ -100,6 +99,7 @@ void MovementInBoard(GameState game){
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,4,true);
     }
+    UpdateCameraPosition(game);
     UpdateAnimation(game);
 }
 
