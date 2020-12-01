@@ -130,13 +130,15 @@ void InitializeCards (GameState game){
             for(int i = 0; i < howManyCards; i++){
                 game->playerInTurn->cardsInHand[i] = ShuffledCards[i];
             }
+            if(game->playersAlive == 3){howManyCards--;}
         }
         else{
-            howManyCards++;
+            if(game->playersAlive == 6){howManyCards++;}
             for(int i = 0; i < howManyCards; i++){
                 game->playerInTurn->cardsInHand[i] = ShuffledCards[i];
             }
         }
+        if(game->playersAlive == 3){howManyCards++;}
         for(int j = 0; j < 20-howManyCards; j++){
             ShuffledCards[j] = ShuffledCards[j + howManyCards];
         }
