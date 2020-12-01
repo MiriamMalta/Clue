@@ -16,12 +16,15 @@ void Accusation();
 void Suggestion();
 void GenerateTurnList();
 int CalculateRandomMovements();
-int CalculateRandomPlacements();
+int CalculateRandomPlacements(GameState game);
 void HatONames();
 
 void addCharacter(GameState game, Player fullCharacter);
 char* moveAlongInTurns(GameState game);
 char* peekWhoSNext(GameState game);
 void takeOutCharacter(GameState game, Player fullCharacter);
+
+void InitializeCards (GameState game);
+void MakeSuggestion(GameState game, char* suggestion);
 
 #endif

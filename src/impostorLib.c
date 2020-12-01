@@ -409,7 +409,8 @@ void initImpostor(GameState game){
     game->board = NewBoard(game);
     SetPlayersInBoard(game);
     InitCamera(game);
-
+    game->envelope = calloc(3, sizeof(char));
+    InitializeCards(game);
 }
 GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));

@@ -42,21 +42,22 @@ struct BoardGame{
 struct Player_ref{
     int                 isLive; 
     int                 movingAnimate;
-    int                 cards[3];   // Deck of cards
-    int                 frame;      // Visible frame
-    int                 maxFrames;  // Frames in the Texture
+    int                 cards[3];       // Deck of cards
+    int                 frame;          // Visible frame
+    int                 maxFrames;      // Frames in the Texture
     int                 x;
     int                 y;
     int                 movesLeft;
-    float               frameWidth; // Width of the Colider
-    float               frameHeight;// Height of the Colider
-    float               timer;      // Helper Timer for animation
-    char*               c_player;   // Color of the character
-    char*               name;       // Name of the player
-    struct Rectangle    frameRec;   // Rectangle Frame Colider
-    struct Vector2      position;   // Position in the window
-    Texture2D           skin[4];    // 0 = Stand Right || 1 = Stand Left || 2 = Walking Right || 3 = Walking Left  
-    struct Player_ref*  next;       // Pointer To Create a CLL
+    float               frameWidth;     // Width of the Colider
+    float               frameHeight;    // Height of the Colider
+    float               timer;          // Helper Timer for animation
+    char*               c_player;       // Color of the character
+    char*               name;           // Name of the player
+    char*               cardsInHand;    // Cards of each player
+    struct Rectangle    frameRec;       // Rectangle Frame Colider
+    struct Vector2      position;       // Position in the window
+    Texture2D           skin[4];        // 0 = Stand Right || 1 = Stand Left || 2 = Walking Right || 3 = Walking Left  
+    struct Player_ref*  next;           // Pointer To Create a CLL
 };
 typedef struct Player_ref* Player;
 
@@ -71,6 +72,7 @@ struct ImpostorGame{
     int                 fps;
     int                 playersAlive;
     float               speed;
+    char*               envelope;               // Cards inside the envelope
     Board               board;
     Player              playerInTurn;
 };
