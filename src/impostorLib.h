@@ -12,6 +12,7 @@ typedef enum {
     DISCLAIMER, 
     MENU,
     GAME,
+    PAUSE,
     NEWGAME,
     LOADGAME,
     SAVEGAME,
