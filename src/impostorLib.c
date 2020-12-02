@@ -504,7 +504,7 @@ Board NewBoard(GameState game){
                 if(x >= 8 && x <= 15)
                     board->boxes[y][x].status = 'f';
             if(x == 12)
-                if(y == 0 || y == 23 || y == 12)
+                if(y == 0 || y == 23)
                     board->boxes[y][x].status = 'r';
             if(x == 2 || x == 10 || x == 13 || x == 21)
                 if(y == 0 || y == 23)
@@ -518,6 +518,9 @@ Board NewBoard(GameState game){
             if(y == 9 || y == 14)
                 if(x == 11 || x == 12)
                     board->boxes[y][x].status = 'd';
+            if(x == 12)
+                if(y == 12)
+                    board->boxes[y][x].status = 'c';
         }
     }
     //MoveCharacter(game, x, y);
