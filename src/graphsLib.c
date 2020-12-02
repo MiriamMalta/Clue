@@ -3,47 +3,12 @@
 
 //Aqui solamente funciones graficas
 
-void Movement(GameState game){
-    if(IsKeyReleased(KEY_K)){
-        game->playerInTurn = game->playerInTurn->next;
-    }
-    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)){
-        game->playerInTurn->position.y += GetFrameTime() * -(game->speed);
-        SelectAnimation(game,1,false);
-    }
-    if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)){
-        game->playerInTurn->position.y += GetFrameTime() * (game->speed);
-        SelectAnimation(game,2,false);
-    }
-    if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)){
-        game->playerInTurn->position.x += GetFrameTime() * (game->speed);
-        SelectAnimation(game,3,false);
-    }
-    if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)){
-        game->playerInTurn->position.x += GetFrameTime() * -(game->speed);
-        SelectAnimation(game,4,false);
-    }
-    
-    UpdateCameraPosition(game);
-
-    if (IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP)){
-        SelectAnimation(game,1,true);
-    }
-    if (IsKeyReleased(KEY_S) || IsKeyReleased(KEY_DOWN)){
-        SelectAnimation(game,2,true);
-    }
-    if (IsKeyReleased(KEY_D) || IsKeyReleased(KEY_RIGHT)){
-        SelectAnimation(game,3,true);
-    }
-    if (IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT)){
-        SelectAnimation(game,4,true);
-    }
-    UpdateAnimation(game);
-}
-
 void MovementInBoard(GameState game){
     if(IsKeyReleased(KEY_K)){
         game->playerInTurn = game->playerInTurn->next;
+    }
+    if(IsKeyReleased(KEY_P)){
+        
     }
     if (IsKeyReleased(KEY_SPACE)){
         game->playerInTurn->movesLeft = CalculateRandomMovements();  
