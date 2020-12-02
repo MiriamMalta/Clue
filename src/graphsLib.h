@@ -19,4 +19,6 @@ void Teletransport();
 void EnterRoom();
 void ExitRoom();
 
+void MoveCharacter(GameState game);
+
 #endif

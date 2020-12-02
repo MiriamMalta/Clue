@@ -150,5 +150,5 @@ void InitializeCards (GameState game){
 }
 
 void MakeSuggestion(GameState game, char* suggestion){
-
+    
 }

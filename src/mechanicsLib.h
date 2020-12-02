@@ -27,4 +27,5 @@ void takeOutCharacter(GameState game, Player fullCharacter);
 void InitializeCards (GameState game);
 void MakeSuggestion(GameState game, char* suggestion);
 
+
 #endif

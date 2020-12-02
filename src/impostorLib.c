@@ -25,8 +25,8 @@ void playImpostor(GameState game){
     float       alpha = 0.0f;
     Music ostMenu = LoadMusicStream("./res/music/ost_menu.mp3");
     Music ostGame = LoadMusicStream("./res/music/ost_game.mp3");
-    SetMusicVolume(ostMenu,1.0);
-    SetMusicVolume(ostGame,1.0);
+    SetMusicVolume(ostMenu,0.1);
+    SetMusicVolume(ostGame,0.1);
     PlayMusicStream(ostMenu);
     float timePlayed = 0.0f;
     int musicFlag = 0;
@@ -520,6 +520,8 @@ Board NewBoard(GameState game){
                     board->boxes[y][x].status = 'd';
         }
     }
+    //MoveCharacter(game, x, y);
+    //for(int x=0;x<24;x++){for(int y=0;y<24;y++){if((x == 2 && y == 0) || (x == 0 && y == 2))}}    
     for(int x=0;x<24;x++){
         for(int y=0;y<24;y++){
             fprintf(stdout, "[%c] ",board->boxes[y][x].status);

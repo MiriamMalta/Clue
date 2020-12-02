@@ -101,6 +101,17 @@ void MovementInBoard(GameState game){
     }
     UpdateCameraPosition(game);
     UpdateAnimation(game);
+
+    MoveCharacter(game);
+
+    // Suggestion
+    if (IsKeyReleased(KEY_G)){
+        
+    }
+    // Accusation
+    if (IsKeyReleased(KEY_C)){
+
+    }
 }
 
 void SelectAnimation(GameState game, int Selection,int isStill){
@@ -202,6 +213,225 @@ void SetPlayersInBoard(GameState game){
         game->playerInTurn->y = 8;
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         game->playerInTurn = game->playerInTurn->next;
+    }
+}
+
+/*
+Move Inside
+    [O]
+Move Outside
+    [I]
+[J]     [L]
+    [M]
+*/
+void MoveCharacter(GameState game){
+    // UPPER ENGINE
+    if (IsKeyReleased(KEY_O) && ((game->playerInTurn->x == 2 && game->playerInTurn->y == 0) || (game->playerInTurn->x == 0 && game->playerInTurn->y == 2))){
+        game->playerInTurn->x = 0;
+        game->playerInTurn->y = 0;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 0 && game->playerInTurn->y == 0){
+        if (IsKeyReleased(KEY_M)){
+            game->playerInTurn->x = 0;
+            game->playerInTurn->y = 2;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_L)){
+            game->playerInTurn->x = 2;
+            game->playerInTurn->y = 0;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // WEAPONS
+    if (IsKeyReleased(KEY_O) && ((game->playerInTurn->x == 21 && game->playerInTurn->y == 0) || (game->playerInTurn->x == 23 && game->playerInTurn->y == 2))){
+        game->playerInTurn->x = 23;
+        game->playerInTurn->y = 0;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 23 && game->playerInTurn->y == 0){
+        if (IsKeyReleased(KEY_M)){
+            game->playerInTurn->x = 23;
+            game->playerInTurn->y = 2;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_J)){
+            game->playerInTurn->x = 21;
+            game->playerInTurn->y = 0;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // LOWER ENGINE
+    if (IsKeyReleased(KEY_O) && ((game->playerInTurn->x == 0 && game->playerInTurn->y == 21) || (game->playerInTurn->x == 2 && game->playerInTurn->y == 23))){
+        game->playerInTurn->x = 0;
+        game->playerInTurn->y = 23;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 0 && game->playerInTurn->y == 23){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 0;
+            game->playerInTurn->y = 21;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_L)){
+            game->playerInTurn->x = 2;
+            game->playerInTurn->y = 23;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // SHIELDS
+    if (IsKeyReleased(KEY_O) && ((game->playerInTurn->x == 21 && game->playerInTurn->y == 23) || (game->playerInTurn->x == 23 && game->playerInTurn->y == 21))){
+        game->playerInTurn->x = 23;
+        game->playerInTurn->y = 23;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 23 && game->playerInTurn->y == 23){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 23;
+            game->playerInTurn->y = 21;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_J)){
+            game->playerInTurn->x = 21;
+            game->playerInTurn->y = 23;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // REACTOR
+    if (IsKeyReleased(KEY_O) && ((game->playerInTurn->x == 0 && game->playerInTurn->y == 10) || (game->playerInTurn->x == 0 && game->playerInTurn->y == 13))){
+        game->playerInTurn->x = 0;
+        game->playerInTurn->y = 12;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 0 && game->playerInTurn->y == 12){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 0;
+            game->playerInTurn->y = 10;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_M)){
+            game->playerInTurn->x = 0;
+            game->playerInTurn->y = 13;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // NAVIGATION
+    if (IsKeyReleased(KEY_O) && ((game->playerInTurn->x == 23 && game->playerInTurn->y == 10) || (game->playerInTurn->x == 23 && game->playerInTurn->y == 13))){
+        game->playerInTurn->x = 23;
+        game->playerInTurn->y = 12;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 23 && game->playerInTurn->y == 12){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 23;
+            game->playerInTurn->y = 10;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_M)){
+            game->playerInTurn->x = 23;
+            game->playerInTurn->y = 13;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // MED-BAY
+    if (IsKeyReleased(KEY_O) && ((game->playerInTurn->x == 6 && game->playerInTurn->y == 5) || (game->playerInTurn->x == 6 && game->playerInTurn->y == 7))){
+        game->playerInTurn->x = 6;
+        game->playerInTurn->y = 6;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 6 && game->playerInTurn->y == 6){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 6;
+            game->playerInTurn->y = 5;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_M)){
+            game->playerInTurn->x = 6;
+            game->playerInTurn->y = 7;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // STORAGE
+    if (IsKeyReleased(KEY_O) && ((game->playerInTurn->x == 17 && game->playerInTurn->y == 5) || (game->playerInTurn->x == 17 && game->playerInTurn->y == 7))){
+        game->playerInTurn->x = 17;
+        game->playerInTurn->y = 6;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 17 && game->playerInTurn->y == 6){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 17;
+            game->playerInTurn->y = 5;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_M)){
+            game->playerInTurn->x = 17;
+            game->playerInTurn->y = 7;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // ADMIN
+    if (IsKeyReleased(KEY_O) && ((game->playerInTurn->x == 6 && game->playerInTurn->y == 16) || (game->playerInTurn->x == 7 && game->playerInTurn->y == 17))){
+        game->playerInTurn->x = 5;
+        game->playerInTurn->y = 18;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 5 && game->playerInTurn->y == 18){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 6;
+            game->playerInTurn->y = 16;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_L)){
+            game->playerInTurn->x = 7;
+            game->playerInTurn->y = 17;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // ELECTRICAL
+    if (IsKeyReleased(KEY_O) && ((game->playerInTurn->x == 17 && game->playerInTurn->y == 16) || (game->playerInTurn->x == 16 && game->playerInTurn->y == 17))){
+        game->playerInTurn->x = 18;
+        game->playerInTurn->y = 18;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 18 && game->playerInTurn->y == 18){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 17;
+            game->playerInTurn->y = 16;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_J)){
+            game->playerInTurn->x = 16;
+            game->playerInTurn->y = 17;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // CAFETERIA
+    if (IsKeyReleased(KEY_O) && ((game->playerInTurn->x == 11 && game->playerInTurn->y == 9) || (game->playerInTurn->x == 12 && game->playerInTurn->y == 9) || (game->playerInTurn->x == 11 && game->playerInTurn->y == 14) || (game->playerInTurn->x == 12 && game->playerInTurn->y == 14) || (game->playerInTurn->x == 9 && game->playerInTurn->y == 11) || (game->playerInTurn->x == 9 && game->playerInTurn->y == 12) || (game->playerInTurn->x == 14 && game->playerInTurn->y == 11) || (game->playerInTurn->x == 14 && game->playerInTurn->y == 12))){
+        game->playerInTurn->x = 12;
+        game->playerInTurn->y = 12;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 12 && game->playerInTurn->y == 12){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 12;
+            game->playerInTurn->y = 9;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_J)){
+            game->playerInTurn->x = 9;
+            game->playerInTurn->y = 12;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_L)){
+            game->playerInTurn->x = 14;
+            game->playerInTurn->y = 12;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_M)){
+            game->playerInTurn->x = 12;
+            game->playerInTurn->y = 14;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
     }
 }
 

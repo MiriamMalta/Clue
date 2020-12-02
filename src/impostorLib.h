@@ -26,7 +26,7 @@ typedef enum {
 
 struct Box{
     int                 isRoom;
-    char                status;         //f = free; b = blocked; p = player; and rooms
+    char                status;         //f = free; - = blocked; p = player; d = doors; r = rooms
     Vector2             tilePosition;
 };
 
