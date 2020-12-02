@@ -30,12 +30,13 @@ void playImpostor(GameState game){
     PlayMusicStream(ostMenu);
     float timePlayed = 0.0f;
     int musicFlag = 0;
-    Texture2D logo = LoadTexture("./res/animations/Logo2.png");
+    Texture2D logo = LoadTexture("./res/animations/Logo.png");
     Texture2D menu = LoadTexture("./res/animations/Menu.png");
     Texture2D black = LoadTexture("./res/animations/black.png");
     Texture2D RL = LoadTexture("./res/animations/raylib_logo.png");
     Texture2D credits = LoadTexture("./res/animations/Credits.png");
     Texture2D save = LoadTexture("./res/animations/Save.png");   
+    Texture2D load = LoadTexture("./res/animations/Load.png");
     initImpostor(game);
     
     while (!WindowShouldClose() && exit){
@@ -137,7 +138,6 @@ void playImpostor(GameState game){
                 break;
 
             case THANKS:
-                CloseAudioDevice();
                 if(state == 0) {
                     if(alpha<1.0)alpha += 0.05;
                     else state = 1;
@@ -151,6 +151,7 @@ void playImpostor(GameState game){
                     else{
                         gameScene = EXIT;
                         state = 0;
+                        CloseAudioDevice();
                     }
                 }
                 break;
@@ -255,32 +256,30 @@ void playImpostor(GameState game){
                         DrawTexture(game->board->map, 0, 0, WHITE);
                         MovementInBoard(game);
                         //fprintf(stdout,"x=[%f] y=[%f]||x=[%d] y=[%d]\n",game->board->camera.target.x,game->board->camera.target.y,(int)((game->board->camera.target.x)*.5),(int)((game->board->camera.target.y)*1.1));
-                    EndMode2D();
-                        if(IsKeyDown(KEY_P)){
-                            int initXHUD = (int)((game->board->camera.target.x)-960);
-                            int initYHUD = (int)((game->board->camera.target.y)+270);
-                            //DrawRectangle(initXHUD,initYHUD,game->screenWidth,game->screenHeight/4,DARKGRAY);
-                                
-                            //GuiGroupBox((Rectangle){ initXHUD + 25, initYHUD + 30, 125, 150 }, "OPTIONS");
-                            if (GuiButton((Rectangle){ initXHUD + 30, initYHUD + 40, 115, 30 }, "Tirar Dado")) {
-                                fprintf(stdout,"Hola");
-                            }
-                            if (GuiButton((Rectangle){ initXHUD + 30, initYHUD + 75, 115, 30 }, "Suggest")) { 
-                                fprintf(stdout,"Hola");
-
-                            }
-                            if (GuiButton((Rectangle){ initXHUD + 30, initYHUD + 110, 115, 30 }, "Notebook")) {
-                                fprintf(stdout,"Hola");
-
-                            }
+                        int initXHUD = (int)((game->board->camera.target.x)-960);
+                        int initYHUD = (int)((game->board->camera.target.y)+270);
+                        DrawRectangle(initXHUD,initYHUD,game->screenWidth,game->screenHeight/4,DARKGRAY);
+                            
+                        GuiGroupBox((Rectangle){ initXHUD + 25, initYHUD + 30, 125, 150 }, "OPTIONS");
+                        if (GuiButton((Rectangle){ initXHUD + 30, initYHUD + 40, 115, 30 }, "Tirar Dado")) {
+                            fprintf(stdout,"Hola");
                         }
+                        if (GuiButton((Rectangle){ initXHUD + 30, initYHUD + 75, 115, 30 }, "Suggest")) { 
+                            fprintf(stdout,"Hola");
+
+                        }
+                        if (GuiButton((Rectangle){ initXHUD + 30, initYHUD + 110, 115, 30 }, "Notebook")) {
+                            fprintf(stdout,"Hola");
+
+                        }
+                    EndMode2D();
                     
                     break;
                 case NEWGAME:
                     break;
 
                 case LOADGAME:
-                    DrawTexture(save,0, 0,RAYWHITE);
+                    DrawTexture(load,0, 0,RAYWHITE);
                     //game->screenCenterWidth-225, 280, 450, 70
                     if (GuiButton((Rectangle){ game->screenCenterWidth-230, 410, 460, 90 }, "Slot 1")) {  
                         fprintf(stdout,"Slot 1\n"); 
@@ -523,14 +522,13 @@ Board NewBoard(GameState game){
                     board->boxes[y][x].status = 'c';
         }
     }
-    //MoveCharacter(game, x, y);
-    //for(int x=0;x<24;x++){for(int y=0;y<24;y++){if((x == 2 && y == 0) || (x == 0 && y == 2))}}    
+    /*
     for(int x=0;x<24;x++){
         for(int y=0;y<24;y++){
             fprintf(stdout, "[%c] ",board->boxes[y][x].status);
         }
         fprintf(stdout, "\n");
-    }
+    }*/
     return board;
 }
 Player newPlayer(GameState game,char color[10]){

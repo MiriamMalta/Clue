@@ -1,22 +1,21 @@
-# Clue
-###### botón de inicio
-###### botón de instrucciones
-###### botón de settings
-###### la primera vez que se inicia el juego se pregunta el nombre del usuario
-######      si el usuario lo quiere cambiar, se cambia en settings
-###### la primera vez que se inicia el juego se muestran las instrucciones
-###### al iniciar se habla de la situación que se encuentra el personaje (introducciñon con voz ,3)
-###### la primera vez que se inicia el juego se muestran un tutorial -> en duda
+# Impostor
+
 One suspect, one room, one weapon.
 Mr. Boddy is found death in one of the rooms of his mansion.
-All you need to do is answer who killed them, where and with what weapon.
+All you need to do is answer who killed them, where and how.
+Go and find the impostor...
+SHHHHHH......
 
+Impostor is a Among Us flavored Clue game.
 · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - · - ·
 ## How to install
 
-Using Cmake:
+Using Cmake in Windows:
 
 >cmake -G "MinGW Makefiles" -D CMAKE_C_COMPILER="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/x86_64-w64-mingw32-gcc.exe" ..
+
+Where CMAKE_C_COMPILER is the route to your MinGW32-gcc.exe. You need to have installed the 64-bits MinGW.
+Then you can run:
 
 >minGW32-make
 
@@ -220,14 +219,14 @@ Manejo de Datos (purple) (yellow)
 ## Requerimientos no funcionales
 
 ### Sprites
-- [ ] Clue Map similar to "Skeld"
+- [x] Clue Map similar to "Skeld"
 - [ ] 'Shhh' Screen
 - [ ] 'Winner' Screen
 - [ ] 'Loser' Screen
-- [ ] 'Main Menu' Screen
-- [ ] 'Load' Screen
+- [x] 'Main Menu' Screen
+- [x] 'Load' Screen
 - [ ] 'Settings' Screen
-- [ ] 'Credits' Screen
+- [x] 'Credits' Screen
 - [ ] HUD
 - [ ] 'Notebook' Screen
 - [ ] 'Loader' Screen
@@ -266,11 +265,11 @@ Manejo de Datos (purple) (yellow)
 - [ ] Deaths
 
 ### Botones que envian a otras ventanas
-- [ ] New Game -> Ventana de Opciones de nuevo juego
+- [x] New Game -> Ventana de Opciones de nuevo juego
 - [ ] New Game Options -> Ventana de Shhh(inicio de juego)
-- [ ] Load -> Ventana de Carga
+- [x] Load -> Ventana de Carga
 - [ ] Settings -> Ventana de Opciones
-- [ ] Credits -> Ventana de Creditos
+- [x] Credits -> Ventana de Creditos
 
 - [ ] Quit Game -> Main Menu
 - [ ] Save Game -> Ventana de Guardado
