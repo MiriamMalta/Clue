@@ -15,7 +15,13 @@ void FillPackage(){
     // add TO ImpostorGame
 }
 // THIS
-void Accusation(){
+int Accusation(GameState game,Card cards[3]){   
+    if(game->envelope[PLACES].uniqueInitial == cards[PLACES]->uniqueInitial && 
+        game->envelope[CHARACTER].uniqueInitial == cards[CHARACTER]->uniqueInitial && 
+        game->envelope[DEATHS].uniqueInitial == cards[DEATHS]->uniqueInitial){
+            return true;
+        }
+    return false;
 }
 // THIS
 void Suggestion(){

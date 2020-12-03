@@ -12,7 +12,7 @@ void SaveGame();
 void LoadGame();
 void SetGame();
 void FillPackage();
-void Accusation();
+int Accusation(GameState game, Card cards[3]);
 void Suggestion();
 void GenerateTurnList();
 int CalculateRandomMovements();

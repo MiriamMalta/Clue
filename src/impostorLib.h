@@ -24,6 +24,12 @@ typedef enum {
 
 } GameScreen;
 
+typedef enum {
+    PLACES,
+    CHARACTER,
+    DEATHS
+} CardType;
+
 
 struct Box{
     int                 isRoom;
