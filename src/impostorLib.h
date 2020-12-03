@@ -40,6 +40,13 @@ struct BoardGame{
 }; typedef struct BoardGame* Board;
 
 
+struct Card_struct{
+    char                uniqueInitial;
+    char*               name;
+    Texture2D           visual;
+}; typedef struct Card_struct* Card;
+
+
 struct Player_ref{
     int                 isLive; 
     int                 movingAnimate;
@@ -54,13 +61,13 @@ struct Player_ref{
     float               timer;          // Helper Timer for animation
     char*               c_player;       // Color of the character
     char*               name;           // Name of the player
-    char*               cardsInHand;    // Cards of each player
+    Card                cardsInHand;    // Cards of each player
+    int                 numCards;       // Number of cards for each player
     struct Rectangle    frameRec;       // Rectangle Frame Colider
     struct Vector2      position;       // Position in the window
     Texture2D           skin[4];        // 0 = Stand Right || 1 = Stand Left || 2 = Walking Right || 3 = Walking Left  
     struct Player_ref*  next;           // Pointer To Create a CLL
-};
-typedef struct Player_ref* Player;
+}; typedef struct Player_ref* Player;
 
 
 struct ImpostorGame{
@@ -73,18 +80,17 @@ struct ImpostorGame{
     int                 fps;
     int                 playersAlive;
     float               speed;
-    char*               envelope;               // Cards inside the envelope
+    Card                envelope;               // Cards inside the envelope
     Board               board;
     Player              playerInTurn;
 };
 
 
+
+
 struct GameHistory{
     
 };
-
-
-
 
 struct Notebook{
     

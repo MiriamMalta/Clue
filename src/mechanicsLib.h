@@ -25,8 +25,16 @@ char* moveAlongInTurns(GameState game);
 char* peekWhoSNext(GameState game);
 void takeOutCharacter(GameState game, Player fullCharacter);
 
-void InitializeCards (GameState game);
 void MakeSuggestion(GameState game, char* suggestion);
 
+Card newCard(GameState game,char initial, char* name);
+void makeCards(GameState game, Card deckPlaces, Card deckCharacters, Card deckDeaths);
+void takeOutCard(Card Deck, int position, int elements);
+void pushToAll(Card All, Card Places, Card Characters, Card Deaths);
+void shuffleCards(Card All, Card Shuffle);
+void dealCards(GameState game, Card Shuffle);
+void initializeCards (GameState game);
+
+void printPlayersAndCards(GameState game);
 
 #endif

@@ -51,6 +51,7 @@ void addCharacter(GameState game, Player fullCharacter){
         fullCharacter->next = fullCharacter;
     }
     game->playerInTurn = fullCharacter->next;
+    //fprintf(stdout, "{{%s}}->", game->playerInTurn->c_player);
 }
 
 char* moveAlongInTurns(GameState game){
@@ -85,69 +86,137 @@ void takeOutCharacter(GameState game, Player fullCharacter){
     }
 }
 
+Card newCard(GameState game,char initial, char* name){
+    Card cardOne = calloc(1, sizeof(struct Card_struct));
+    //char urlPath[100] = "./res/assets/cards/"; 
+    //strcat(urlPath,initial);
+    //strcat(urlPath,".jpg");
+    //cardOne->visual = LoadTexture(urlPath);
+    cardOne->uniqueInitial = initial;
+    cardOne->name = name;
+    return cardOne;
+}
 
-void InitializeCards (GameState game){
-    //A: Admin, E: Electrical, F: Cafeteria, H: Shields, I: Lower Engine, L: Storage
-    //R: Reactor, U: Upper Engine, V: Navigation, X: Weapons, Y: Medbay
-    char deckPlaces[] = {'A','E','F','H','I','L','R','U','V','X','Y'};
-    //C: Colonel Mustard, G: Mr. Green, M: Mrs. Peacock, P: Professor Plum, S: Miss Scarlet, W: Mrs. White
-    char deckCharacters[] = {'C','G','M','P','S','W'};
-    //B: Stabbing, D: Disconected from Server, J: Gun Shot, N: Neck Snap, O: Thrown into Space, T: Throat Saber
-    char deckDeaths[] = {'B','D','J','N','O','T'};
-
-    int randomPlaces = rand()%11;
-    int randomCharacters = rand()%6;
-    int randomDeaths = rand()%6;
-
-    game->envelope[0] = deckPlaces[randomPlaces];
-    game->envelope[1] = deckCharacters[randomCharacters];
-    game->envelope[2] = deckDeaths[randomDeaths];
-
-    fprintf(stdout, "%c - %c - %c\n", game->envelope[0], game->envelope[1], game->envelope[2]);
-
-    for(int i = randomPlaces; i < 11; i++){deckPlaces[i] = deckPlaces[i + 1];}
-    for(int i = randomCharacters; i < 6; i++){deckCharacters[i] = deckCharacters[i + 1];}
-    for(int i = randomDeaths; i < 6; i++){deckDeaths[i] = deckDeaths[i + 1];}
-
-    char* AllCards = calloc(20, sizeof(char)); 
-    for(int i = 0; i < 10; i++){AllCards[i] = deckPlaces[i];}
-    for(int i = 0; i < 5; i++){AllCards[i+10] = deckCharacters[i];}
-    for(int i = 0; i < 5; i++){AllCards[i+15] = deckDeaths[i];}
-
-    char* ShuffledCards = calloc(20, sizeof(char));
-    for(int i = 0 ; i < 20; i++){
-        int Index = rand() % 20;
-        while(AllCards[Index % 20] == 0)
-        Index++;
-        ShuffledCards[i] = AllCards[Index % 20];
-        AllCards[Index % 20] = 0;
+void makeCards(GameState game, Card deckPlaces, Card deckCharacters, Card deckDeaths){
+    char Places1[] = {'A','E','F','H','I','L','R','U','V','X','Y'};
+    char* Places2[] = {
+        "Admin","Electrical","Cafeteria","Shields","Lower Engine","Storage",
+        "Reactor","Upper Engine","Navigation","Weapons","Medbay"
+    };
+    for(int i = 0; i <= 11; i++){
+        deckPlaces[i] = *(newCard(game, Places1[i], Places2[i]));
     }
 
+    char Characters1[] = {'C','G','M','P','S','W'};
+    char* Characters2[] = {
+        "Colonel Mustard","Mr. Green","Mrs. Peacock",
+        "Professor Plum","Miss Scarlet","Mrs. White"
+    };
+    for(int i = 0; i <= 6; i++){
+        deckCharacters[i] = *(newCard(game, Characters1[i], Characters2[i]));
+    }
+
+    char Deaths1[] = {'B','D','J','N','O','T'};
+    char* Deaths2[] = {
+        "Stabbing","Disconnected from Server","Gun Shot",
+        "Neck Snap","Thrown into Space","Throat Saber"
+    };
+    for(int i = 0; i <= 6; i++){
+        deckDeaths[i] = *(newCard(game, Deaths1[i], Deaths2[i]));
+    }
+}
+
+void takeOutCard(Card Deck, int position, int elements){
+    for(int i = position; i < elements; i++){
+        Deck[i] = Deck[i + 1];
+    }
+}
+
+void pushToAll(Card All, Card Places, Card Characters, Card Deaths){
+    for(int i = 0; i < 10; i++){All[i] = Places[i];}
+    for(int i = 0; i < 5; i++){All[i+10] = Characters[i];}
+    for(int i = 0; i < 5; i++){All[i+15] = Deaths[i];}
+}
+
+void shuffleCards(Card All, Card Shuffle){
+    for(int i = 0 ; i < 20; i++){
+        int addIndex = rand() % 20;
+        while(All[addIndex % 20].uniqueInitial == 0){addIndex++;}
+        Shuffle[i] = All[addIndex % 20];
+        All[addIndex % 20].uniqueInitial = 0;
+    }
+}
+
+void dealCards(GameState game, Card Shuffle){
     int howManyCards = 20/(game->playersAlive);
     int totalNumberOfCards = 20;
 
     for(int j = 0; j < game->playersAlive; j++){
-        fprintf(stdout, "\n");
-        game->playerInTurn->cardsInHand = calloc(20, sizeof(char));
+        game->playerInTurn->cardsInHand = calloc(20, sizeof(struct Card_struct));
         if ((totalNumberOfCards/howManyCards >= howManyCards)||(totalNumberOfCards/howManyCards == 1)){
             for(int i = 0; i < howManyCards; i++){
-                game->playerInTurn->cardsInHand[i] = ShuffledCards[i];
+                game->playerInTurn->cardsInHand[i] = Shuffle[i];
             }
         }
         else{
             if(game->playersAlive == 6){howManyCards++;}
             if (game->playersAlive == 3 && totalNumberOfCards < 20){howManyCards++;}
             for(int i = 0; i < howManyCards; i++){
-                game->playerInTurn->cardsInHand[i] = ShuffledCards[i];
+                game->playerInTurn->cardsInHand[i] = Shuffle[i];
             }
         }
         for(int j = 0; j < 20 - howManyCards; j++){
-            ShuffledCards[j] = ShuffledCards[j + howManyCards];
+            Shuffle[j] = Shuffle[j + howManyCards];
         }
-        for(int i = 0; i < howManyCards; i++){
-            fprintf(stdout, "[%c]", game->playerInTurn->cardsInHand[i]);
-        }
+        game->playerInTurn->numCards = howManyCards;
         totalNumberOfCards = totalNumberOfCards - howManyCards;
+        game->playerInTurn = game->playerInTurn->next;
+    }
+}
+
+void initializeCards (GameState game){
+    game->envelope = calloc(3, sizeof(struct Card_struct));
+    Card deckPlaces = calloc(11, sizeof(struct Card_struct));
+    Card deckCharacters = calloc(6, sizeof(struct Card_struct));
+    Card deckDeaths = calloc(6, sizeof(struct Card_struct));
+    Card AllCards = calloc(20, sizeof(struct Card_struct));
+    Card ShuffledCards = calloc(20, sizeof(struct Card_struct));
+
+    makeCards(game, deckPlaces, deckCharacters, deckDeaths);
+
+    int randomPlaces = rand()%11; int randomCharacters = rand()%6; int randomDeaths = rand()%6;
+
+    game->envelope[0] = deckPlaces[randomPlaces];
+    game->envelope[1] = deckCharacters[randomCharacters];
+    game->envelope[2] = deckDeaths[randomDeaths];
+
+    fprintf(stdout, "%c - %c - %c\n", game->envelope[0].uniqueInitial, game->envelope[1].uniqueInitial, game->envelope[2].uniqueInitial);
+
+    takeOutCard(deckPlaces, randomPlaces, 11);
+    takeOutCard(deckCharacters, randomCharacters, 6);
+    takeOutCard(deckDeaths, randomDeaths, 6);
+
+    pushToAll(AllCards, deckPlaces, deckCharacters, deckDeaths);
+    shuffleCards(AllCards, ShuffledCards);
+    dealCards(game, ShuffledCards);
+
+    //free(deckPlaces);
+    //free(deckCharacters);
+    //free(deckDeaths);
+    //free(AllCards);
+    //free(ShuffledCards);
+}
+
+//Red->[A]->[B]->[C]
+void printPlayersAndCards(GameState game){
+    fprintf(stdout, "\n");
+    for(int j = 0; j < game->playersAlive; j++){
+        //char* color = game->playerInTurn->c_player;
+        fprintf(stdout, " %s ->", game->playerInTurn->c_player);
+        for(int i = 0; i < game->playerInTurn->numCards; i++){
+            fprintf(stdout, "[%c]", game->playerInTurn->cardsInHand[i].uniqueInitial);
+        }
+        fprintf(stdout, "{%d}\n", game->playerInTurn->numCards);
         game->playerInTurn = game->playerInTurn->next;
     }
 }

@@ -591,8 +591,8 @@ void initImpostor(GameState game){
     game->board = NewBoard(game);
     SetPlayersInBoard(game);
     InitCamera(game);
-    game->envelope = calloc(3, sizeof(char));
-    InitializeCards(game);
+    initializeCards(game);
+    printPlayersAndCards(game);
 }
 GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));
@@ -740,7 +740,7 @@ Player newPlayer(GameState game,char color[10]){
     player->frameRec.width = player->frameWidth; 
     player->frameRec.height = player->frameHeight;
     player->position.x = 1723;//game->screenCenterWidth;
-    player->position.y = 1699;//game->screenCenterHeight;    
+    player->position.y = 1699;//game->screenCenterHeight; 
     return player;
 }
 void addPlayerToList(GameState game,Player player){
@@ -754,13 +754,12 @@ void addPlayerToList(GameState game,Player player){
         }
         temp->next = player;
         player->next = game->playerInTurn;
-
     }
 }
 void newPlayerList(GameState game){
     game->playerInTurn = NULL;
     // Aqui debe haber una funcion con los datos de los personajes escogidos
-    char colorsArray[6][10] = {
+    static char colorsArray[6][10] = {
         "Blue",
         "Green",
         "Purple",
