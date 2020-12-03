@@ -1,14 +1,12 @@
 #include "graphsLib.h"
 #include "impostorLib.h"
+#include "mechanicsLib.h"
 
 //Aqui solamente funciones graficas
 
 void MovementInBoard(GameState game){
     if(IsKeyReleased(KEY_K)){
-        game->playerInTurn = game->playerInTurn->next;
-    }
-    if(IsKeyReleased(KEY_P)){
-        
+        NextTurn(game);
     }
     if (IsKeyReleased(KEY_SPACE)){
         game->playerInTurn->movesLeft = CalculateRandomMovements();  
@@ -397,6 +395,22 @@ void MoveCharacter(GameState game){
         }
     }
 }
+
+void PrintMap(GameState game){
+    for(int x=0;x<24;x++){
+        for(int y=0;y<24;y++){
+            fprintf(stdout, "[%c] ",game->board->boxes[y][x].status);
+        }
+        fprintf(stdout, "\n");
+    }
+}
+
+void PrintPlayersAndCards(GameState game){
+    for(int i=0;i<game->playersAlive;i++){
+        
+    }
+}
+
 
 void Teleport()
 {

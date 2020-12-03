@@ -26,6 +26,9 @@ void GenerateTurnList(){
 int CalculateRandomMovements(){
     return (rand()%9) + 1;
 }
+void NextTurn(GameState game){
+    game->playerInTurn = game->playerInTurn->next;
+}
 // This is
 int CalculateRandomPlacements(GameState game){
     char* nameOfChar = game->playerInTurn->c_player;

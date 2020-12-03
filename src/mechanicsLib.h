@@ -17,6 +17,7 @@ void Suggestion();
 void GenerateTurnList();
 int CalculateRandomMovements();
 int CalculateRandomPlacements(GameState game);
+void NextTurn(GameState game);
 void HatONames();
 
 void addCharacter(GameState game, Player fullCharacter);

@@ -5,7 +5,7 @@
 #include <time.h>
 #include <string.h>
 
-
+void DoTests();
 
 
 #endif
