@@ -20,7 +20,9 @@ int CalculateRandomPlacements();
 void NextTurn(GameState game);
 void HatONames();
 
-void addCharacter(GameState game, Player fullCharacter);
+void addPlayerToList(GameState game,Player player);
+void newPlayerList(GameState game);
+
 char* moveAlongInTurns(GameState game);
 char* peekWhoSNext(GameState game);
 void takeOutCharacter(GameState game, Player fullCharacter);

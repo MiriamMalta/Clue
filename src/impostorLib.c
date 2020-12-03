@@ -833,25 +833,4 @@ Player newPlayer(GameState game,char* color){
     player->position = game->board->boxes[player->x][player->y].tilePosition;
     return player;
 }
-void addPlayerToList(GameState game,Player player){
-    Player temp = game->playerInTurn;
-    if(game->playerInTurn == NULL){
-        game->playerInTurn = player;
-        game->playerInTurn->next = player;
-    }else{
-        while(temp->next != game->playerInTurn){
-            temp = temp->next;
-        }
-        temp->next = player;
-        player->next = game->playerInTurn;
-    }
-}
-void newPlayerList(GameState game){
-    game->playerInTurn = NULL;
-    for(int i = 0;i<6;i++){
-        if(game->typeTBActive[i] == 1){
-            addPlayerToList(game,newPlayer(game,game->colorTB[i]));
-            game->playersAlive++;
-        }
-    }
-}
+
