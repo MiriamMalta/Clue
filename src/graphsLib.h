@@ -13,7 +13,6 @@ void SelectAnimation(GameState game, int Selection, int isStill);
 void UpdateAnimation(GameState game);
 void UpdateCameraPosition(GameState game);
 void InitCamera(GameState game);
-void SetPlayersInBoard(GameState game);
 void PrintMap(GameState game);
 void PrintPlayersAndCards(GameState game);
 void Teletransport();

@@ -45,30 +45,7 @@ void playImpostor(GameState game){
 
     int resActive = 0;
     bool resEditMode = false;
-    
-    int typeTBActive[6] = {0,0,0,0,0,0};
-    bool typeTBEditMode[6] = {false,false,false,false,false,false};
-
-    int volumeLevel = 60;
-    char* nameTB[6];
-    nameTB[0] = "Ingrese nombre";
-    nameTB[1] = "Ingrese nombre";
-    nameTB[2] = "Ingrese nombre";
-    nameTB[3] = "Ingrese nombre";
-    nameTB[4] = "Ingrese nombre";
-    nameTB[5] = "Ingrese nombre";
-
-    char* colorTB[6];
-    colorTB[0] = "Blue";
-    colorTB[1] = "Green";
-    colorTB[2] = "Purple";
-    colorTB[3] = "Red";
-    colorTB[4] = "White";
-    colorTB[5] = "Yellow";
-
-    bool nameEditMode = false;
-
-    initImpostor(game);
+    int volumeLevel = 60;   
     
     while (!exitWindow){
         exitWindow = WindowShouldClose();
@@ -85,7 +62,7 @@ void playImpostor(GameState game){
                 }
                 else if (state == 1){
                     alpha = 1.0;
-                    if(transCounter % 350==0) state = 2;
+                    if(transCounter % 200==0) state = 2;
                 }
                 else if (state == 2){
                     if(alpha>0.0)alpha -= 0.05;
@@ -102,7 +79,7 @@ void playImpostor(GameState game){
                 }
                 else if (state == 1){
                     alpha = 1.0;
-                    if(transCounter % 350==0) state = 2;
+                    if(transCounter % 200==0) state = 2;
                 }
                 else if (state == 2){
                     if(alpha>0.0)alpha -= 0.05;
@@ -119,7 +96,7 @@ void playImpostor(GameState game){
                 }
                 else if (state == 1){
                     alpha = 1.0;
-                    if(transCounter % 350==0) state = 2;
+                    if(transCounter % 200==0) state = 2;
                 }
                 else if (state == 2){
                     if(alpha>0.0)alpha -= 0.05;
@@ -432,98 +409,80 @@ void playImpostor(GameState game){
                 case NEWGAME:
                     DrawTexture(newGame,0, 0,RAYWHITE);
                     GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-500, 290, 200, 40 }, nameTB[0], 30, nameEditMode)){
-                        nameEditMode = !nameEditMode;
-                        fprintf(stdout,"%s\n",nameTB[0]);
+                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-500, 290, 200, 40 }, game->nameTB[0], 30, game->nameEditMode[0])){
+                        game->nameEditMode[0] = !game->nameEditMode[0];
+                        fprintf(stdout,"%s\n",game->nameTB[0]);
                     }
                     GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-500, 335, 200, 40 }, nameTB[1], 30, nameEditMode)){
-                        nameEditMode = !nameEditMode;
-                        fprintf(stdout,"%s\n",nameTB[1]);
+                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-500, 335, 200, 40 }, game->nameTB[1], 30, game->nameEditMode[1])){
+                        game->nameEditMode[1] = !game->nameEditMode[1];
+                        fprintf(stdout,"%s\n",game->nameTB[1]);
                     }
                     GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-500, 380, 200, 40 }, nameTB[2], 30, nameEditMode)){
-                        nameEditMode = !nameEditMode;
-                        fprintf(stdout,"%s\n",nameTB[2]);
+                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-500, 380, 200, 40 }, game->nameTB[2], 30, game->nameEditMode[2])){
+                        game->nameEditMode[2] = !game->nameEditMode[2];
+                        fprintf(stdout,"%s\n",game->nameTB[2]);
                     }
                     GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-500, 425, 200, 40 }, nameTB[3], 30, nameEditMode)){
-                        nameEditMode = !nameEditMode;
-                        fprintf(stdout,"%s\n",nameTB[3]);
+                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-500, 425, 200, 40 }, game->nameTB[3], 30, game->nameEditMode[3])){
+                        game->nameEditMode[3] = !game->nameEditMode[3];
+                        fprintf(stdout,"%s\n",game->nameTB[3]);
                     }
                     GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-500, 470, 200, 40 }, nameTB[4], 30, nameEditMode)){
-                        nameEditMode = !nameEditMode;
-                        fprintf(stdout,"%s\n",nameTB[4]);
+                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-500, 470, 200, 40 }, game->nameTB[4], 30, game->nameEditMode[4])){
+                        game->nameEditMode[4] = !game->nameEditMode[4];
+                        fprintf(stdout,"%s\n",game->nameTB[4]);
                     }
                     GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-500, 515, 200, 40 }, nameTB[5], 30, nameEditMode)){
-                        nameEditMode = !nameEditMode;
-                        fprintf(stdout,"%s\n",nameTB[5]);
+                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-500, 515, 200, 40 }, game->nameTB[5], 30, game->nameEditMode[5])){
+                        game->nameEditMode[5] = !game->nameEditMode[5];
+                        fprintf(stdout,"%s\n",game->nameTB[5]);
                     }
-                    //ssssssssssssssss
-
+                    
+                    
                     GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-250, 290, 200, 40 }, colorTB[0], 30, nameEditMode)){
-                        nameEditMode = !nameEditMode;
-                        fprintf(stdout,"%s\n",colorTB[0]);
-                    }
+                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-250, 290, 200, 40 }, game->colorTB[0], 30, false)){}
                     GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-250, 335, 200, 40 }, colorTB[1], 30, nameEditMode)){
-                        nameEditMode = !nameEditMode;
-                        fprintf(stdout,"%s\n",colorTB[1]);
-                    }
+                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-250, 335, 200, 40 }, game->colorTB[1], 30, false)){}
                     GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-250, 380, 200, 40 }, colorTB[2], 30, nameEditMode)){
-                        nameEditMode = !nameEditMode;
-                        fprintf(stdout,"%s\n",colorTB[2]);
-                    }
+                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-250, 380, 200, 40 }, game->colorTB[2], 30, false)){}
                     GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-250, 425, 200, 40 }, colorTB[3], 30, nameEditMode)){
-                        nameEditMode = !nameEditMode;
-                        fprintf(stdout,"%s\n",colorTB[3]);
-                    }
+                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-250, 425, 200, 40 }, game->colorTB[3], 30, false)){}
                     GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-250, 470, 200, 40 }, colorTB[4], 30, nameEditMode)){
-                        nameEditMode = !nameEditMode;
-                        fprintf(stdout,"%s\n",colorTB[4]);
-                    }
+                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-250, 470, 200, 40 }, game->colorTB[4], 30, false)){}
                     GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-250, 515, 200, 40 }, colorTB[5], 30, nameEditMode)){
-                        nameEditMode = !nameEditMode;
-                        fprintf(stdout,"%s\n",colorTB[5]);
-                    }
-                    //sssssssssssssssssssssssss
-
+                    if (GuiTextBox((Rectangle){ game->screenCenterWidth-250, 515, 200, 40 }, game->colorTB[5], 30, false)){}
+                    
+                    
                     GuiSetStyle(DROPDOWNBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiDropdownBox((Rectangle){ game->screenCenterWidth, 515, 200, 40 }, "#01#PLAYER;#02#COMPUTER;#03#NONE", &typeTBActive[5], typeTBEditMode[5])){
-                        typeTBEditMode[5] = !typeTBEditMode[5];
-                        fprintf(stdout,"%d\n",typeTBActive[5]);
+                    if (GuiDropdownBox((Rectangle){ game->screenCenterWidth, 515, 200, 40 }, "#01#PLAYER;#02#COMPUTER;#03#NONE", &game->typeTBActive[5], game->typeTBEditMode[5])){
+                        game->typeTBEditMode[5] = !game->typeTBEditMode[5];
+                        fprintf(stdout,"%d\n",game->typeTBActive[5]);
                     } 
                     GuiSetStyle(DROPDOWNBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiDropdownBox((Rectangle){ game->screenCenterWidth, 470, 200, 40 }, "#01#PLAYER;#02#COMPUTER;#03#NONE", &typeTBActive[4], typeTBEditMode[4])){
-                        typeTBEditMode[4] = !typeTBEditMode[4];
-                        fprintf(stdout,"%d\n",typeTBActive[4]);
+                    if (GuiDropdownBox((Rectangle){ game->screenCenterWidth, 470, 200, 40 }, "#01#PLAYER;#02#COMPUTER;#03#NONE", &game->typeTBActive[4], game->typeTBEditMode[4])){
+                        game->typeTBEditMode[4] = !game->typeTBEditMode[4];
+                        fprintf(stdout,"%d\n",game->typeTBActive[4]);
                     } 
                     GuiSetStyle(DROPDOWNBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiDropdownBox((Rectangle){ game->screenCenterWidth, 425, 200, 40 }, "#01#PLAYER;#02#COMPUTER;#03#NONE", &typeTBActive[3], typeTBEditMode[3])){
-                        typeTBEditMode[3] = !typeTBEditMode[3];
-                        fprintf(stdout,"%d\n",typeTBActive[3]);
+                    if (GuiDropdownBox((Rectangle){ game->screenCenterWidth, 425, 200, 40 }, "#01#PLAYER;#02#COMPUTER;#03#NONE", &game->typeTBActive[3], game->typeTBEditMode[3])){
+                        game->typeTBEditMode[3] = !game->typeTBEditMode[3];
+                        fprintf(stdout,"%d\n",game->typeTBActive[3]);
                     } 
                     GuiSetStyle(DROPDOWNBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiDropdownBox((Rectangle){ game->screenCenterWidth, 380, 200, 40 }, "#01#PLAYER;#02#COMPUTER;#03#NONE", &typeTBActive[2], typeTBEditMode[2])){
-                        typeTBEditMode[2] = !typeTBEditMode[2];
-                        fprintf(stdout,"%d\n",typeTBActive[2]);
+                    if (GuiDropdownBox((Rectangle){ game->screenCenterWidth, 380, 200, 40 }, "#01#PLAYER;#02#COMPUTER;#03#NONE", &game->typeTBActive[2], game->typeTBEditMode[2])){
+                        game->typeTBEditMode[2] = !game->typeTBEditMode[2];
+                        fprintf(stdout,"%d\n",game->typeTBActive[2]);
                     } 
                     GuiSetStyle(DROPDOWNBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiDropdownBox((Rectangle){ game->screenCenterWidth, 335, 200, 40 }, "#01#PLAYER;#02#COMPUTER;#03#NONE", &typeTBActive[1], typeTBEditMode[1])){
-                        typeTBEditMode[1] = !typeTBEditMode[1];
-                        fprintf(stdout,"%d\n",typeTBActive[1]);
+                    if (GuiDropdownBox((Rectangle){ game->screenCenterWidth, 335, 200, 40 }, "#01#PLAYER;#02#COMPUTER;#03#NONE", &game->typeTBActive[1], game->typeTBEditMode[1])){
+                        game->typeTBEditMode[1] = !game->typeTBEditMode[1];
+                        fprintf(stdout,"%d\n",game->typeTBActive[1]);
                     } 
                     GuiSetStyle(DROPDOWNBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    if (GuiDropdownBox((Rectangle){ game->screenCenterWidth, 290, 200, 40 }, "#01#PLAYER;#02#COMPUTER;#03#NONE", &typeTBActive[0], typeTBEditMode[0])){
-                        typeTBEditMode[0] = !typeTBEditMode[0];
-                        fprintf(stdout,"%d\n",typeTBActive[0]);
+                    if (GuiDropdownBox((Rectangle){ game->screenCenterWidth, 290, 200, 40 }, "#01#PLAYER;#02#COMPUTER;#03#NONE", &game->typeTBActive[0], game->typeTBEditMode[0])){
+                        game->typeTBEditMode[0] = !game->typeTBEditMode[0];
+                        fprintf(stdout,"%d\n",game->typeTBActive[0]);
                     }
 
                     //game->screenCenterWidth-225, 526, 450, 70
@@ -541,6 +500,7 @@ void playImpostor(GameState game){
                         timePlayed = 0.0;
                         gameScene = GAME;
                         state = 0;
+                        initImpostor(game);
                     }
                     break;
 
@@ -703,9 +663,9 @@ void endImpostor(GameState game){
 }
 // Initialization (called one time)
 void initImpostor(GameState game){
-    srand(time(NULL));    newPlayerList(game);
+    srand(time(NULL));    
     game->board = NewBoard(game);
-    SetPlayersInBoard(game);
+    newPlayerList(game);
     InitCamera(game);
     initializeCards(game);
     printPlayersAndCards(game);
@@ -740,6 +700,19 @@ GameState newImpostorGame(){
     game->screenCenterWidth = (int)game->screenWidth/2;
     game->screenCenterHeight = (int)game->screenHeight/2;
     game->playersAlive = 0;
+    for(int i=0;i<6;i++){
+        game->typeTBActive[i] = 1;
+        game->typeTBEditMode[i] = false;
+        game->nameTB[i] = "Ingrese nombre";
+        game->nameEditMode[i] = false; 
+    }
+
+    game->colorTB[0] = "Blue";
+    game->colorTB[1] = "Green";
+    game->colorTB[2] = "Purple";
+    game->colorTB[3] = "Red";
+    game->colorTB[4] = "White";
+    game->colorTB[5] = "Yellow";
     InitWindow(game->screenWidth,game->screenHeight, "raylib");
     SetExitKey(0);
     SetTargetFPS(game->fps);
@@ -823,10 +796,10 @@ Board NewBoard(GameState game){
                 if(y == 12)
                     board->boxes[y][x].status = 'c';
         }
-    }
+    }    
     return board;
 }
-Player newPlayer(GameState game,char color[10]){
+Player newPlayer(GameState game,char* color){
     Player player = malloc(sizeof(struct Player_ref));
     char urlPath[100] = "./res/assets/crewmates/"; 
     strcat(urlPath,color);
@@ -855,8 +828,9 @@ Player newPlayer(GameState game,char color[10]){
     player->frameRec.y = 0;
     player->frameRec.width = player->frameWidth; 
     player->frameRec.height = player->frameHeight;
-    player->position.x = 1723;//game->screenCenterWidth;
-    player->position.y = 1699;//game->screenCenterHeight; 
+    player->x = CalculateRandomPlacements();
+    player->y = 8;
+    player->position = game->board->boxes[player->x][player->y].tilePosition;
     return player;
 }
 void addPlayerToList(GameState game,Player player){
@@ -874,17 +848,10 @@ void addPlayerToList(GameState game,Player player){
 }
 void newPlayerList(GameState game){
     game->playerInTurn = NULL;
-    // Aqui debe haber una funcion con los datos de los personajes escogidos
-    static char colorsArray[6][10] = {
-        "Blue",
-        "Green",
-        "Purple",
-        "Red",
-        "White",
-        "Yellow"
-    };
     for(int i = 0;i<6;i++){
-        addPlayerToList(game,newPlayer(game,colorsArray[i]));
-        game->playersAlive++;
+        if(game->typeTBActive[i] == 1){
+            addPlayerToList(game,newPlayer(game,game->colorTB[i]));
+            game->playersAlive++;
+        }
     }
 }

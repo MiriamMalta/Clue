@@ -170,14 +170,6 @@ void InitCamera(GameState game){
     game->board->camera.zoom = 1.0f;
 }
 
-void SetPlayersInBoard(GameState game){
-    for(int i=0;i<game->playersAlive;i++){
-        game->playerInTurn->x = CalculateRandomPlacements(game);
-        game->playerInTurn->y = 8;
-        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
-        game->playerInTurn = game->playerInTurn->next;
-    }
-}
 
 /*
 Move Outside

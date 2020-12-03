@@ -30,11 +30,7 @@ void NextTurn(GameState game){
     game->playerInTurn = game->playerInTurn->next;
 }
 // This is
-int CalculateRandomPlacements(GameState game){
-    char* nameOfChar = game->playerInTurn->c_player;
-    //fprintf(stdout, "%c\n", nameOfChar[0]);
-    //if (nameOfChar[0] == 'B'){fprintf(stdout, "BLUE");}
-    //if (nameOfChar[0] == 'G'){fprintf(stdout, "GREEN");}
+int CalculateRandomPlacements(){
     return (rand()%8) + 8;
 }
 void HatONames(){
@@ -51,7 +47,6 @@ void addCharacter(GameState game, Player fullCharacter){
         fullCharacter->next = fullCharacter;
     }
     game->playerInTurn = fullCharacter->next;
-    //fprintf(stdout, "{{%s}}->", game->playerInTurn->c_player);
 }
 
 char* moveAlongInTurns(GameState game){
@@ -148,6 +143,7 @@ void shuffleCards(Card All, Card Shuffle){
 }
 
 void dealCards(GameState game, Card Shuffle){
+
     int howManyCards = 20/(game->playersAlive);
     int totalNumberOfCards = 20;
 

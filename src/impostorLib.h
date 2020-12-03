@@ -80,6 +80,11 @@ struct ImpostorGame{
     int                 fps;
     int                 playersAlive;
     float               speed;
+    int                 typeTBActive[6];
+    bool                typeTBEditMode[6];
+    char*               nameTB[6];
+    bool                nameEditMode[6];
+    char*               colorTB[6];
     Card                envelope;               // Cards inside the envelope
     Board               board;
     Player              playerInTurn;
