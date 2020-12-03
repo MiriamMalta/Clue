@@ -14,6 +14,8 @@ typedef enum {
     GAME,
     PAUSE,
     NEWGAME,
+    WIN,
+    LOSE,
     LOADGAME,
     SAVEGAME,
     SETTINGS,
@@ -85,6 +87,7 @@ struct ImpostorGame{
     int                 relScreenY;
     int                 fps;
     int                 playersAlive;
+    int                 resolution;
     float               speed;
     int                 typeTBActive[6];
     bool                typeTBEditMode[6];

@@ -18,16 +18,82 @@
 void playImpostor(GameState game){
     GuiLoadStyle("./res/styles/impostor/impostor.rgs");
     GameScreen  gameScene = LOGO;
-    Texture2D logo = LoadTexture("./res/animations/Logo.png");
-    Texture2D menu = LoadTexture("./res/animations/Menu.png");
-    Texture2D black = LoadTexture("./res/animations/black.png");
-    Texture2D RL = LoadTexture("./res/animations/raylib_logo.png");
-    Texture2D credits = LoadTexture("./res/animations/Credits.png");
-    Texture2D save = LoadTexture("./res/animations/Save.png");   
-    Texture2D load = LoadTexture("./res/animations/Load.png");
-    Texture2D newGame = LoadTexture("./res/animations/NewGame.png");
-    Texture2D pause = LoadTexture("./res/animations/Pause.png");
-    Texture2D settings = LoadTexture("./res/animations/Settings.png");
+
+    Texture2D logo,menu,black,RL,credits,save,load,newGame,pause,settings,win,lose;
+    switch (game->resolution){
+        case 1:     // Monitor normal
+            logo = LoadTexture("./res/animations/1920x1080/Logo.png");
+            menu = LoadTexture("./res/animations/1920x1080/Menu.png");
+            black = LoadTexture("./res/animations/1920x1080/black.png");
+            RL = LoadTexture("./res/animations/1920x1080/raylib_logo.png");
+            credits = LoadTexture("./res/animations/1920x1080/Credits.png");
+            save = LoadTexture("./res/animations/1920x1080/Save.png");   
+            load = LoadTexture("./res/animations/1920x1080/Load.png");
+            newGame = LoadTexture("./res/animations/1920x1080/NewGame.png");
+            pause = LoadTexture("./res/animations/1920x1080/Pause.png");
+            settings = LoadTexture("./res/animations/1920x1080/Settings.png");
+            win = LoadTexture("");
+            lose = LoadTexture("");
+            break;
+        case 2:     // Monitor lap
+            logo = LoadTexture("./res/animations/1366x768/Logo.png");
+            menu = LoadTexture("./res/animations/1366x768/Menu.png");
+            black = LoadTexture("./res/animations/1366x768/black.png");
+            RL = LoadTexture("./res/animations/1366x768/raylib_logo.png");
+            credits = LoadTexture("./res/animations/1366x768/Credits.png");
+            save = LoadTexture("./res/animations/1366x768/Save.png");   
+            load = LoadTexture("./res/animations/1366x768/Load.png");
+            newGame = LoadTexture("./res/animations/1366x768/NewGame.png");
+            pause = LoadTexture("./res/animations/1366x768/Pause.png");
+            settings = LoadTexture("./res/animations/1366x768/Settings.png");
+            win = LoadTexture("");
+            lose = LoadTexture("");
+            break;
+        case 3:     // Monitor feo
+            logo = LoadTexture("./res/animations/1024x768/Logo.png");
+            menu = LoadTexture("./res/animations/1024x768/Menu.png");
+            black = LoadTexture("./res/animations/1024x768/black.png");
+            RL = LoadTexture("./res/animations/1024x768/raylib_logo.png");
+            credits = LoadTexture("./res/animations/1024x768/Credits.png");
+            save = LoadTexture("./res/animations/1024x768/Save.png");   
+            load = LoadTexture("./res/animations/1024x768/Load.png");
+            newGame = LoadTexture("./res/animations/1024x768/NewGame.png");
+            pause = LoadTexture("./res/animations/1024x768/Pause.png");
+            settings = LoadTexture("./res/animations/1024x768/Settings.png");
+            win = LoadTexture("");
+            lose = LoadTexture("");
+            break;
+        case 4:     // Monitor Mac
+            logo = LoadTexture("./res/animations/1280x70/Logo.png");
+            menu = LoadTexture("./res/animations/1280x70/Menu.png");
+            black = LoadTexture("./res/animations/1280x70/black.png");
+            RL = LoadTexture("./res/animations/1280x70/raylib_logo.png");
+            credits = LoadTexture("./res/animations/1280x70/Credits.png");
+            save = LoadTexture("./res/animations/1280x70/Save.png");   
+            load = LoadTexture("./res/animations/1280x70/Load.png");
+            newGame = LoadTexture("./res/animations/1280x70/NewGame.png");
+            pause = LoadTexture("./res/animations/1280x70/Pause.png");
+            settings = LoadTexture("./res/animations/1280x70/Settings.png");
+            win = LoadTexture("");
+            lose = LoadTexture("");
+            break;
+        default:    // Default normal
+            logo = LoadTexture("./res/animations/1920x1080/Logo.png");
+            menu = LoadTexture("./res/animations/1920x1080/Menu.png");
+            black = LoadTexture("./res/animations/1920x1080/black.png");
+            RL = LoadTexture("./res/animations/1920x1080/raylib_logo.png");
+            credits = LoadTexture("./res/animations/1920x1080/Credits.png");
+            save = LoadTexture("./res/animations/1920x1080/Save.png");   
+            load = LoadTexture("./res/animations/1920x1080/Load.png");
+            newGame = LoadTexture("./res/animations/1920x1080/NewGame.png");
+            pause = LoadTexture("./res/animations/1920x1080/Pause.png");
+            settings = LoadTexture("./res/animations/1920x1080/Settings.png");
+            win = LoadTexture("");
+            lose = LoadTexture("");
+            break;
+    }
+
+    
     bool        exitWindow = false;
     bool        showMessageBox = false;
     int         state = 0;
@@ -147,6 +213,10 @@ void playImpostor(GameState game){
                     timePlayed = GetMusicTimePlayed(ostMenu)/GetMusicTimeLength(ostMenu)*100;
                 }
                 break;
+            case WIN:
+                break;
+            case LOSE:
+                break;
             case PAUSE:
                 if(musicFlag == 0 ){
                     StopMusicStream(ostGame);
@@ -241,14 +311,7 @@ void playImpostor(GameState game){
                             DrawTexture(black,0,0,Fade(BLACK,alpha));
                             break;
                         case 1 :
-                            DrawTexture(black,0,0,BLACK);
-                            DrawText(
-                                TextSubtext("DK SS",0,splashCounter/13),
-                                game->screenWidth/3 + 25, 
-                                game->screenHeight*2/3 + 18, 23, 
-                                WHITE
-                            );
-                            DrawTexture(logo,game->screenWidth/3 + 25, game->screenHeight/4,RAYWHITE);
+                            DrawTexture(logo,0,0,RAYWHITE);
                             break;
                         case 2 : 
                             DrawTexture(black,0,0,BLACK);
@@ -258,19 +321,7 @@ void playImpostor(GameState game){
                 case POWERED:
                     switch(state){
                         case 1 :
-                            DrawText(
-                                "Powered by", 
-                                game->screenWidth/3 + 25, 
-                                game->screenHeight/5 - 5, 
-                                20, 
-                                BLACK
-                            );
-                            DrawTexture(
-                                RL, 
-                                game->screenWidth/2 - RL.width/2 + 5, 
-                                game->screenHeight/2 - RL.height/2 + game->screenHeight/35, 
-                                RAYWHITE
-                            );
+                            DrawTexture(RL,0,0,RAYWHITE);
                             break;
                         case 2 :
                             DrawTexture(black,0,0,Fade(BLACK,alpha));
@@ -405,6 +456,10 @@ void playImpostor(GameState game){
                         gameScene = GAME;
                         state = 0;
                     }
+                    break;
+                case WIN:
+                    break;
+                case LOSE:
                     break;
                 case NEWGAME:
                     DrawTexture(newGame,0, 0,RAYWHITE);
@@ -672,8 +727,8 @@ void initImpostor(GameState game){
 }
 GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));
-    int res = 1;
-    switch(res){
+    game->resolution = 2;
+    switch(game->resolution){
         case 1:     // Monitor normal
             game->screenWidth = 1920;
             game->screenHeight = 1080;
