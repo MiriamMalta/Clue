@@ -799,7 +799,7 @@ GameState newImpostorGame(){
     }
     game->playersAlive = 0;
     for(int i=0;i<6;i++){
-        game->typeTBActive[i] = 1;
+        game->typeTBActive[i] = 0;
         game->typeTBEditMode[i] = false;
         memset(game->nameTB[i], 0, 50);
         strcpy(game->nameTB[i], "Ingrese nombre");

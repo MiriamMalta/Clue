@@ -60,7 +60,7 @@ void addPlayerToList(GameState game,Player player){
 void newPlayerList(GameState game){
     game->playerInTurn = NULL;
     for(int i = 0;i<6;i++){
-        if(game->typeTBActive[i] == 1){
+        if(game->typeTBActive[i] == 0){
             addPlayerToList(game,newPlayer(game,game->colorTB[i]));
             game->playersAlive++;
         }
