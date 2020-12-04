@@ -5,12 +5,9 @@
 //Aqui solamente funciones graficas
 
 void MovementInBoard(GameState game){
-    if(IsKeyReleased(KEY_K)){
-        NextTurn(game);
-    }
     if (IsKeyReleased(KEY_SPACE)){
-        game->playerInTurn->movesLeft = CalculateRandomMovements();  
-        fprintf(stdout, "%d\n", game->playerInTurn->movesLeft); //Left here for now to know what number we got on the dice
+        game->playerInTurn->movesLeft = CalculateRandomMovements()+1;  
+        fprintf(stdout, "%d\n", (game->playerInTurn->movesLeft)-1); //Left here for now to know what number we got on the dice
     }
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)){
         SelectAnimation(game,1,false);
@@ -25,8 +22,7 @@ void MovementInBoard(GameState game){
         SelectAnimation(game,4,false);
     }
     
-    
-    if ((IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP)) && (game->playerInTurn->movesLeft > 0)){
+    if ((IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP)) && (game->playerInTurn->movesLeft > 1)){
         if((game->playerInTurn->y-1 >= 0) && (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y-1].status == 'f' || game->board->boxes[game->playerInTurn->x][game->playerInTurn->y-1].status == 'd')){
             game->playerInTurn->x;
             game->playerInTurn->y--;
@@ -35,7 +31,7 @@ void MovementInBoard(GameState game){
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,1,true);
     }
-    if ((IsKeyReleased(KEY_S) || IsKeyReleased(KEY_DOWN)) && (game->playerInTurn->movesLeft > 0)){
+    if ((IsKeyReleased(KEY_S) || IsKeyReleased(KEY_DOWN)) && (game->playerInTurn->movesLeft > 1)){
         if((game->playerInTurn->y+1 < 24) && (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y+1].status == 'f' || game->board->boxes[game->playerInTurn->x][game->playerInTurn->y+1].status == 'd')){
             game->playerInTurn->x;
             game->playerInTurn->y++;
@@ -44,7 +40,7 @@ void MovementInBoard(GameState game){
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,2,true);
     }
-    if ((IsKeyReleased(KEY_D) || IsKeyReleased(KEY_RIGHT)) && (game->playerInTurn->movesLeft > 0)){
+    if ((IsKeyReleased(KEY_D) || IsKeyReleased(KEY_RIGHT)) && (game->playerInTurn->movesLeft > 1)){
         if((game->playerInTurn->x+1 < 24) && (game->board->boxes[game->playerInTurn->x+1][game->playerInTurn->y].status == 'f' || game->board->boxes[game->playerInTurn->x+1][game->playerInTurn->y].status == 'd')){
             game->playerInTurn->x++;
             game->playerInTurn->y;
@@ -53,7 +49,7 @@ void MovementInBoard(GameState game){
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,3,true);
     }
-    if ((IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT)) && (game->playerInTurn->movesLeft > 0)){
+    if ((IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT)) && (game->playerInTurn->movesLeft > 1)){
         if((game->playerInTurn->x-1 >= 0) && (game->board->boxes[game->playerInTurn->x-1][game->playerInTurn->y].status == 'f' || game->board->boxes[game->playerInTurn->x-1][game->playerInTurn->y].status == 'd')){
             game->playerInTurn->x--;
             game->playerInTurn->y;
@@ -62,28 +58,45 @@ void MovementInBoard(GameState game){
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,4,true);
     }
+
+    if(game->playerInTurn->movesLeft == 1){
+        game->playerInTurn->movesLeft = 0;
+        NextTurn(game);
+    }
+
     UpdateCameraPosition(game);
     UpdateAnimation(game);
 
     MoveCharacter(game);
 
     // Suggestion & Accusation
-    if (IsKeyReleased(KEY_G)){
+    if (IsKeyReleased(KEY_K)){
         if (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].status == 'r'){
-            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 0){char place = 'U';} // UPPER ENGINE
-            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 0){char place = 'X';} // WEAPONS
-            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 23){char place = 'I';} // LOWER ENGINE
-            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 23){char place = 'H';} // SHIELDS
-            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 12){char place = 'R';} // REACTOR
-            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 12){char place = 'V';} // NAVIGATION
-            if (game->playerInTurn->x == 6 && game->playerInTurn->y == 6){char place = 'Y';} // MED-BAY
-            if (game->playerInTurn->x == 17 && game->playerInTurn->y == 6){char place = 'L';} // STORAGE
-            if (game->playerInTurn->x == 5 && game->playerInTurn->y == 18){char place = 'A';} // ADMIN
-            if (game->playerInTurn->x == 18 && game->playerInTurn->y == 18){char place = 'E';} // ELECTRICAL
-            //makeAccusation(game, place, character, death);
+            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 0){
+                Card card[3]; card[PLACES]->uniqueInitial = 'U'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // UPPER ENGINE
+            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 0){
+                Card card[3]; card[PLACES]->uniqueInitial = 'X'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // WEAPONS
+            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 23){
+                Card card[3]; card[PLACES]->uniqueInitial = 'I'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // LOWER ENGINE
+            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 23){
+                Card card[3]; card[PLACES]->uniqueInitial = 'H'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // SHIELDS
+            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 12){
+                Card card[3]; card[PLACES]->uniqueInitial = 'R'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // REACTOR
+            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 12){
+                Card card[3]; card[PLACES]->uniqueInitial = 'V'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // NAVIGATION
+            if (game->playerInTurn->x == 6 && game->playerInTurn->y == 6){
+                Card card[3]; card[PLACES]->uniqueInitial = 'Y'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // MED-BAY
+            if (game->playerInTurn->x == 17 && game->playerInTurn->y == 6){
+                Card card[3]; card[PLACES]->uniqueInitial = 'L'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // STORAGE
+            if (game->playerInTurn->x == 5 && game->playerInTurn->y == 18){
+                Card card[3]; card[PLACES]->uniqueInitial = 'A'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // ADMIN
+            if (game->playerInTurn->x == 18 && game->playerInTurn->y == 18){
+                Card card[3]; card[PLACES]->uniqueInitial = 'E'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // ELECTRICAL
+            //makeSuggestion(game, card[3]);
         }
-        if (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].status == 'c'){
-            fprintf(stdout, "ACC");
+        if (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].status == 'c'){  //CAFETERIA
+            Card card[3]; card[PLACES]->uniqueInitial = 'Z'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z'; // ELECTRICAL
+            //makeAccusation(game, cards[3]);            
         }
     }
 }

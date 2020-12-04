@@ -15,7 +15,7 @@ void FillPackage(){
     // add TO ImpostorGame
 }
 // THIS
-int makeAccusation(GameState game,Card cards[3]){   
+int makeAccusation(GameState game, Card cards[3]){   
     if(game->envelope[PLACES].uniqueInitial == cards[PLACES]->uniqueInitial && 
         game->envelope[CHARACTER].uniqueInitial == cards[CHARACTER]->uniqueInitial && 
         game->envelope[DEATHS].uniqueInitial == cards[DEATHS]->uniqueInitial){
@@ -24,7 +24,13 @@ int makeAccusation(GameState game,Card cards[3]){
     return false;
 }
 // THIS
-void makeSuggestion(){
+void makeSuggestion(GameState game, Card cards[3]){   
+    if(game->envelope[PLACES].uniqueInitial == cards[PLACES]->uniqueInitial && 
+        game->envelope[CHARACTER].uniqueInitial == cards[CHARACTER]->uniqueInitial && 
+        game->envelope[DEATHS].uniqueInitial == cards[DEATHS]->uniqueInitial){
+            //return true;
+        }
+    //return false;
 }
 void GenerateTurnList(){
 }
