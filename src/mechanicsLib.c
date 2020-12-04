@@ -1,8 +1,8 @@
 #include "mechanicsLib.h"
 #include "impostorLib.h"
 
-//Este seria el Backend del juego, solamente 
-//codigo funcional
+
+// Save Settings in the settings panel
 void SaveSettings(GameState game){
     int* data;
     data = s_Settings(game);
@@ -15,6 +15,8 @@ void SaveSettings(GameState game){
     rewind(pSett);
     fclose(pSett);
 }
+
+// Load Settings at the begin.
 void LoadSettings(GameState game){
     int data[2];
     long size;
@@ -41,35 +43,46 @@ void LoadSettings(GameState game){
         }
     }
 }
+
+// Settings Serializer
 int* s_Settings(GameState game){
     int* settings = malloc(sizeof(int)*2);
     settings[0] = (int)game->resolution;
     settings[1] = (int)game->volume;
     return settings;
 }
+
+// Settings DeSerializer
 void d_Settings(GameState game,int data[2]){
     game->resolution = data[0];
     game->volume = (float)data[1];
 }
+
+// Save Game Option
 void SaveGame(GameState game){
 
 }
+
+// Load Game Option
 void LoadGame(GameState game){
 
 }
+
+// Game information Serializer
 void s_Game(GameState game){
 
 }
+
+// Game information DeSerializer
 void d_Game(GameState game){
 
 }
-void SetGame(){
-}
-void FillPackage(){
-    // package
-    // add TO ImpostorGame
-}
-// THIS
+
+/**
+ * Function to create accusation.
+ * An accusation is the ultimate suggestion.
+ * If you miss the cards. You die.
+ */
 int makeAccusation(GameState game, Card cards[3]){   
     if(game->envelope[PLACES].uniqueInitial == cards[PLACES]->uniqueInitial && 
         game->envelope[CHARACTER].uniqueInitial == cards[CHARACTER]->uniqueInitial && 
@@ -78,36 +91,39 @@ int makeAccusation(GameState game, Card cards[3]){
         }
     return false;
 }
-// THIS
+
+/**
+ * Function to create Suggestion.
+ * A Suggestion is an open question, if anybody has
+ * a named card the have to show it to the suggester.
+ */
 void makeSuggestion(GameState game, Card cards[3]){   
-    if(game->envelope[PLACES].uniqueInitial == cards[PLACES]->uniqueInitial && 
-        game->envelope[CHARACTER].uniqueInitial == cards[CHARACTER]->uniqueInitial && 
-        game->envelope[DEATHS].uniqueInitial == cards[DEATHS]->uniqueInitial){
-            //return true;
-        }
-    //return false;
-}
-void GenerateTurnList(){
-}
-void HatONames(){
+    
 }
 
-
-// This is the Dice of 6 sides
+// Dice Random Function
 int CalculateRandomMovements(){
     return (rand()%9) + 1;
 }
+
+// Next Turn Function
 void NextTurn(GameState game){
     if(game->playerInTurn->movesLeft == 1){
         game->playerInTurn->movesLeft = 0;
         game->playerInTurn = game->playerInTurn->next;
     }
 }
-// This is
+/**
+ * Function to calculate the initial positions of the 
+ * crewmates
+ */
 int CalculateRandomPlacements(){
     return (rand()%8) + 8;
 }
 
+/**
+ * Function to add players to a Circular Linked List
+ */
 void addPlayerToList(GameState game,Player player){
     Player temp = game->playerInTurn;
     if(game->playerInTurn == NULL){
@@ -121,6 +137,10 @@ void addPlayerToList(GameState game,Player player){
         player->next = game->playerInTurn;
     }
 }
+
+/**
+ * Function to add all the actual players to the list
+ */
 void newPlayerList(GameState game){
     game->playerInTurn = NULL;
     for(int i = 0;i<6;i++){

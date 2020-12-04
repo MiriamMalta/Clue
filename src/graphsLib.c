@@ -110,6 +110,10 @@ void MovementInBoard(GameState game){
     }
 }
 
+/**
+ * Check the state of the player, the next movements 
+ * and update the variables of the animations.
+ */
 void SelectAnimation(GameState game, int Selection,int isStill){
     if(isStill){
         switch (Selection){
@@ -170,6 +174,9 @@ void SelectAnimation(GameState game, int Selection,int isStill){
 
 }
 
+/**
+ * Update the states of the animations and redraw the Player.
+ */
 void UpdateAnimation(GameState game){
     game->playerInTurn->timer += GetFrameTime();
     if (game->playerInTurn->timer >= 0.05f)
@@ -187,6 +194,11 @@ void UpdateAnimation(GameState game){
     );
 }
 
+/**
+ * - Update the camera position
+ * - Update the zoom level
+ * - Print the Green Lines of the player 
+ */
 void UpdateCameraPosition(GameState game){
     game->board->camera.target = (Vector2) {game->playerInTurn->position.x+43,game->playerInTurn->position.y+50};
     game->board->camera.zoom += ((float)GetMouseWheelMove()*0.05f);
@@ -195,7 +207,9 @@ void UpdateCameraPosition(GameState game){
     DrawLine(game->board->camera.target.x,-game->screenHeight*10,game->board->camera.target.x,game->screenHeight*10,GREEN);
     DrawLine(-game->screenWidth*10,game->board->camera.target.y,game->screenWidth*10,game->board->camera.target.y,GREEN);  
 }
-
+/**
+ * Intialize the camera data layer
+ */
 void InitCamera(GameState game){
     game->board->camera.target = (Vector2) {game->playerInTurn->position.x+20,game->playerInTurn->position.y+20};
     game->board->camera.offset = (Vector2) {game->screenCenterWidth,game->screenCenterHeight};
@@ -421,6 +435,9 @@ void MoveCharacter(GameState game){
     }
 }
 
+/**
+ * Print the structure data of the Board
+ */
 void PrintMap(GameState game){
     for(int x=0;x<24;x++){
         for(int y=0;y<24;y++){
@@ -429,7 +446,9 @@ void PrintMap(GameState game){
         fprintf(stdout, "\n");
     }
 }
-
+/**
+ * Print the players and the cards in their possession.
+ */
 void PrintPlayersAndCards(GameState game){
     for(int j = 0; j < game->playersAlive; j++){
         for(int i = 0; i < game->playerInTurn->numCards; i++){
@@ -442,12 +461,3 @@ void PrintPlayersAndCards(GameState game){
 }
 
 
-void Teleport()
-{
-}
-void EnterRoom()
-{
-}
-void ExitRoom()
-{
-}
