@@ -108,9 +108,10 @@ struct ImpostorGame{
     int                 btnRowDistance;
     int                 btnCenter;
     float               speed;
+    float               volume;
     int                 typeTBActive[6];
     bool                typeTBEditMode[6];
-    char               nameTB[6][30];
+    char                nameTB[6][30];
     bool                nameEditMode[6];
     char*               colorTB[6];
     Card                envelope;               // Cards inside the envelope

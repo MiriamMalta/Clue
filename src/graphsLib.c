@@ -409,9 +409,14 @@ void PrintMap(GameState game){
 }
 
 void PrintPlayersAndCards(GameState game){
-    for(int i=0;i<game->playersAlive;i++){
-        
+    for(int j = 0; j < game->playersAlive; j++){
+        for(int i = 0; i < game->playerInTurn->numCards; i++){
+            fprintf(stdout, "[%c]", game->playerInTurn->cardsInHand[i].uniqueInitial);
+        }
+        fprintf(stdout, " {%d}\n", game->playerInTurn->numCards);
+        game->playerInTurn = game->playerInTurn->next;
     }
+    fprintf(stdout, "\n");
 }
 
 

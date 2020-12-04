@@ -29,15 +29,14 @@ void playImpostor(GameState game){
     
     Music ostMenu = LoadMusicStream("./res/music/ost_menu.mp3");
     Music ostGame = LoadMusicStream("./res/music/ost_game.mp3");
-    SetMusicVolume(ostMenu,0.1);
-    SetMusicVolume(ostGame,0.1);
+    SetMusicVolume(ostMenu,game->volume/100);
+    SetMusicVolume(ostGame,game->volume/100);
     PlayMusicStream(ostMenu);
     float timePlayed = 0.0f;
     int musicFlag = 0;
 
     int resActive = 0;
-    bool resEditMode = false;
-    int volumeLevel = 60;   
+    bool resEditMode = false; 
     
     while (!exitWindow){
         exitWindow = WindowShouldClose();
@@ -339,44 +338,32 @@ void playImpostor(GameState game){
                     break;
                 case PAUSE:
                     DrawTexture(game->screens[sPAUSE],0, 0,RAYWHITE);
-                    //game->screenCenterWidth-225, 198, btnWidth, btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)-(1*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Quit Current Game")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 290, 460, 90 }, "Quit Current Game")) { 
                         fprintf(stdout,"Menu\n"); 
                         gameScene = MENU;
                         state = 0;
                     }
-                    //game->screenCenterWidth-225, 280, btnWidth, btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, game->btnInitialPosition, game->btnWidth, game->btnHeight }, "Save Game")) {
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 410, 460, 90 }, "Save Game")) {
                         fprintf(stdout,"Save Game\n");
                         gameScene = SAVEGAME;
                         state = 0; 
                     }
-                    //game->screenCenterWidth-225, 362, btnWidth, btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(1*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Load Game")) {
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 530, 460, 90 }, "Load Game")) {
                         fprintf(stdout,"Load Game\n"); 
                         gameScene = LOADGAME;
                         state = 0;
                     }
-                    //game->screenCenterWidth-225, 444, btnWidth, btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(2*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Settings")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 650, 460, 90 }, "Settings")) { 
                         fprintf(stdout,"Settings\n"); 
                         gameScene = SETTINGS;
                         state = 0;
                     }
-                    //game->screenCenterWidth-225, 526, btnWidth, btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(3*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Restart")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 770, 460, 90 }, "Restart")) { 
                         fprintf(stdout,"Exit\n"); 
                         gameScene = THANKS;
                         state = 0;
                     }
-                    //game->screenCenterWidth-225, 608, btnWidth, btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Cancel")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 890, 460, 90 }, "Cancel")) { 
                         fprintf(stdout,"GAME\n"); 
                         gameScene = GAME;
                         state = 0;
@@ -389,8 +376,6 @@ void playImpostor(GameState game){
                 case NEWGAME:
                     DrawTexture(game->screens[sNEWGAME],0, 0,RAYWHITE);
                     GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    //game->screenCenterWidth-350, 290, 200, 40
-                    //if (GuiTextBox((Rectangle){ game->screenCenterWidth-350, 290, 200, 40 }, game->nameTB[0], 30, game->nameEditMode[0])){
                     if (GuiTextBox((Rectangle){ game->screenCenterWidth-500, 290, 200, 40 }, game->nameTB[0], 30, game->nameEditMode[0])){
                         game->nameEditMode[0] = !game->nameEditMode[0];
                         fprintf(stdout,"%s\n",game->nameTB[0]);
@@ -420,8 +405,6 @@ void playImpostor(GameState game){
                         game->nameEditMode[5] = !game->nameEditMode[5];
                         fprintf(stdout,"%s\n",game->nameTB[5]);
                     }
-                    
-                    
                     GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
                     if (GuiTextBox((Rectangle){ game->screenCenterWidth-250, 290, 200, 40 }, game->colorTB[0], 30, false)){}
                     GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
@@ -434,7 +417,6 @@ void playImpostor(GameState game){
                     if (GuiTextBox((Rectangle){ game->screenCenterWidth-250, 470, 200, 40 }, game->colorTB[4], 30, false)){}
                     GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
                     if (GuiTextBox((Rectangle){ game->screenCenterWidth-250, 515, 200, 40 }, game->colorTB[5], 30, false)){}
-                    
                     
                     GuiSetStyle(DROPDOWNBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
                     if (GuiDropdownBox((Rectangle){ game->screenCenterWidth, 515, 200, 40 }, "#01#PLAYER;#02#COMPUTER;#03#NONE", &game->typeTBActive[5], game->typeTBEditMode[5])){
@@ -466,17 +448,12 @@ void playImpostor(GameState game){
                         game->typeTBEditMode[0] = !game->typeTBEditMode[0];
                         fprintf(stdout,"%d\n",game->typeTBActive[0]);
                     }
-
-                    //game->screenCenterWidth+19, 608, btnWidth, btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth+19, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Return to Menu")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth+20, 890, 460, 90 }, "Return to Menu")) {
                         fprintf(stdout,"Menu\n"); 
                         gameScene = MENU;
                         state = 0;
                     }
-                    //game->screenCenterWidth-465, 608, game->btnWidth, game->btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-465, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Begin Game")) {
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-500, 890, 460, 90 }, "Begin Game")) {
                         fprintf(stdout,"Game\n"); 
                         UnloadMusicStream(ostMenu);
                         PlayMusicStream(ostGame);
@@ -490,37 +467,27 @@ void playImpostor(GameState game){
 
                 case LOADGAME:
                     DrawTexture(game->screens[sLOAD],0, 0,RAYWHITE);
-                    //game->screenCenterWidth-225, 280, game->btnWidth, game->btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, game->btnInitialPosition, game->btnWidth, game->btnHeight }, "Slot 1")) {  
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 410, 460, 90 }, "Slot 1")) {  
                         fprintf(stdout,"Slot 1\n"); 
                         gameScene = GAME;
                         state = 0;
                     }
-                    //game->screenCenterWidth-225, 362, game->btnWidth, game->btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(1*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Slot 2")) {
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 530, 460, 90 }, "Slot 2")) {
                         fprintf(stdout,"Slot 2\n");
                         gameScene = GAME;
                         state = 0; 
                     }
-                    //game->screenCenterWidth-225, 444, game->btnWidth, game->btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(2*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Slot 3")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 650, 460, 90 }, "Slot 3")) { 
                         fprintf(stdout,"Slot 3\n"); 
                         gameScene = GAME;
                         state = 0;
                     }
-                    //game->screenCenterWidth+19, 608, game->btnWidth, game->btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth+19, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Return to Menu")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth+20, 890, 460, 90 }, "Return to Menu")) { 
                         fprintf(stdout,"Menu\n"); 
                         gameScene = MENU;
                         state = 0;
                     }
-                    //game->screenCenterWidth-465, 608, game->btnWidth, game->btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-465, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Exit Game")) {
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-500, 890, 460, 90 }, "Exit Game")) {
                         fprintf(stdout,"Exit\n"); 
                         gameScene = THANKS;
                         state = 0;
@@ -528,37 +495,27 @@ void playImpostor(GameState game){
                     break;
                 case SAVEGAME:
                     DrawTexture(game->screens[sSAVE],0, 0,RAYWHITE);
-                    //game->screenCenterWidth-225, 280, game->btnWidth, game->btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, game->btnInitialPosition, game->btnWidth, game->btnHeight }, "Slot 1")) {
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 410, 460, 90 }, "Slot 1")) { 
                         fprintf(stdout,"Slot 1\n"); 
                         gameScene = GAME;
                         state = 0;
                     }
-                    //game->screenCenterWidth-225, 362, game->btnWidth, game->btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(1*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Slot 2")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 530, 460, 90 }, "Slot 2")) { 
                         fprintf(stdout,"Slot 2\n");
                         gameScene = GAME;
                         state = 0; 
                     }
-                    //game->screenCenterWidth-225, 444, game->btnWidth, game->btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(2*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Slot 3")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 650, 460, 90 }, "Slot 3")) { 
                         fprintf(stdout,"Slot 3\n"); 
                         gameScene = GAME;
                         state = 0;
                     }
-                    //game->screenCenterWidth+19, 608, game->btnWidth, game->btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth+19, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Return to Menu")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth+20, 890, 460, 90 }, "Return to Menu")) { 
                         fprintf(stdout,"Menu\n"); 
                         gameScene = MENU;
                         state = 0;
                     }
-                    //game->screenCenterWidth-465, 608, game->btnWidth, game->btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-465, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Exit Game")) {
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-500, 890, 460, 90 }, "Exit Game")) {
                         fprintf(stdout,"Exit\n"); 
                         gameScene = THANKS;
                         state = 0;
@@ -567,51 +524,38 @@ void playImpostor(GameState game){
                 case SETTINGS:
                     DrawTexture(game->screens[sSETTINGS],0, 0,RAYWHITE);
 
-                    //game->screenCenterWidth-225, 340, game->btnWidth, 50
-                    volumeLevel = GuiSliderBar((Rectangle){ game->screenCenterWidth-225, 340, game->btnWidth, 50 }, "Volume", TextFormat("%i", (int)volumeLevel), volumeLevel, 0, 100);
-                    //volumeLevel = GuiSliderBar((Rectangle){ game->screenCenterWidth-230, 510, 460, 50 }, "Volume", TextFormat("%i", (int)volumeLevel), volumeLevel, 0, 100);
+                    game->volume = GuiSliderBar((Rectangle){ game->screenCenterWidth-225, 340, game->btnWidth, 50 }, "Volume", TextFormat("%i", (int)game->volume), game->volume, 0, 100);
                     
-                    SetMusicVolume(ostMenu,volumeLevel/100);
-                    SetMusicVolume(ostGame,volumeLevel/100);
+                    SetMusicVolume(ostMenu,game->volume/100);
+                    SetMusicVolume(ostGame,game->volume/100);
                     
-                    //game->screenCenterWidth+19, 608, game->btnWidth, game->btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth+19, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Return to Menu")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth+20, 890, 460, 90 }, "Return to Menu")) { 
                         fprintf(stdout,"Menu\n"); 
                         gameScene = MENU;
                         state = 0;
                         StopMusicStream(ostMenu);
                         PlayMusicStream(ostMenu);
                     }
-                    //game->screenCenterWidth-465, 608, game->btnWidth, game->btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-465, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Exit Game")) {
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-500, 890, 460, 90 }, "Exit Game")) {
                         fprintf(stdout,"Exit\n"); 
                         gameScene = THANKS;
                         state = 0;
                     }
                     GuiSetStyle(DROPDOWNBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
-                    //game->screenCenterWidth-225, 280, 130, 50
                     if (GuiDropdownBox((Rectangle){ game->screenCenterWidth-225, 280, 130, 50 },"#01#1920x1080;#02#1366x768;#03#1024x768;#04#1280x700",&resActive,resEditMode)){
-                    //if (GuiDropdownBox((Rectangle){ game->screenCenterWidth-230, 410, 125, 50 },"#01#1920x1080;#02#1366x768;#03#1024x768;#04#1280x700",&resActive,resEditMode)){
                         resEditMode = !resEditMode;
                         fprintf(stdout,"Resolution: %d\n",resActive);
-                        //Actualizar Resolution settings 
                     }
                     break;
 
                 case CREDITS:
                     DrawTexture(game->screens[sCREDITS],0, 0,RAYWHITE);
-                    //game->screenCenterWidth+19, 608, game->btnWidth, game->btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth+19, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Return to Menu")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth+20, 890, 460, 90 }, "Return to Menu")) { 
                         fprintf(stdout,"Menu\n"); 
                         gameScene = MENU;
                         state = 0;
                     }
-                    //game->screenCenterWidth-465, 608, game->btnWidth, game->btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-465, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Exit Game")) {
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-500, 890, 460, 90 }, "Exit Game")) {
                         fprintf(stdout,"Exit\n"); 
                         gameScene = THANKS;
                         state = 0;
@@ -630,7 +574,6 @@ void playImpostor(GameState game){
                             DrawText(
                                 "Gracias por jugar esta basura.", 
                                 (game->screenCenterWidth/2)+100,
-                                //(game->screenCenterWidth/4)*3, 
                                 game->screenCenterHeight, 
                                 30, 
                                 WHITE
@@ -649,10 +592,8 @@ void playImpostor(GameState game){
             }
             if (showMessageBox){
                 DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(RAYWHITE, 0.8f));
-                //GetScreenWidth()/2 - 125, GetScreenHeight()/2 - 40, 400, 100
                 int result = GuiMessageBox((Rectangle){ GetScreenWidth()/2 - 200, GetScreenHeight()/2 - 50, 400, 100 }, GuiIconText(RICON_EXIT, "Close Window"), "Do you really want to exit?", "Yes;No"); 
-                //int result = GuiMessageBox((Rectangle){ GetScreenWidth()/2 - 125, GetScreenHeight()/2 - 50, 400, 100 }, GuiIconText(RICON_EXIT, "Close Window"), "Do you really want to exit?", "Yes;No"); 
-            
+                
                 if ((result == 0) || (result == 2)) showMessageBox = false;
                 else if (result == 1) gameScene = THANKS;
             }
@@ -666,7 +607,6 @@ void endImpostor(GameState game){
     free(game);
     CloseWindow();
 }
-// Initialization (called one time)
 void initImpostor(GameState game){
     srand(time(NULL));    
     game->board = NewBoard(game);
@@ -674,7 +614,6 @@ void initImpostor(GameState game){
     InitCamera(game);
     game->envelope = calloc(3, sizeof(struct Card_struct));
     initializeCards(game);
-    //printPlayersAndCards(game);
 }
 GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));
@@ -811,6 +750,7 @@ GameState newImpostorGame(){
     game->colorTB[3] = "Red";
     game->colorTB[4] = "White";
     game->colorTB[5] = "Yellow";
+    game->volume = 60.0f;
     return game;
 }
 Board NewBoard(GameState game){

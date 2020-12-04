@@ -213,24 +213,4 @@ void initializeCards (GameState game){
     shuffleCards(AllCards, ShuffledCards);
     dealCards(game, ShuffledCards);
 
-    //free(deckPlaces);
-    //free(deckCharacters);
-    //free(deckDeaths);
-    //free(AllCards);
-    //free(ShuffledCards);
 }
-
-/*
-void printPlayersAndCards(GameState game){
-    fprintf(stdout, "\n");
-    for(int j = 0; j < game->playersAlive; j++){
-        //char* color = game->playerInTurn->c_player;
-        //fprintf(stdout, "%s -> ", game->playerInTurn->c_player);
-        for(int i = 0; i < game->playerInTurn->numCards; i++){
-            fprintf(stdout, "[%c]", game->playerInTurn->cardsInHand[i].uniqueInitial);
-        }
-        fprintf(stdout, " {%d}\n", game->playerInTurn->numCards);
-        game->playerInTurn = game->playerInTurn->next;
-    }
-}
-*/
