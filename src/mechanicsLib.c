@@ -15,7 +15,7 @@ void FillPackage(){
     // add TO ImpostorGame
 }
 // THIS
-int Accusation(GameState game,Card cards[3]){   
+int makeAccusation(GameState game,Card cards[3]){   
     if(game->envelope[PLACES].uniqueInitial == cards[PLACES]->uniqueInitial && 
         game->envelope[CHARACTER].uniqueInitial == cards[CHARACTER]->uniqueInitial && 
         game->envelope[DEATHS].uniqueInitial == cards[DEATHS]->uniqueInitial){
@@ -24,10 +24,14 @@ int Accusation(GameState game,Card cards[3]){
     return false;
 }
 // THIS
-void Suggestion(){
+void makeSuggestion(){
 }
 void GenerateTurnList(){
 }
+void HatONames(){
+}
+
+
 // This is the Dice of 6 sides
 int CalculateRandomMovements(){
     return (rand()%9) + 1;
@@ -38,8 +42,6 @@ void NextTurn(GameState game){
 // This is
 int CalculateRandomPlacements(){
     return (rand()%8) + 8;
-}
-void HatONames(){
 }
 
 void addPlayerToList(GameState game,Player player){
@@ -187,7 +189,6 @@ void dealCards(GameState game, Card Shuffle){
 }
 
 void initializeCards (GameState game){
-    game->envelope = calloc(3, sizeof(struct Card_struct));
     Card deckPlaces = calloc(11, sizeof(struct Card_struct));
     Card deckCharacters = calloc(6, sizeof(struct Card_struct));
     Card deckDeaths = calloc(6, sizeof(struct Card_struct));
@@ -212,27 +213,24 @@ void initializeCards (GameState game){
     shuffleCards(AllCards, ShuffledCards);
     dealCards(game, ShuffledCards);
 
-    //free(deckPlaces);
-    //free(deckCharacters);
-    //free(deckDeaths);
-    //free(AllCards);
-    //free(ShuffledCards);
+    free(deckPlaces);
+    free(deckCharacters);
+    free(deckDeaths);
+    free(AllCards);
+    free(ShuffledCards);
 }
 
-//Red->[A]->[B]->[C]
+/*
 void printPlayersAndCards(GameState game){
     fprintf(stdout, "\n");
     for(int j = 0; j < game->playersAlive; j++){
         //char* color = game->playerInTurn->c_player;
-        fprintf(stdout, " %s ->", game->playerInTurn->c_player);
+        //fprintf(stdout, "%s -> ", game->playerInTurn->c_player);
         for(int i = 0; i < game->playerInTurn->numCards; i++){
             fprintf(stdout, "[%c]", game->playerInTurn->cardsInHand[i].uniqueInitial);
         }
-        fprintf(stdout, "{%d}\n", game->playerInTurn->numCards);
+        fprintf(stdout, " {%d}\n", game->playerInTurn->numCards);
         game->playerInTurn = game->playerInTurn->next;
     }
 }
-
-void MakeSuggestion(GameState game, char* suggestion){
-    
-}
+*/

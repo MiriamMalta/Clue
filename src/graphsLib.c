@@ -67,13 +67,24 @@ void MovementInBoard(GameState game){
 
     MoveCharacter(game);
 
-    // Suggestion
+    // Suggestion & Accusation
     if (IsKeyReleased(KEY_G)){
-        
-    }
-    // Accusation
-    if (IsKeyReleased(KEY_C)){
-
+        if (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].status == 'r'){
+            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 0){char place = 'U';} // UPPER ENGINE
+            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 0){char place = 'X';} // WEAPONS
+            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 23){char place = 'I';} // LOWER ENGINE
+            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 23){char place = 'H';} // SHIELDS
+            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 12){char place = 'R';} // REACTOR
+            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 12){char place = 'V';} // NAVIGATION
+            if (game->playerInTurn->x == 6 && game->playerInTurn->y == 6){char place = 'Y';} // MED-BAY
+            if (game->playerInTurn->x == 17 && game->playerInTurn->y == 6){char place = 'L';} // STORAGE
+            if (game->playerInTurn->x == 5 && game->playerInTurn->y == 18){char place = 'A';} // ADMIN
+            if (game->playerInTurn->x == 18 && game->playerInTurn->y == 18){char place = 'E';} // ELECTRICAL
+            //makeAccusation(game, place, character, death);
+        }
+        if (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].status == 'c'){
+            fprintf(stdout, "ACC");
+        }
     }
 }
 

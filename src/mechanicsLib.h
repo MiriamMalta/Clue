@@ -12,13 +12,14 @@ void SaveGame();
 void LoadGame();
 void SetGame();
 void FillPackage();
-int Accusation(GameState game, Card cards[3]);
-void Suggestion();
+int makeAccusation(GameState game, Card cards[3]);
+void makeSuggestion();
 void GenerateTurnList();
+void HatONames();
+
 int CalculateRandomMovements();
 int CalculateRandomPlacements();
 void NextTurn(GameState game);
-void HatONames();
 
 void addPlayerToList(GameState game,Player player);
 void newPlayerList(GameState game);

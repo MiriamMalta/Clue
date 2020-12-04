@@ -99,6 +99,40 @@ struct ImpostorGame{
     Player              playerInTurn;
 };
 
+struct Suggestion_struct{
+    char                place; 
+    /*
+    A - Admin
+    E - Electrical  
+    F - Cafeteria
+    H - Shields
+    I - Lower Engine
+    L - Storage
+    R - Reactor
+    U - Upper Engine
+    V - Navigation
+    X - Weapons
+    Y - Medbay
+    */
+    char                character;
+    /*
+    C - Colonel Mustard
+    G - Mr. Green
+    M - Mrs. Peacock
+    P - Professor Plum
+    S - Miss Scarlet
+    W - Mrs. White
+    */
+    char                death;
+    /*
+    B - Stabbing
+    D - Disconected from Server
+    J - Gun Shot
+    N - Neck Snap
+    O - Thrown into Space
+    T - Throat Saber
+    */
+}; typedef struct Suggestion_struct* Suggestion;
 
 
 
@@ -110,9 +144,7 @@ struct Notebook{
     
 };
 
-struct Accusations{
 
-};
 
 typedef struct ImpostorGame* GameState, GameInitialState;
 
