@@ -42,7 +42,10 @@ Empezamos el código con un ejemplo de Raylib para poder ver como correría y qu
 fueron haciendo cambios y cambios para que se pudiera abrir tanto en Mac como en Windows como en Linux. Después 
 de esto ya se crearon los assets. 
 
+Se creó una branch de development, donde se haría el código para luego subirlo a main.
+
 Después se mejoró el Readme a formato tabla, donde se especificaba de mejor manera todo lo que se iba a hacer en el 
 proyecto, todo lo que tendríamos que hacer. Se fue viendo como mostrar todo lo necesario. Lo primero que se mostró 
-bien fue el personaje. Se logró que se mostrará la animación de este 
+bien fue el personaje. Se logró que se mostrará la animación de este. 
+
 
