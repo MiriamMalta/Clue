@@ -97,6 +97,7 @@ struct ImpostorGame{
     Card                envelope;               // Cards inside the envelope
     Board               board;
     Player              playerInTurn;
+    Texture2D           screens[10];
 };
 
 struct Suggestion_struct{

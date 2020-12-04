@@ -15,6 +15,7 @@
 #include "src/test.h"
 
 int main(){
+    setbuf(stdout, NULL);
     DoTests();
     GameState game = newImpostorGame();
     playImpostor(game);

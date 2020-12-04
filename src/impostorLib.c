@@ -363,8 +363,7 @@ void playImpostor(GameState game){
                             DrawTexture(black,0,0,BLACK);
                             DrawText(
                                 "This Game is for Educational purposes. No nos demanden pliz.", 
-                                (game->screenCenterWidth/2)-150, 
-                                //game->screenCenterWidth/2,  
+                                (game->screenCenterWidth/2)-150,
                                 game->screenCenterHeight, 
                                 30, 
                                 WHITE
@@ -377,63 +376,42 @@ void playImpostor(GameState game){
                     break;
                 case MENU:
                     DrawTexture(menu,0, 0,RAYWHITE);
-                    //game->screenCenterWidth-225, 280, btnWidth, btnHeight
-                    //(btnInitialPosicion)+(0)(btnRowDistance)
                     if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, btnInitialPosition, btnWidth, btnHeight}, "New Game")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 410, 460, 90 }, "New Game")) { 
                         fprintf(stdout,"New Game\n"); 
                         gameScene = NEWGAME;
                         state = 0;
                     }
-                    //game->screenCenterWidth-225, 362, btnWidth, btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, (btnInitialPosition)+(1*btnRowDistance), btnWidth, btnHeight }, "Load Game")) {
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 530, 460, 90 }, "Load Game")) {
                         fprintf(stdout,"Load Game\n");
                         gameScene = LOADGAME;
                         state = 0; 
                     }
-                    //game->screenCenterWidth-225, 444, btnWidth, btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, (btnInitialPosition)+(2*btnRowDistance), btnWidth, btnHeight }, "Settings")) {
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 650, 460, 90 }, "Settings")) {
                         fprintf(stdout,"Settings\n"); 
                         gameScene = SETTINGS;
                         state = 0;
                     }
-                    //game->screenCenterWidth-225, 526, btnWidth, btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, (btnInitialPosition)+(3*btnRowDistance), btnWidth, btnHeight }, "Credits")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 770, 460, 90 }, "Credits")) { 
                         fprintf(stdout,"Credits\n"); 
                         gameScene = CREDITS;
                         state = 0;
                     }
-                    //game->screenCenterWidth-225, 608, btnWidth, btnHeight
                     if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, (btnInitialPosition)+(4*btnRowDistance), btnWidth, btnHeight }, "Exit")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 890, 460, 90 }, "Exit")) { 
                         fprintf(stdout,"Exit\n"); 
                         gameScene = THANKS;
                         state = 0;
                     }
-            
                     break;
                 case GAME:
                     if(IsKeyPressed(KEY_P)){
-                        fprintf(stdout,"Si jala\n"); 
-                        
+                        fprintf(stdout,"Si jala\n");    
                         gameScene = PAUSE;
                         state = 0;
                     }
                     BeginMode2D(game->board->camera);
                         DrawTexture(game->board->mapBackground, 0, 0, WHITE);
                         DrawTexture(game->board->map, 0, 0, WHITE);
-                        MovementInBoard(game);
-                        //fprintf(stdout,"x=[%f] y=[%f]||x=[%d] y=[%d]\n",game->board->camera.target.x,game->board->camera.target.y,(int)((game->board->camera.target.x)*.5),(int)((game->board->camera.target.y)*1.1));
-                        
-                        //
-                        //
                         int initXHUD = (int)((game->board->camera.target.x)-960);
-                        
-                        //
-                        //
                         int initYHUD = (int)((game->board->camera.target.y)+270);
                         DrawRectangle(
                             initXHUD,
@@ -452,8 +430,8 @@ void playImpostor(GameState game){
                         }
                         if (GuiButton((Rectangle){ initXHUD + 30, initYHUD + 110, 115, 30 }, "Notebook")) {
                             fprintf(stdout,"Hola");
-
                         }
+                        MovementInBoard(game);
                     EndMode2D();
                     
                     break;
@@ -798,7 +776,7 @@ void initImpostor(GameState game){
 }
 GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));
-    game->resolution = 3;
+    game->resolution = 1;
     switch(game->resolution){
         case 1:     // Monitor normal
             game->screenWidth = 1920;
@@ -832,7 +810,22 @@ GameState newImpostorGame(){
         game->nameTB[i] = "Ingrese nombre";
         game->nameEditMode[i] = false; 
     }
-    
+    /*
+    fprintf(stdout,"HOLIPS\n");
+    game->screens[0] = LoadTexture("./res/animations/1920x1080/Logo.png");
+    game->screens[1] = LoadTexture("./res/animations/1920x1080/Menu.png");
+    game->screens[2] = LoadTexture("./res/animations/1920x1080/black.png");
+    game->screens[3] = LoadTexture("./res/animations/1920x1080/raylib_logo.png");
+    game->screens[4] = LoadTexture("./res/animations/1920x1080/Credits.png");
+    game->screens[5] = LoadTexture("./res/animations/1920x1080/Save.png");   
+    game->screens[6] = LoadTexture("./res/animations/1920x1080/Load.png");
+    game->screens[7] = LoadTexture("./res/animations/1920x1080/NewGame.png");
+    game->screens[8] = LoadTexture("./res/animations/1920x1080/Pause.png");
+    game->screens[9] = LoadTexture("./res/animations/1920x1080/Settings.png");
+    fprintf(stdout,"HOLIPS\n");
+    */
+    //game->screens[] = LoadTexture("");
+    //game->screens[] = LoadTexture("");
     game->colorTB[0] = "Blue";
     game->colorTB[1] = "Green";
     game->colorTB[2] = "Purple";
