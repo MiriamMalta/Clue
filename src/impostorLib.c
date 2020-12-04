@@ -75,7 +75,7 @@ void playImpostor(GameState game){
             lose = LoadTexture("");
             btnWidth = 450;
             btnHeight = 70;
-            btnInitialPosition = 250;
+            btnInitialPosition = 290;
             btnRowDistance = 90;
             btnCenter = (int)btnWidth/2;
             break;
@@ -798,7 +798,7 @@ void initImpostor(GameState game){
 }
 GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));
-    game->resolution = 2;
+    game->resolution = 3;
     switch(game->resolution){
         case 1:     // Monitor normal
             game->screenWidth = 1920;
