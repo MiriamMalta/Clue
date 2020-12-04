@@ -2,16 +2,14 @@
 #include "impostorLib.h"
 #include "mechanicsLib.h"
 
-//Aqui solamente funciones graficas
-
+/**
+ * MovementInBoard manages the movement and the animation of
+ * the player. As well works with the camera and detects
+ * the principal keyboard events.
+ */
 void MovementInBoard(GameState game){
-    if(IsKeyReleased(KEY_K)){
-        NextTurn(game);
-    }
-    if (IsKeyReleased(KEY_SPACE)){
-        game->playerInTurn->movesLeft = CalculateRandomMovements();  
-        fprintf(stdout, "%d\n", game->playerInTurn->movesLeft); //Left here for now to know what number we got on the dice
-    }
+    // This code manages the animation selections
+
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)){
         SelectAnimation(game,1,false);
     }
@@ -25,8 +23,9 @@ void MovementInBoard(GameState game){
         SelectAnimation(game,4,false);
     }
     
-    
-    if ((IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP)) && (game->playerInTurn->movesLeft > 0)){
+    // This code manages the movement of the Player trought the Board
+
+    if ((IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP)) && (game->playerInTurn->movesLeft > 1)){
         if((game->playerInTurn->y-1 >= 0) && (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y-1].status == 'f' || game->board->boxes[game->playerInTurn->x][game->playerInTurn->y-1].status == 'd')){
             game->playerInTurn->x;
             game->playerInTurn->y--;
@@ -35,7 +34,7 @@ void MovementInBoard(GameState game){
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,1,true);
     }
-    if ((IsKeyReleased(KEY_S) || IsKeyReleased(KEY_DOWN)) && (game->playerInTurn->movesLeft > 0)){
+    if ((IsKeyReleased(KEY_S) || IsKeyReleased(KEY_DOWN)) && (game->playerInTurn->movesLeft > 1)){
         if((game->playerInTurn->y+1 < 24) && (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y+1].status == 'f' || game->board->boxes[game->playerInTurn->x][game->playerInTurn->y+1].status == 'd')){
             game->playerInTurn->x;
             game->playerInTurn->y++;
@@ -44,7 +43,7 @@ void MovementInBoard(GameState game){
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,2,true);
     }
-    if ((IsKeyReleased(KEY_D) || IsKeyReleased(KEY_RIGHT)) && (game->playerInTurn->movesLeft > 0)){
+    if ((IsKeyReleased(KEY_D) || IsKeyReleased(KEY_RIGHT)) && (game->playerInTurn->movesLeft > 1)){
         if((game->playerInTurn->x+1 < 24) && (game->board->boxes[game->playerInTurn->x+1][game->playerInTurn->y].status == 'f' || game->board->boxes[game->playerInTurn->x+1][game->playerInTurn->y].status == 'd')){
             game->playerInTurn->x++;
             game->playerInTurn->y;
@@ -53,7 +52,7 @@ void MovementInBoard(GameState game){
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,3,true);
     }
-    if ((IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT)) && (game->playerInTurn->movesLeft > 0)){
+    if ((IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT)) && (game->playerInTurn->movesLeft > 1)){
         if((game->playerInTurn->x-1 >= 0) && (game->board->boxes[game->playerInTurn->x-1][game->playerInTurn->y].status == 'f' || game->board->boxes[game->playerInTurn->x-1][game->playerInTurn->y].status == 'd')){
             game->playerInTurn->x--;
             game->playerInTurn->y;
@@ -62,32 +61,24 @@ void MovementInBoard(GameState game){
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,4,true);
     }
+ 
+    /**
+     * This block of code checks:
+     * - The turns left of the player
+     * - The position of the Camera
+     * - The correct animation in the game
+     * - The room events
+     */
+    NextTurn(game);
     UpdateCameraPosition(game);
     UpdateAnimation(game);
-
     MoveCharacter(game);
-
-    // Suggestion & Accusation
-    if (IsKeyReleased(KEY_G)){
-        if (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].status == 'r'){
-            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 0){char place = 'U';} // UPPER ENGINE
-            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 0){char place = 'X';} // WEAPONS
-            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 23){char place = 'I';} // LOWER ENGINE
-            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 23){char place = 'H';} // SHIELDS
-            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 12){char place = 'R';} // REACTOR
-            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 12){char place = 'V';} // NAVIGATION
-            if (game->playerInTurn->x == 6 && game->playerInTurn->y == 6){char place = 'Y';} // MED-BAY
-            if (game->playerInTurn->x == 17 && game->playerInTurn->y == 6){char place = 'L';} // STORAGE
-            if (game->playerInTurn->x == 5 && game->playerInTurn->y == 18){char place = 'A';} // ADMIN
-            if (game->playerInTurn->x == 18 && game->playerInTurn->y == 18){char place = 'E';} // ELECTRICAL
-            //makeAccusation(game, place, character, death);
-        }
-        if (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].status == 'c'){
-            fprintf(stdout, "ACC");
-        }
-    }
 }
 
+/**
+ * Check the state of the player, the next movements 
+ * and update the variables of the animations.
+ */
 void SelectAnimation(GameState game, int Selection,int isStill){
     if(isStill){
         switch (Selection){
@@ -148,6 +139,9 @@ void SelectAnimation(GameState game, int Selection,int isStill){
 
 }
 
+/**
+ * Update the states of the animations and redraw the Player.
+ */
 void UpdateAnimation(GameState game){
     game->playerInTurn->timer += GetFrameTime();
     if (game->playerInTurn->timer >= 0.05f)
@@ -165,6 +159,11 @@ void UpdateAnimation(GameState game){
     );
 }
 
+/**
+ * - Update the camera position
+ * - Update the zoom level
+ * - Print the Green Lines of the player 
+ */
 void UpdateCameraPosition(GameState game){
     game->board->camera.target = (Vector2) {game->playerInTurn->position.x+43,game->playerInTurn->position.y+50};
     game->board->camera.zoom += ((float)GetMouseWheelMove()*0.05f);
@@ -173,7 +172,9 @@ void UpdateCameraPosition(GameState game){
     DrawLine(game->board->camera.target.x,-game->screenHeight*10,game->board->camera.target.x,game->screenHeight*10,GREEN);
     DrawLine(-game->screenWidth*10,game->board->camera.target.y,game->screenWidth*10,game->board->camera.target.y,GREEN);  
 }
-
+/**
+ * Intialize the camera data layer
+ */
 void InitCamera(GameState game){
     game->board->camera.target = (Vector2) {game->playerInTurn->position.x+20,game->playerInTurn->position.y+20};
     game->board->camera.offset = (Vector2) {game->screenCenterWidth,game->screenCenterHeight};
@@ -399,6 +400,9 @@ void MoveCharacter(GameState game){
     }
 }
 
+/**
+ * Print the structure data of the Board
+ */
 void PrintMap(GameState game){
     for(int x=0;x<24;x++){
         for(int y=0;y<24;y++){
@@ -407,20 +411,18 @@ void PrintMap(GameState game){
         fprintf(stdout, "\n");
     }
 }
-
+/**
+ * Print the players and the cards in their possession.
+ */
 void PrintPlayersAndCards(GameState game){
-    for(int i=0;i<game->playersAlive;i++){
-        
+    for(int j = 0; j < game->playersAlive; j++){
+        for(int i = 0; i < game->playerInTurn->numCards; i++){
+            fprintf(stdout, "[%c]", game->playerInTurn->cardsInHand[i].id);
+        }
+        fprintf(stdout, " {%d}\n", game->playerInTurn->numCards);
+        game->playerInTurn = game->playerInTurn->next;
     }
+    fprintf(stdout, "\n");
 }
 
 
-void Teleport()
-{
-}
-void EnterRoom()
-{
-}
-void ExitRoom()
-{
-}

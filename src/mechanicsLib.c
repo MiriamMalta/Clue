@@ -1,49 +1,135 @@
 #include "mechanicsLib.h"
 #include "impostorLib.h"
 
-//Este seria el Backend del juego, solamente 
-//codigo funcional
 
-void SaveGame(){
+// Save Settings in the settings panel
+void SaveSettings(GameState game){
+    int* data;
+    data = s_Settings(game);
+    FILE *pSett;
+    if((pSett = fopen("./data/settings.bin","wb+"))== NULL){
+        fprintf(stdout,"ERROR: APERTURA DE ARCHIVO SETTINGS SAVE.\n");
+        exit(1); 
+    }
+    fwrite(data,sizeof(int),2,pSett);
+    rewind(pSett);
+    fclose(pSett);
 }
-void LoadGame(){
+
+// Load Settings at the begin.
+void LoadSettings(GameState game){
+    int data[2];
+    long size;
+    FILE *pSett;
+    if((pSett = fopen("./data/settings.bin","rb"))== NULL){
+        fprintf(stdout,"ERROR: APERTURA DE ARCHIVO SETTINGS LOAD.\n");
+        game->resolution = 1;
+        game->volume = 60;        
+    }
+
+    if (NULL != pSett) {
+        fseek (pSett, 0, SEEK_END);
+        size = ftell(pSett);
+        rewind(pSett);
+        if (0 == size) {
+            game->resolution = 1;
+            game->volume = 60;   
+        }else{
+            fread(data,sizeof(int),2,pSett);
+            rewind(pSett);
+            fclose(pSett);
+            d_Settings(game,data);
+
+        }
+    }
 }
-void SetGame(){
+
+// Settings Serializer
+int* s_Settings(GameState game){
+    int* settings = malloc(sizeof(int)*2);
+    settings[0] = (int)game->resolution;
+    settings[1] = (int)game->volume;
+    return settings;
 }
-void FillPackage(){
-    // package
-    // add TO ImpostorGame
+
+// Settings DeSerializer
+void d_Settings(GameState game,int data[2]){
+    game->resolution = data[0];
+    game->volume = (float)data[1];
 }
-// THIS
-int makeAccusation(GameState game,Card cards[3]){   
-    if(game->envelope[PLACES].uniqueInitial == cards[PLACES]->uniqueInitial && 
-        game->envelope[CHARACTER].uniqueInitial == cards[CHARACTER]->uniqueInitial && 
-        game->envelope[DEATHS].uniqueInitial == cards[DEATHS]->uniqueInitial){
+
+// Save Game Option
+void SaveGame(GameState game){
+
+}
+
+// Load Game Option
+void LoadGame(GameState game){
+
+}
+
+// Game information Serializer
+void s_Game(GameState game){
+
+}
+
+// Game information DeSerializer
+void d_Game(GameState game){
+
+}
+
+/**
+ * Function to create accusation.
+ * An accusation is the ultimate suggestion.
+ * If you miss the cards. You die.
+ */
+int makeAccusation(GameState game, Card cards[3]){   
+    if(game->envelope[PLACES].id == cards[PLACES]->id && 
+        game->envelope[CHARACTER].id == cards[CHARACTER]->id && 
+        game->envelope[DEATHS].id == cards[DEATHS]->id){
             return true;
         }
     return false;
 }
-// THIS
-void makeSuggestion(){
-}
-void GenerateTurnList(){
-}
-void HatONames(){
+
+/**
+ * Function to create Suggestion.
+ * A Suggestion is an open question, if anybody has
+ * a named card the have to show it to the suggester.
+ */
+void makeSuggestion(GameState game, Card cards[3]){   
+    
 }
 
-
-// This is the Dice of 6 sides
+// Dice Random Function
 int CalculateRandomMovements(){
     return (rand()%9) + 1;
 }
+
+// Next Turn Function
 void NextTurn(GameState game){
-    game->playerInTurn = game->playerInTurn->next;
+    if(game->playerInTurn->movesLeft == 1){
+        game->playerInTurn->movesLeft = 0;
+        game->playerInTurn = game->playerInTurn->next;
+    }
 }
-// This is
+/**
+ * Function to calculate the initial positions of the 
+ * crewmates
+ */
 int CalculateRandomPlacements(){
     return (rand()%8) + 8;
 }
+void throwDice(GameState game){
+    game->playerInTurn->movesLeft = CalculateRandomMovements()+1;  
+    fprintf(stdout, "%d\n", (game->playerInTurn->movesLeft)-1); //Left here for now to know what number we got on the dice
 
+}
+
+
+/**
+ * Function to add players to a Circular Linked List
+ */
 void addPlayerToList(GameState game,Player player){
     Player temp = game->playerInTurn;
     if(game->playerInTurn == NULL){
@@ -57,6 +143,10 @@ void addPlayerToList(GameState game,Player player){
         player->next = game->playerInTurn;
     }
 }
+
+/**
+ * Function to add all the actual players to the list
+ */
 void newPlayerList(GameState game){
     game->playerInTurn = NULL;
     for(int i = 0;i<6;i++){
@@ -66,7 +156,6 @@ void newPlayerList(GameState game){
         }
     }
 }
-
 char* moveAlongInTurns(GameState game){
     char* nameOfChar = NULL;
     if(game->playerInTurn->next != NULL){
@@ -76,7 +165,6 @@ char* moveAlongInTurns(GameState game){
     }
     return nameOfChar;
 }
-
 char* peekWhoSNext(GameState game){
     char* nameOfChar = NULL;
     if(game->playerInTurn->next != NULL){
@@ -85,7 +173,6 @@ char* peekWhoSNext(GameState game){
     }
     return nameOfChar;
 }
-
 void takeOutCharacter(GameState game, Player fullCharacter){
     Player charactertoDelete = game->playerInTurn;
     Player prevCharacter = game->playerInTurn;
@@ -99,17 +186,17 @@ void takeOutCharacter(GameState game, Player fullCharacter){
     }
 }
 
+
 Card newCard(GameState game,char initial, char* name){
     Card cardOne = calloc(1, sizeof(struct Card_struct));
     //char urlPath[100] = "./res/assets/cards/"; 
     //strcat(urlPath,initial);
     //strcat(urlPath,".jpg");
     //cardOne->visual = LoadTexture(urlPath);
-    cardOne->uniqueInitial = initial;
+    cardOne->id = initial;
     cardOne->name = name;
     return cardOne;
 }
-
 void makeCards(GameState game, Card deckPlaces, Card deckCharacters, Card deckDeaths){
     char Places1[] = {'A','E','F','H','I','L','R','U','V','X','Y'};
     char* Places2[] = {
@@ -138,56 +225,51 @@ void makeCards(GameState game, Card deckPlaces, Card deckCharacters, Card deckDe
         deckDeaths[i] = *(newCard(game, Deaths1[i], Deaths2[i]));
     }
 }
-
 void takeOutCard(Card Deck, int position, int elements){
     for(int i = position; i < elements; i++){
         Deck[i] = Deck[i + 1];
     }
 }
-
 void pushToAll(Card All, Card Places, Card Characters, Card Deaths){
     for(int i = 0; i < 10; i++){All[i] = Places[i];}
     for(int i = 0; i < 5; i++){All[i+10] = Characters[i];}
     for(int i = 0; i < 5; i++){All[i+15] = Deaths[i];}
 }
-
 void shuffleCards(Card All, Card Shuffle){
     for(int i = 0 ; i < 20; i++){
         int addIndex = rand() % 20;
-        while(All[addIndex % 20].uniqueInitial == 0){addIndex++;}
+        while(All[addIndex % 20].id == 0){addIndex++;}
         Shuffle[i] = All[addIndex % 20];
-        All[addIndex % 20].uniqueInitial = 0;
+        All[addIndex % 20].id = 0;
     }
 }
-
 void dealCards(GameState game, Card Shuffle){
-
-    int howManyCards = 20/(game->playersAlive);
-    int totalNumberOfCards = 20;
-
-    for(int j = 0; j < game->playersAlive; j++){
-        game->playerInTurn->cardsInHand = calloc(20, sizeof(struct Card_struct));
-        if ((totalNumberOfCards/howManyCards >= howManyCards)||(totalNumberOfCards/howManyCards == 1)){
-            for(int i = 0; i < howManyCards; i++){
-                game->playerInTurn->cardsInHand[i] = Shuffle[i];
+    if (game->playersAlive != 0){
+        int howManyCards = 20/(game->playersAlive);
+        int totalNumberOfCards = 20;
+        for(int j = 0; j < game->playersAlive; j++){
+            game->playerInTurn->cardsInHand = calloc(20, sizeof(struct Card_struct));
+            if ((totalNumberOfCards/howManyCards >= howManyCards)||(totalNumberOfCards/howManyCards == 1)){
+                for(int i = 0; i < howManyCards; i++){
+                    game->playerInTurn->cardsInHand[i] = Shuffle[i];
+                }
             }
-        }
-        else{
-            if(game->playersAlive == 6){howManyCards++;}
-            if (game->playersAlive == 3 && totalNumberOfCards < 20){howManyCards++;}
-            for(int i = 0; i < howManyCards; i++){
-                game->playerInTurn->cardsInHand[i] = Shuffle[i];
+            else{
+                if(game->playersAlive == 6){howManyCards++;}
+                if (game->playersAlive == 3 && totalNumberOfCards < 20){howManyCards++;}
+                for(int i = 0; i < howManyCards; i++){
+                    game->playerInTurn->cardsInHand[i] = Shuffle[i];
+                }
             }
+            for(int j = 0; j < 20 - howManyCards; j++){
+                Shuffle[j] = Shuffle[j + howManyCards];
+            }
+            game->playerInTurn->numCards = howManyCards;
+            totalNumberOfCards = totalNumberOfCards - howManyCards;
+            game->playerInTurn = game->playerInTurn->next;
         }
-        for(int j = 0; j < 20 - howManyCards; j++){
-            Shuffle[j] = Shuffle[j + howManyCards];
-        }
-        game->playerInTurn->numCards = howManyCards;
-        totalNumberOfCards = totalNumberOfCards - howManyCards;
-        game->playerInTurn = game->playerInTurn->next;
     }
 }
-
 void initializeCards (GameState game){
     Card deckPlaces = calloc(11, sizeof(struct Card_struct));
     Card deckCharacters = calloc(6, sizeof(struct Card_struct));
@@ -203,7 +285,7 @@ void initializeCards (GameState game){
     game->envelope[1] = deckCharacters[randomCharacters];
     game->envelope[2] = deckDeaths[randomDeaths];
 
-    fprintf(stdout, "%c - %c - %c\n", game->envelope[0].uniqueInitial, game->envelope[1].uniqueInitial, game->envelope[2].uniqueInitial);
+    fprintf(stdout, "%c - %c - %c\n", game->envelope[0].id, game->envelope[1].id, game->envelope[2].id);
 
     takeOutCard(deckPlaces, randomPlaces, 11);
     takeOutCard(deckCharacters, randomCharacters, 6);
@@ -213,24 +295,35 @@ void initializeCards (GameState game){
     shuffleCards(AllCards, ShuffledCards);
     dealCards(game, ShuffledCards);
 
-    //free(deckPlaces);
-    //free(deckCharacters);
-    //free(deckDeaths);
-    //free(AllCards);
-    //free(ShuffledCards);
 }
 
 /*
-void printPlayersAndCards(GameState game){
-    fprintf(stdout, "\n");
-    for(int j = 0; j < game->playersAlive; j++){
-        //char* color = game->playerInTurn->c_player;
-        //fprintf(stdout, "%s -> ", game->playerInTurn->c_player);
-        for(int i = 0; i < game->playerInTurn->numCards; i++){
-            fprintf(stdout, "[%c]", game->playerInTurn->cardsInHand[i].uniqueInitial);
+// This function is to make a suggestion
+void makeSuggestion(GameState game, Card cards[3]){   
+    if(game->envelope[PLACES].id == cards[PLACES]->id && 
+        game->envelope[CHARACTER].id == cards[CHARACTER]->id && 
+        game->envelope[DEATHS].id == cards[DEATHS]->id){
+            //return true;
         }
-        fprintf(stdout, " {%d}\n", game->playerInTurn->numCards);
-        game->playerInTurn = game->playerInTurn->next;
-    }
+    //return false;
+}
+*/
+char whatPlace(GameState game){
+    if (game->playerInTurn->x == 0 && game->playerInTurn->y == 0) return 'U'; // UPPER ENGINE
+    if (game->playerInTurn->x == 23 && game->playerInTurn->y == 0) return 'X'; // WEAPONS
+    if (game->playerInTurn->x == 0 && game->playerInTurn->y == 23) return 'I'; // LOWER ENGINE
+    if (game->playerInTurn->x == 23 && game->playerInTurn->y == 23) return 'H'; // SHIELDS
+    if (game->playerInTurn->x == 0 && game->playerInTurn->y == 12) return 'R'; // REACTOR
+    if (game->playerInTurn->x == 23 && game->playerInTurn->y == 12) return 'V'; // NAVIGATION
+    if (game->playerInTurn->x == 6 && game->playerInTurn->y == 6) return 'Y'; // MED-BAY
+    if (game->playerInTurn->x == 17 && game->playerInTurn->y == 6) return 'L'; // STORAGE
+    if (game->playerInTurn->x == 5 && game->playerInTurn->y == 18) return 'A'; // ADMIN
+    if (game->playerInTurn->x == 18 && game->playerInTurn->y == 18) return 'E'; // ELECTRICAL
+}
+/*
+void printCardsIGot(GameState game){
+    int place = whatPlace(game);
+    Card sugg[3]; sugg[PLACES]->id = place; sugg[CHARACTER]->id = 'C'; sugg[DEATHS]->id = 'B';
+    fprintf(stdout, "%c %c %c", sugg[PLACES]->id, sugg[CHARACTER]->id, sugg[DEATHS]->id);
 }
 */
