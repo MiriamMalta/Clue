@@ -51,9 +51,17 @@ void d_Settings(GameState game,int data[2]){
     game->resolution = data[0];
     game->volume = (float)data[1];
 }
-void SaveGame(){
+void SaveGame(GameState game){
+
 }
-void LoadGame(){
+void LoadGame(GameState game){
+
+}
+void s_Game(GameState game){
+
+}
+void d_Game(GameState game){
+
 }
 void SetGame(){
 }

@@ -632,11 +632,11 @@ GameState newImpostorGame(){
             game->screenWidth = 1366;
             game->screenHeight = 768;
             break;
-        case 3:     // Monitor feo
+        case 2:     // Monitor feo
             game->screenWidth = 1024;
             game->screenHeight = 768;
             break;
-        case 4:     // Monitor Mac
+        case 3:     // Monitor Mac
             game->screenWidth = 1280;
             game->screenHeight = 700;
             break;
