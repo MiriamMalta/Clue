@@ -200,42 +200,57 @@ void takeOutCharacter(GameState game, Player fullCharacter){
 }
 
 
-Card newCard(GameState game,char initial, char* name){
+Card newCard(GameState game,int initial, char* name, char* imgName){
     Card cardOne = calloc(1, sizeof(struct Card_struct));
-    //char urlPath[100] = "./res/assets/cards/"; 
-    //strcat(urlPath,initial);
-    //strcat(urlPath,".jpg");
-    //cardOne->visual = LoadTexture(urlPath);
+    char urlPath[100] = "./res/assets/cards/"; 
+    strcat(urlPath,imgName);
+    strcat(urlPath,".png");
+    cardOne->visual = LoadTexture(urlPath);
     cardOne->id = initial;
     cardOne->name = name;
     return cardOne;
 }
 void makeCards(GameState game, Card deckPlaces, Card deckCharacters, Card deckDeaths){
-    char Places1[] = {'A','E','F','H','I','L','R','U','V','X','Y'};
+    int Places1[] = {1,2,3,4,5,6,7,8,9,10,11};
     char* Places2[] = {
         "Admin","Electrical","Cafeteria","Shields","Lower Engine","Storage",
         "Reactor","Upper Engine","Navigation","Weapons","Medbay"
     };
-    for(int i = 0; i <= 11; i++){
-        deckPlaces[i] = *(newCard(game, Places1[i], Places2[i]));
-    }
-
-    char Characters1[] = {'C','G','M','P','S','W'};
+    char* Places3[] = {
+        "p_Admin","p_Electrical","p_Cafeteria","p_Shields","p_LEngine","p_Storage",
+        "p_Reactor","p_UEngine","p_Navigation","p_Weapons","p_Medbay"
+    };
+    
+    int Characters1[] = {12,13,14,15,16,17};
     char* Characters2[] = {
         "Colonel Mustard","Mr. Green","Mrs. Peacock",
         "Professor Plum","Miss Scarlet","Mrs. White"
     };
-    for(int i = 0; i <= 6; i++){
-        deckCharacters[i] = *(newCard(game, Characters1[i], Characters2[i]));
-    }
-
-    char Deaths1[] = {'B','D','J','N','O','T'};
+    char* Characters3[] = {
+        "c_Yellow","c_Green","c_Blue",
+        "c_Purple","c_Red","c_White"
+    };
+    int Deaths1[] = {18,19,20,21,22,23};
     char* Deaths2[] = {
         "Stabbing","Disconnected from Server","Gun Shot",
         "Neck Snap","Thrown into Space","Throat Saber"
     };
+    char* Deaths3[] = {
+        "d_Stabbing","d_Disconnected","d_GunShot",
+        "d_NeckSnap","d_Funado","d_ThroatSaber"
+    };
+
+    
+    for(int i = 0; i <= 11; i++){
+        deckPlaces[i] = *(newCard(game, Places1[i], Places2[i],Places3[i]));
+    }
+
     for(int i = 0; i <= 6; i++){
-        deckDeaths[i] = *(newCard(game, Deaths1[i], Deaths2[i]));
+        deckCharacters[i] = *(newCard(game, Characters1[i], Characters2[i],Characters3[i]));
+    }
+
+    for(int i = 0; i <= 6; i++){
+        deckDeaths[i] = *(newCard(game, Deaths1[i], Deaths2[i], Deaths3[i]));
     }
 }
 void takeOutCard(Card Deck, int position, int elements){

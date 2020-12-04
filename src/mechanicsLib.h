@@ -37,7 +37,7 @@ void    takeOutCharacter(GameState game, Player fullCharacter);
 
 void    MakeSuggestion(GameState game, char* suggestion);
 
-Card    newCard(GameState game,char initial, char* name);
+Card    newCard(GameState game,int initial, char* name,char* imgName);
 void    makeCards(GameState game, Card deckPlaces, Card deckCharacters, Card deckDeaths);
 void    takeOutCard(Card Deck, int position, int elements);
 void    pushToAll(Card All, Card Places, Card Characters, Card Deaths);
