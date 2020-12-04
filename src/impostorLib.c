@@ -29,6 +29,9 @@ void playImpostor(GameState game){
     int         splashCounter = 0;
     int         transCounter = 0; 
     float       alpha = 0.0f;
+
+    bool        showSuggestionBox = false;
+    bool        showAccusationBox = false;
     
     Music ostMenu = LoadMusicStream("./res/music/ost_menu.mp3");
     Music ostGame = LoadMusicStream("./res/music/ost_game.mp3");
@@ -327,17 +330,29 @@ void playImpostor(GameState game){
                             game->screenHeight/4,
                             DARKGRAY
                     );
-
                     GuiGroupBox((Rectangle){ 10, offset + 10, 125, 150 }, "OPTIONS");
-                    if (GuiButton((Rectangle){ 15, offset + 20, 115, 30 }, "Tirar Dado")) {
-                        fprintf(stdout,"Hola");
+                    if (GuiButton((Rectangle){ 15, offset + 20, 115, 30 }, "Throw Dice")) {
+                        throwDice(game);
                     }
                     if (GuiButton((Rectangle){ 15, offset + 55, 115, 30 }, "Suggest")) {
-                        fprintf(stdout,"Hola");
-
+                        if (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].status == 'r'){
+                            showSuggestionBox = true;
+                        }
                     }
-                    if (GuiButton((Rectangle){ 15, offset + 95, 115, 30 }, "Notebook")) {
+                    if (GuiButton((Rectangle){ 15, offset + 90, 115, 30 }, "Accusation")) {
+                        if (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].status == 'c'){
+                            fprintf(stdout,"ACU");
+                            showAccusationBox = true;
+                        }
+                    }
+                    if (GuiButton((Rectangle){ 15, offset + 125, 115, 30 }, "Notebook")) {
                         fprintf(stdout,"Hola");
+                    }
+                    if (showSuggestionBox){
+                        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(RAYWHITE, 0.4f));
+                        int result = GuiMessageBox((Rectangle){ GetScreenWidth()/2 - 300, GetScreenHeight()/2 - 150, 600, 300 }, GuiIconText(RICON_EXIT, "Suggestion"), "The crime was committed by ... in ... by ...", "Accept;Cancel"); 
+                        if ((result == 0) || (result == 2))  showSuggestionBox = false;
+                        else if (result == 1) fprintf(stdout, "Suggestion");
                     }
                     break;
                 case PAUSE:
@@ -640,9 +655,7 @@ void initImpostor(GameState game){
 GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));
     ScreenRes sRes;
-    
     LoadSettings(game);
-
     switch(game->resolution){
         case 0:     // Monitor normal
             game->screenWidth = 1920;

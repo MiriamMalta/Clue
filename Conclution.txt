@@ -1,0 +1,48 @@
+Este proyecto empezó desde el día que el profesor presentó las opciones de juego. Ese día estuvimos 1 hora tratando 
+de ver diferentes opciones de que haríamos de juego. No nos decidimos hasta el 1 de noviembre que le preguntamos a 
+nuestro profesor que juego deberíamos realizar. Nos decidimos por Clue… y fue la peor decisión que pudimos haber
+tomado. El juego, a simple vista, estaba fácil. ¿Qué tan difícil sería hacer un juego que solo necesita de unas cartas, un
+tablero y unas piezas para jugar? Al parecer demasiado. 
+
+Lo primero que hicimos fue buscar las reglas de juego y entender que es Clue. Tendríamos que saber jugar Clue para 
+poder pasarlo a código. Decidimos crear el README con todas las funciones que tendríamos que realizar, para poder
+saber que tendía que hacer el juego. Así podríamos comprender de mejor manera los que tendríamos que hacer en la
+elaboración del proyecto. Empezamos un poco mal. Teníamos que ponernos de acuerdo en que funciones eran 
+importantes y que funciones no, que sí se incluiría y que no, que se cambiaría por el hecho de ser un juego en 
+computadora y que no. Todas estas decisiones de diseño tardaron mucho y fueron variando como íbamos
+implementando nuestro código. 
+
+Un claro ejemplo de esto es el board que usamos para el juego. Este cambio demasiadas veces. La primera idea era hacer 
+un tablero del mismo tamaño y dimensiones y estilo del juego original. Queríamos hacer algo diferente, no solo un Clue. 
+Queríamos que nuestro juego tuviera algo… especial, o espacial, por lo que decidimos hacer un Clue de Among Us. Con 
+esta decisión de cambio el estilo del tablero. De ser un cuadrado lleno de casillas, se volvió un tablero con ‘hoyos’ en 
+medio, simulando el mapa Skeld del juego original de Among Us. El principal problema con este mapa fue que era de 
+75x55, lo cual era demasiado grande para que una persona pudiera trasladarse de un lugar a otro. Esto fue cambiado al 
+final por un tablero de 24x24.
+
+Al igual que el board, cambiaron la cantidad de cuartos. Al principio iban a ser los 9 que presenta el juego original, pero 
+se cambiaron a 13 por el diseño del tablero. Los personajes fueron cambiados a los presentes en Among Us y las armas a 
+las diferentes formas en que uno se puede morir en el juego ya mencionado. 
+
+Al saber que íbamos a hacer el diseño de nuestro juego de Among Us, supimos que queríamos hacer animaciones para 
+los personajes. Esto resulto en varias (bastantes) horas por parte del equipo para poder realizar los sprites. Las 
+imágenes eran todas separadas, se modificaron para que tuvieran una decoración (sombrero) cada una y un color único 
+aludiendo a los personajes del juego original, cuyos nombres representan colores. 
+
+Por bastante tiempo se planeó todo lo que iba a incluir el juego. Se planearon las ventanas que se iban a abrir, los assets, 
+las cartas, las implementaciones, los diseños, las ideas; como se llegaría de un lado a otro, que ventana llevaría a que, que 
+funciones tendría el juego, que interfaz tendría, que mecánicas se tendrían que hacer y como se harían. Empezamos 
+poniendo las reglas en el README y poniendo clasificación del código, como mecánicas y assets a realizar.
+
+Un problema que tuvimos fue el hecho que ambos teníamos computadoras diferentes. Uno tiene Windows mientras el 
+otro tiene Mac, entonces el proyecto TENÍA que ser capaz de correr en mínimo 2 diferentes versiones. 
+
+Algo que supimos desde el principio fue que íbamos a usar una librería gráfica, pues nuestro juego la necesitaba. 
+Empezamos el código con un ejemplo de Raylib para poder ver como correría y que hacer para que este corriera. Se 
+fueron haciendo cambios y cambios para que se pudiera abrir tanto en Mac como en Windows como en Linux. Después 
+de esto ya se crearon los assets. 
+
+Después se mejoró el Readme a formato tabla, donde se especificaba de mejor manera todo lo que se iba a hacer en el 
+proyecto, todo lo que tendríamos que hacer. Se fue viendo como mostrar todo lo necesario. Lo primero que se mostró 
+bien fue el personaje. Se logró que se mostrará la animación de este 
+

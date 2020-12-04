@@ -77,37 +77,6 @@ void MovementInBoard(GameState game){
     UpdateCameraPosition(game);
     UpdateAnimation(game);
     MoveCharacter(game);
-
-    // Suggestion & Accusation
-    if (IsKeyReleased(KEY_K)){
-        if (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].status == 'r'){
-            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 0){
-                Card card[3]; card[PLACES]->uniqueInitial = 'U'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // UPPER ENGINE
-            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 0){
-                Card card[3]; card[PLACES]->uniqueInitial = 'X'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // WEAPONS
-            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 23){
-                Card card[3]; card[PLACES]->uniqueInitial = 'I'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // LOWER ENGINE
-            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 23){
-                Card card[3]; card[PLACES]->uniqueInitial = 'H'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // SHIELDS
-            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 12){
-                Card card[3]; card[PLACES]->uniqueInitial = 'R'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // REACTOR
-            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 12){
-                Card card[3]; card[PLACES]->uniqueInitial = 'V'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // NAVIGATION
-            if (game->playerInTurn->x == 6 && game->playerInTurn->y == 6){
-                Card card[3]; card[PLACES]->uniqueInitial = 'Y'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // MED-BAY
-            if (game->playerInTurn->x == 17 && game->playerInTurn->y == 6){
-                Card card[3]; card[PLACES]->uniqueInitial = 'L'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // STORAGE
-            if (game->playerInTurn->x == 5 && game->playerInTurn->y == 18){
-                Card card[3]; card[PLACES]->uniqueInitial = 'A'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // ADMIN
-            if (game->playerInTurn->x == 18 && game->playerInTurn->y == 18){
-                Card card[3]; card[PLACES]->uniqueInitial = 'E'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z';} // ELECTRICAL
-            //makeSuggestion(game, card[3]);
-        }
-        if (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].status == 'c'){  //CAFETERIA
-            Card card[3]; card[PLACES]->uniqueInitial = 'Z'; card[CHARACTER]->uniqueInitial = 'Z'; card[DEATHS]->uniqueInitial = 'Z'; // ELECTRICAL
-            //makeAccusation(game, cards[3]);            
-        }
-    }
 }
 
 /**
@@ -452,7 +421,7 @@ void PrintMap(GameState game){
 void PrintPlayersAndCards(GameState game){
     for(int j = 0; j < game->playersAlive; j++){
         for(int i = 0; i < game->playerInTurn->numCards; i++){
-            fprintf(stdout, "[%c]", game->playerInTurn->cardsInHand[i].uniqueInitial);
+            fprintf(stdout, "[%c]", game->playerInTurn->cardsInHand[i].id);
         }
         fprintf(stdout, " {%d}\n", game->playerInTurn->numCards);
         game->playerInTurn = game->playerInTurn->next;

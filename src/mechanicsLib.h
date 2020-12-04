@@ -17,7 +17,7 @@ void    LoadGame(GameState);
 void    d_Game(GameState game);
 void    s_Game(GameState game);
 int     makeAccusation(GameState game, Card cards[3]);
-void    makeSuggestion();
+void    makeSuggestion(GameState game, Card cards[3]);
 void    GenerateTurnList();
 void    SetGame();
 void    FillPackage();
@@ -44,6 +44,7 @@ void    shuffleCards(Card All, Card Shuffle);
 void    dealCards(GameState game, Card Shuffle);
 void    initializeCards (GameState game);
 
-void printPlayersAndCards(GameState game);
+char     whatPlace(GameState game);
+//void    printCardsIGot(GameState game);
 
 #endif

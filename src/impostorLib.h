@@ -63,7 +63,7 @@ struct BoardGame{
 
 
 struct Card_struct{
-    char                uniqueInitial;
+    int                 id;
     char*               name;
     Texture2D           visual;
 }; typedef struct Card_struct* Card;
