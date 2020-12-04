@@ -48,4 +48,13 @@ Después se mejoró el Readme a formato tabla, donde se especificaba de mejor ma
 proyecto, todo lo que tendríamos que hacer. Se fue viendo como mostrar todo lo necesario. Lo primero que se mostró 
 bien fue el personaje. Se logró que se mostrará la animación de este. 
 
+Otros de los incovenientes a solucionar fue el poco conocimiento que teniamos sobre las herramientas como la libreria Raylib
+donde muchas veces tuvimos que poner Issues dentro de la libreria para poder ser capaz de usarla como necesitabamos.
+Dentro de las decisiones que tuvimos que tomar por estos errores, fue crear nuevas ventanas para poder hacer las 
+Accusations y Suggestions, cosas que se pudieron salvar una ves que nos respondieron un issue.
+
+Pese a todo, nuestras estructuras fueron muy consistentes desde el comienzo y aunque en lo personal me hubiera gustado
+dividirlas un poco mas el tiempo apremiaba. Realmente las estructuras principales de Player y ImpostorGame existian desde 
+el inicio y casi sin cambios.
+
 
