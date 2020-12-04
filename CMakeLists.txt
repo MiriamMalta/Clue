@@ -8,6 +8,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 find_package(raylib 3.0 QUIET) # Let CMake search for a raylib-config.cmake
 file(COPY res DESTINATION ${CMAKE_BINARY_DIR})
 include(FetchContent)
+set(BUILD_EXAMPLES FALSE)
 if (NOT raylib_FOUND)
 
     FetchContent_Declare(

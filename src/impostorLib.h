@@ -27,6 +27,20 @@ typedef enum {
 } GameScreen;
 
 typedef enum {
+    sLOGO, 
+    sMENU,
+    sBLACK,
+    sRAYLOGO,
+    sCREDITS,
+    sSAVE,
+    sLOAD,
+    sNEWGAME,
+    sPAUSE,
+    sSETTINGS,
+    
+} ScreenRes;
+
+typedef enum {
     PLACES,
     CHARACTER,
     DEATHS
@@ -88,10 +102,15 @@ struct ImpostorGame{
     int                 fps;
     int                 playersAlive;
     int                 resolution;
+    int                 btnWidth;
+    int                 btnHeight;
+    int                 btnInitialPosition;
+    int                 btnRowDistance;
+    int                 btnCenter;
     float               speed;
     int                 typeTBActive[6];
     bool                typeTBEditMode[6];
-    char*               nameTB[6];
+    char               nameTB[6][30];
     bool                nameEditMode[6];
     char*               colorTB[6];
     Card                envelope;               // Cards inside the envelope
