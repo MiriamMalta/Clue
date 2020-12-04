@@ -26,6 +26,7 @@ void    HatONames();
 int     CalculateRandomMovements();
 int     CalculateRandomPlacements();
 void    NextTurn(GameState game);
+void    throwDice(GameState game);
 
 void    addPlayerToList(GameState game,Player player);
 void    newPlayerList(GameState game);
@@ -45,6 +46,6 @@ void    dealCards(GameState game, Card Shuffle);
 void    initializeCards (GameState game);
 
 char     whatPlace(GameState game);
-//void    printCardsIGot(GameState game);
+//void   printCardsIGot(GameState game);
 
 #endif

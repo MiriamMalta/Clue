@@ -8,10 +8,6 @@
  * the principal keyboard events.
  */
 void MovementInBoard(GameState game){
-    if (IsKeyReleased(KEY_SPACE)){
-        game->playerInTurn->movesLeft = CalculateRandomMovements()+1;  
-        fprintf(stdout, "%d\n", (game->playerInTurn->movesLeft)-1); //Left here for now to know what number we got on the dice
-    }
     // This code manages the animation selections
 
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)){

@@ -120,8 +120,10 @@ void NextTurn(GameState game){
 int CalculateRandomPlacements(){
     return (rand()%8) + 8;
 }
-void NextTurn(GameState game){
-    game->playerInTurn = game->playerInTurn->next;
+void throwDice(GameState game){
+    game->playerInTurn->movesLeft = CalculateRandomMovements()+1;  
+    fprintf(stdout, "%d\n", (game->playerInTurn->movesLeft)-1); //Left here for now to know what number we got on the dice
+
 }
 
 
