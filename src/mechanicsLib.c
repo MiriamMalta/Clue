@@ -169,23 +169,8 @@ void newPlayerList(GameState game){
         }
     }
 }
-char* moveAlongInTurns(GameState game){
-    char* nameOfChar = NULL;
-    if(game->playerInTurn->next != NULL){
-        //nameOfChar = game->playerInTurn->name;
-        nameOfChar = game->playerInTurn->c_player;
-        game->playerInTurn = game->playerInTurn->next;
-    }
-    return nameOfChar;
-}
-char* peekWhoSNext(GameState game){
-    char* nameOfChar = NULL;
-    if(game->playerInTurn->next != NULL){
-        //nameOfChar = game->playerInTurn->name;
-        nameOfChar = game->playerInTurn->c_player;
-    }
-    return nameOfChar;
-}
+
+
 void takeOutCharacter(GameState game, Player fullCharacter){
     Player charactertoDelete = game->playerInTurn;
     Player prevCharacter = game->playerInTurn;
@@ -324,17 +309,18 @@ void initializeCards (GameState game){
 
 }
 
-char whatPlace(GameState game){
-    if (game->playerInTurn->x == 0 && game->playerInTurn->y == 0) return 'U'; // UPPER ENGINE
-    if (game->playerInTurn->x == 23 && game->playerInTurn->y == 0) return 'X'; // WEAPONS
-    if (game->playerInTurn->x == 0 && game->playerInTurn->y == 23) return 'I'; // LOWER ENGINE
-    if (game->playerInTurn->x == 23 && game->playerInTurn->y == 23) return 'H'; // SHIELDS
-    if (game->playerInTurn->x == 0 && game->playerInTurn->y == 12) return 'R'; // REACTOR
-    if (game->playerInTurn->x == 23 && game->playerInTurn->y == 12) return 'V'; // NAVIGATION
-    if (game->playerInTurn->x == 6 && game->playerInTurn->y == 6) return 'Y'; // MED-BAY
-    if (game->playerInTurn->x == 17 && game->playerInTurn->y == 6) return 'L'; // STORAGE
-    if (game->playerInTurn->x == 5 && game->playerInTurn->y == 18) return 'A'; // ADMIN
-    if (game->playerInTurn->x == 18 && game->playerInTurn->y == 18) return 'E'; // ELECTRICAL
+int whatPlace(GameState game){
+    if (game->playerInTurn->x == 5  && game->playerInTurn->y == 18) return 1; // ADMIN
+    if (game->playerInTurn->x == 18 && game->playerInTurn->y == 18) return 2; // ELECTRICAL
+    if (game->playerInTurn->x == 12 && game->playerInTurn->y == 12) return 3; // CAFETERIA
+    if (game->playerInTurn->x == 23 && game->playerInTurn->y == 23) return 4; // SHIELDS
+    if (game->playerInTurn->x == 0  && game->playerInTurn->y == 23) return 5; // LOWER ENGINE
+    if (game->playerInTurn->x == 17 && game->playerInTurn->y == 6)  return 6; // STORAGE
+    if (game->playerInTurn->x == 0  && game->playerInTurn->y == 12) return 7; // REACTOR
+    if (game->playerInTurn->x == 0  && game->playerInTurn->y == 0)  return 8; // UPPER ENGINE
+    if (game->playerInTurn->x == 23 && game->playerInTurn->y == 12) return 9; // NAVIGATION
+    if (game->playerInTurn->x == 23 && game->playerInTurn->y == 0)  return 10; // WEAPONS
+    if (game->playerInTurn->x == 6  && game->playerInTurn->y == 6)  return 11; // MED-BAY
 }
 /*
 void printCardsIGot(GameState game){

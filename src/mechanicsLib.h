@@ -31,8 +31,6 @@ void    throwDice(GameState game);
 void    addPlayerToList(GameState game,Player player);
 void    newPlayerList(GameState game);
 
-char*   moveAlongInTurns(GameState game);
-char*   peekWhoSNext(GameState game);
 void    takeOutCharacter(GameState game, Player fullCharacter);
 
 void    MakeSuggestion(GameState game, char* suggestion);
@@ -45,7 +43,7 @@ void    shuffleCards(Card All, Card Shuffle);
 void    dealCards(GameState game, Card Shuffle);
 void    initializeCards (GameState game);
 
-char     whatPlace(GameState game);
+int     whatPlace(GameState game);
 //void   printCardsIGot(GameState game);
 
 #endif
