@@ -213,11 +213,11 @@ void initializeCards (GameState game){
     shuffleCards(AllCards, ShuffledCards);
     dealCards(game, ShuffledCards);
 
-    free(deckPlaces);
-    free(deckCharacters);
-    free(deckDeaths);
-    free(AllCards);
-    free(ShuffledCards);
+    //free(deckPlaces);
+    //free(deckCharacters);
+    //free(deckDeaths);
+    //free(AllCards);
+    //free(ShuffledCards);
 }
 
 /*

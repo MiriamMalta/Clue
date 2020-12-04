@@ -37,6 +37,8 @@ void playImpostor(GameState game){
             lose = LoadTexture("");
             btnWidth = 460;
             btnHeight = 90;
+            btnInitialPosition = 400;
+            btnRowDistance = 120;
             break;
         case 2:     // Monitor lap
             logo = LoadTexture("./res/animations/1366x768/Logo.png");
@@ -787,7 +789,7 @@ void initImpostor(GameState game){
 }
 GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));
-    game->resolution = 4;
+    game->resolution = 1;
     switch(game->resolution){
         case 1:     // Monitor normal
             game->screenWidth = 1920;
@@ -837,7 +839,7 @@ GameState newImpostorGame(){
 Board NewBoard(GameState game){
     Board board = malloc(sizeof(struct BoardGame));
     board->mapBackground = LoadTexture("./res/assets/map/Space.png");
-    board->map = LoadTexture("./res/assets/map/Sketch.png");
+    board->map = LoadTexture("./res/assets/map/Board.png");
     float initialX = 1723.0f, intialY = 1699.0f;
     for(int x=0;x<24;x++){
         for(int y=0;y<24;y++){
