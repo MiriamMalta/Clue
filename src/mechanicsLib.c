@@ -204,7 +204,6 @@ Card newCard(GameState game,int initial, char* name, char* imgName){
     Card cardOne = calloc(1, sizeof(struct Card_struct));
     char urlPath[100] = "./res/assets/cards/"; 
     strcat(urlPath,imgName);
-    strcat(urlPath,".png");
     cardOne->visual = LoadTexture(urlPath);
     cardOne->id = initial;
     cardOne->name = name;
@@ -217,8 +216,8 @@ void makeCards(GameState game, Card deckPlaces, Card deckCharacters, Card deckDe
         "Reactor","Upper Engine","Navigation","Weapons","Medbay"
     };
     char* Places3[] = {
-        "p_Admin","p_Electrical","p_Cafeteria","p_Shields","p_LEngine","p_Storage",
-        "p_Reactor","p_UEngine","p_Navigation","p_Weapons","p_Medbay"
+        "p_Admin.png","p_Electrical.png","p_Cafeteria.png","p_Shields.png","p_LEngine.png","p_Storage.png",
+        "p_Reactor.png","p_UEngine.png","p_Navigation.png","p_Weapons.png","p_Medbay.png"
     };
     
     int Characters1[] = {12,13,14,15,16,17};
@@ -227,8 +226,8 @@ void makeCards(GameState game, Card deckPlaces, Card deckCharacters, Card deckDe
         "Professor Plum","Miss Scarlet","Mrs. White"
     };
     char* Characters3[] = {
-        "c_Yellow","c_Green","c_Blue",
-        "c_Purple","c_Red","c_White"
+        "c_Yellow.png","c_Green.png","c_Blue.png",
+        "c_Purple.png","c_Red.png","c_White.png"
     };
     int Deaths1[] = {18,19,20,21,22,23};
     char* Deaths2[] = {
@@ -236,8 +235,8 @@ void makeCards(GameState game, Card deckPlaces, Card deckCharacters, Card deckDe
         "Neck Snap","Thrown into Space","Throat Saber"
     };
     char* Deaths3[] = {
-        "d_Stabbing","d_Disconnected","d_GunShot",
-        "d_NeckSnap","d_Funado","d_ThroatSaber"
+        "d_Stabbing.png","d_Disconnected.png","d_GunShot.png",
+        "d_NeckSnap.png","d_Funado.png","d_ThroatSaber.png"
     };
 
     
