@@ -98,7 +98,10 @@ int CalculateRandomMovements(){
     return (rand()%9) + 1;
 }
 void NextTurn(GameState game){
-    game->playerInTurn = game->playerInTurn->next;
+    if(game->playerInTurn->movesLeft == 1){
+        game->playerInTurn->movesLeft = 0;
+        game->playerInTurn = game->playerInTurn->next;
+    }
 }
 // This is
 int CalculateRandomPlacements(){

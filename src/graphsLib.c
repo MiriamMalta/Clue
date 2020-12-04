@@ -2,13 +2,18 @@
 #include "impostorLib.h"
 #include "mechanicsLib.h"
 
-//Aqui solamente funciones graficas
-
+/**
+ * MovementInBoard manages the movement and the animation of
+ * the player. As well works with the camera and detects
+ * the principal keyboard events.
+ */
 void MovementInBoard(GameState game){
     if (IsKeyReleased(KEY_SPACE)){
         game->playerInTurn->movesLeft = CalculateRandomMovements()+1;  
         fprintf(stdout, "%d\n", (game->playerInTurn->movesLeft)-1); //Left here for now to know what number we got on the dice
     }
+    // This code manages the animation selections
+
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)){
         SelectAnimation(game,1,false);
     }
@@ -22,6 +27,8 @@ void MovementInBoard(GameState game){
         SelectAnimation(game,4,false);
     }
     
+    // This code manages the movement of the Player trought the Board
+
     if ((IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP)) && (game->playerInTurn->movesLeft > 1)){
         if((game->playerInTurn->y-1 >= 0) && (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y-1].status == 'f' || game->board->boxes[game->playerInTurn->x][game->playerInTurn->y-1].status == 'd')){
             game->playerInTurn->x;
@@ -58,15 +65,17 @@ void MovementInBoard(GameState game){
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,4,true);
     }
-
-    if(game->playerInTurn->movesLeft == 1){
-        game->playerInTurn->movesLeft = 0;
-        NextTurn(game);
-    }
-
+ 
+    /**
+     * This block of code checks:
+     * - The turns left of the player
+     * - The position of the Camera
+     * - The correct animation in the game
+     * - The room events
+     */
+    NextTurn(game);
     UpdateCameraPosition(game);
     UpdateAnimation(game);
-
     MoveCharacter(game);
 
     // Suggestion & Accusation

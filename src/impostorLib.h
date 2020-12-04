@@ -71,13 +71,13 @@ struct Card_struct{
 
 struct Player_ref{
     int                 isLive; 
-    int                 movingAnimate;
+    int                 movingAnimate;  // frame to render
     int                 cards[3];       // Deck of cards
     int                 frame;          // Visible frame
     int                 maxFrames;      // Frames in the Texture
-    int                 x;
-    int                 y;
-    int                 movesLeft;
+    int                 x;              // X Position in board
+    int                 y;              // Y Position in board
+    int                 movesLeft;      
     float               frameWidth;     // Width of the Colider
     float               frameHeight;    // Height of the Colider
     float               timer;          // Helper Timer for animation
@@ -96,28 +96,25 @@ struct ImpostorGame{
     int                 screenWidth;
     int                 screenHeight;
     int                 screenCenterWidth;
-    int                 screenCenterHeight;
-    int                 relScreenX;
-    int                 relScreenY;
-    int                 fps;
+    int                 screenCenterHeight;     
+    int                 btnWidth;               // Width of the buttons
+    int                 btnHeight;              // Height of the buttons
+    int                 btnInitialPosition;     // Initial Position of Rows
+    int                 btnRowDistance;         // Distance between Rows
+    int                 btnCenter;              // Distance to put an element in center
+    int                 fps;                   
     int                 playersAlive;
-    int                 resolution;
-    int                 btnWidth;
-    int                 btnHeight;
-    int                 btnInitialPosition;
-    int                 btnRowDistance;
-    int                 btnCenter;
-    float               speed;
-    float               volume;
-    int                 typeTBActive[6];
-    bool                typeTBEditMode[6];
-    char                nameTB[6][30];
-    bool                nameEditMode[6];
-    char*               colorTB[6];
+    int                 resolution;             // Resolution Id
+    float               volume;                 // Master Volume
+    int                 typeTBActive[6];        // Type Player Señectpr data
+    bool                typeTBEditMode[6];      // Type Player Selector Blocker
+    char                nameTB[6][30];          // Name of the crewmates
+    bool                nameEditMode[6];        // Name input blocker
+    char*               colorTB[6];             // Colors of the crewmates
+    Board               board;                  // Information of the board
+    Player              playerInTurn;           // Pointer List of players
+    Texture2D           screens[10];            // Screens and backgrounds
     Card                envelope;               // Cards inside the envelope
-    Board               board;
-    Player              playerInTurn;
-    Texture2D           screens[10];
 };
 
 struct Suggestion_struct{

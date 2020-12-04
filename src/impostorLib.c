@@ -10,11 +10,14 @@
 #define RAYGUI_IMPLEMENTATION
 #define RAYGUI_SUPPORT_ICONS
 #include "raygui.h"
-#undef RAYGUI_IMPLEMENTATION            // Avoid including raygui implementation again
+#undef RAYGUI_IMPLEMENTATION
 
-
-//Aqui juntamos todo el codigo
-
+/**
+ * The main canvas of the game, is divided by:
+ * - The initialization part
+ * - The music & transitions loop part
+ * - The GUI & logic loop part
+ */
 void playImpostor(GameState game){
     GuiLoadStyle("./res/styles/impostor/impostor.rgs");
     GameScreen  gameScene = LOGO;
@@ -38,13 +41,14 @@ void playImpostor(GameState game){
     int resActive = 0;
     bool resEditMode = false; 
     
+    // Main Loop
     while (!exitWindow){
         exitWindow = WindowShouldClose();
         if (IsKeyPressed(KEY_ESCAPE)) showMessageBox = !showMessageBox;
 
-        // Calculos de transiciones
         splashCounter +=4;
         transCounter ++;
+        // Transitions & calculus part
         switch (gameScene){
             case LOGO:
                 if(state == 0) {
@@ -603,12 +607,19 @@ void playImpostor(GameState game){
     }
     
 }
+
+/**
+ * Free the dynamic global data and close the game
+ */
 void endImpostor(GameState game){
     free(game->board);
     free(game->playerInTurn);
     free(game);
     CloseWindow();
 }
+/**
+ * Initilize the data for the Impostor Game.
+ */
 void initImpostor(GameState game){
     srand(time(NULL));    
     game->board = NewBoard(game);
@@ -617,6 +628,15 @@ void initImpostor(GameState game){
     game->envelope = calloc(3, sizeof(struct Card_struct));
     initializeCards(game);
 }
+
+/**
+ * Initialization of the Window and the assets. Here:
+ * - Load the saved Settings
+ * - Load the resources
+ * - Adjust the resolution
+ * - Initialize the Audio
+ * - Set the information Layer of the elements
+ */
 GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));
     ScreenRes sRes;
@@ -642,7 +662,6 @@ GameState newImpostorGame(){
             break;
     }
     game->fps = 60;
-    game->speed = 200.0f;
     game->screenCenterWidth = (int)game->screenWidth/2;
     game->screenCenterHeight = (int)game->screenHeight/2;
     InitWindow(game->screenWidth, game->screenHeight, "raylib");
@@ -735,6 +754,16 @@ GameState newImpostorGame(){
     game->colorTB[5] = "Yellow";
     return game;
 }
+
+/**
+ * Initialization of the board and the boxes
+ * 
+ * - means unavailable
+ * f means free
+ * r means room
+ * d means door
+ * 
+ */
 Board NewBoard(GameState game){
     Board board = malloc(sizeof(struct BoardGame));
     board->mapBackground = LoadTexture("./res/assets/map/Space.png");
@@ -747,12 +776,6 @@ Board NewBoard(GameState game){
             board->boxes[x][y].isRoom = 0;
         }
     }
-    /**
-     * This is where the character can either be told to
-     * walk: which is marked with an 'f'
-     * teleport inside a room: which is marked with a 'd'
-     * or be in a room: which is marked with an 'r'
-     */
     for(int x=0;x<24;x++){
         for(int y=0;y<24;y++){
             if(x == 0 || x == 23){
@@ -815,6 +838,12 @@ Board NewBoard(GameState game){
     }    
     return board;
 }
+
+/**
+ * Initialization of one Player
+ * game     ->  Context of the game
+ * color    ->  Color of the new player
+ */
 Player newPlayer(GameState game,char* color){
     Player player = malloc(sizeof(struct Player_ref));
     char urlPath[100] = "./res/assets/crewmates/"; 
