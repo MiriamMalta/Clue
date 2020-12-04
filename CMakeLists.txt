@@ -7,6 +7,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 # Set this to the minimal version you want to support
 find_package(raylib 3.0 QUIET) # Let CMake search for a raylib-config.cmake
 file(COPY res DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY data DESTINATION ${CMAKE_BINARY_DIR})
 include(FetchContent)
 set(BUILD_EXAMPLES FALSE)
 if (NOT raylib_FOUND)

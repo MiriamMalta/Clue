@@ -529,8 +529,9 @@ void playImpostor(GameState game){
                     SetMusicVolume(ostMenu,game->volume/100);
                     SetMusicVolume(ostGame,game->volume/100);
                     
-                    if (GuiButton((Rectangle){ game->screenCenterWidth+19, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Return to Menu")) { 
+                    if (GuiButton((Rectangle){ game->screenCenterWidth+19, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Save & Return to Menu")) { 
                         fprintf(stdout,"Menu\n"); 
+                        SaveSettings(game);
                         gameScene = MENU;
                         state = 0;
                         StopMusicStream(ostMenu);
@@ -545,6 +546,7 @@ void playImpostor(GameState game){
                     if (GuiDropdownBox((Rectangle){ game->screenCenterWidth-225, 280, 130, 50 },"#01#1920x1080;#02#1366x768;#03#1024x768;#04#1280x700",&resActive,resEditMode)){
                         resEditMode = !resEditMode;
                         fprintf(stdout,"Resolution: %d\n",resActive);
+                        game->resolution = resActive;
                     }
                     break;
 
@@ -618,13 +620,15 @@ void initImpostor(GameState game){
 GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));
     ScreenRes sRes;
-    game->resolution = 1;
+    
+    LoadSettings(game);
+
     switch(game->resolution){
-        case 1:     // Monitor normal
+        case 0:     // Monitor normal
             game->screenWidth = 1920;
             game->screenHeight = 1080;
             break;
-        case 2:     // Monitor lap
+        case 1:     // Monitor lap
             game->screenWidth = 1366;
             game->screenHeight = 768;
             break;
@@ -636,10 +640,6 @@ GameState newImpostorGame(){
             game->screenWidth = 1280;
             game->screenHeight = 700;
             break;
-        default:    // Default normal
-            game->screenWidth = 1920;
-            game->screenHeight = 1080;
-            break;
     }
     game->fps = 60;
     game->speed = 200.0f;
@@ -650,7 +650,7 @@ GameState newImpostorGame(){
     SetTargetFPS(game->fps);
     InitAudioDevice();
     switch (game->resolution){
-        case 1:     // Monitor normal
+        case 0:     // Monitor normal
             game->screens[sLOGO] = LoadTexture("./res/animations/1920x1080/Logo.png");
             game->screens[sMENU] = LoadTexture("./res/animations/1920x1080/Menu.png");
             game->screens[sBLACK] = LoadTexture("./res/animations/1920x1080/black.png");
@@ -667,7 +667,7 @@ GameState newImpostorGame(){
             game->btnRowDistance = 120;
             game->btnCenter = (int)game->btnWidth/2;
             break;
-        case 2:     // Monitor lap
+        case 1:     // Monitor lap
             game->screens[sLOGO] = LoadTexture("./res/animations/1366x768/Logo.png");
             game->screens[sMENU] = LoadTexture("./res/animations/1366x768/Menu.png");
             game->screens[sBLACK] = LoadTexture("./res/animations/1366x768/black.png");
@@ -684,7 +684,7 @@ GameState newImpostorGame(){
             game->btnRowDistance = 90;
             game->btnCenter = (int)game->btnWidth/2;
             break;
-        case 3:     // Monitor feo
+        case 2:     // Monitor feo
             game->screens[sLOGO] = LoadTexture("./res/animations/1024x768/Logo.png");
             game->screens[sMENU] = LoadTexture("./res/animations/1024x768/Menu.png");
             game->screens[sBLACK] = LoadTexture("./res/animations/1024x768/black.png");
@@ -701,7 +701,7 @@ GameState newImpostorGame(){
             game->btnRowDistance = 90;
             game->btnCenter = (int)game->btnWidth/2;
             break;
-        case 4:     // Monitor Mac
+        case 3:     // Monitor Mac
             game->screens[sLOGO] = LoadTexture("./res/animations/1280x700/Logo.png");
             game->screens[sMENU] = LoadTexture("./res/animations/1280x700/Menu.png");
             game->screens[sBLACK] = LoadTexture("./res/animations/1280x700/black.png");
@@ -716,23 +716,6 @@ GameState newImpostorGame(){
             game->btnHeight = 70;
             game->btnInitialPosition = 280;
             game->btnRowDistance = 82;
-            game->btnCenter = (int)game->btnWidth/2;
-            break;
-        default:    // Default normal
-            game->screens[sLOGO] = LoadTexture("./res/animations/1920x1080/Logo.png");
-            game->screens[sMENU] = LoadTexture("./res/animations/1920x1080/Menu.png");
-            game->screens[sBLACK] = LoadTexture("./res/animations/1920x1080/black.png");
-            game->screens[sRAYLOGO] = LoadTexture("./res/animations/1920x1080/raylib_logo.png");
-            game->screens[sCREDITS] = LoadTexture("./res/animations/1920x1080/Credits.png");
-            game->screens[sSAVE] = LoadTexture("./res/animations/1920x1080/Save.png");   
-            game->screens[sLOAD] = LoadTexture("./res/animations/1920x1080/Load.png");
-            game->screens[sNEWGAME] = LoadTexture("./res/animations/1920x1080/NewGame.png");
-            game->screens[sPAUSE] = LoadTexture("./res/animations/1920x1080/Pause.png");
-            game->screens[sSETTINGS] = LoadTexture("./res/animations/1920x1080/Settings.png");
-            game->btnWidth = 460;
-            game->btnHeight = 90;
-            game->btnInitialPosition = 400;
-            game->btnRowDistance = 120;
             game->btnCenter = (int)game->btnWidth/2;
             break;
     }
@@ -750,7 +733,6 @@ GameState newImpostorGame(){
     game->colorTB[3] = "Red";
     game->colorTB[4] = "White";
     game->colorTB[5] = "Yellow";
-    game->volume = 60.0f;
     return game;
 }
 Board NewBoard(GameState game){

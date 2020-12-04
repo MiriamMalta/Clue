@@ -3,7 +3,54 @@
 
 //Este seria el Backend del juego, solamente 
 //codigo funcional
+void SaveSettings(GameState game){
+    int* data;
+    data = s_Settings(game);
+    FILE *pSett;
+    if((pSett = fopen("./data/settings.bin","wb+"))== NULL){
+        fprintf(stdout,"ERROR: APERTURA DE ARCHIVO SETTINGS SAVE.\n");
+        exit(1); 
+    }
+    fwrite(data,sizeof(int),2,pSett);
+    rewind(pSett);
+    fclose(pSett);
+}
+void LoadSettings(GameState game){
+    int data[2];
+    long size;
+    FILE *pSett;
+    if((pSett = fopen("./data/settings.bin","rb"))== NULL){
+        fprintf(stdout,"ERROR: APERTURA DE ARCHIVO SETTINGS LOAD.\n");
+        game->resolution = 1;
+        game->volume = 60;        
+    }
 
+    if (NULL != pSett) {
+        fseek (pSett, 0, SEEK_END);
+        size = ftell(pSett);
+        rewind(pSett);
+        if (0 == size) {
+            game->resolution = 1;
+            game->volume = 60;   
+        }else{
+            fread(data,sizeof(int),2,pSett);
+            rewind(pSett);
+            fclose(pSett);
+            d_Settings(game,data);
+
+        }
+    }
+}
+int* s_Settings(GameState game){
+    int* settings = malloc(sizeof(int)*2);
+    settings[0] = (int)game->resolution;
+    settings[1] = (int)game->volume;
+    return settings;
+}
+void d_Settings(GameState game,int data[2]){
+    game->resolution = data[0];
+    game->volume = (float)data[1];
+}
 void SaveGame(){
 }
 void LoadGame(){

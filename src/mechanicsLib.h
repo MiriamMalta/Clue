@@ -8,6 +8,10 @@
 #include "raylib.h"
 #include "impostorLib.h"
 
+void LoadSettings(GameState game);
+void SaveSettings(GameState);
+void d_Settings(GameState,int[2]);
+int* s_Settings(GameState);
 void SaveGame();
 void LoadGame();
 void SetGame();
