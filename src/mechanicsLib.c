@@ -97,8 +97,21 @@ int makeAccusation(GameState game, Card cards[3]){
  * A Suggestion is an open question, if anybody has
  * a named card the have to show it to the suggester.
  */
-void makeSuggestion(GameState game, Card cards[3]){   
-    
+void makeSuggestion(GameState game, Card cards[3]){ 
+    Player current = game->playerInTurn->next;
+    int place = cards[PLACES]->id;
+    int character = cards[CHARACTER]->id;
+    int death = cards[DEATHS]->id;
+    if (game->playersAlive != 0){ 
+        for (int j = 0; j < game->playersAlive - 1; j++){
+            for(int k = 0; k = current->numCards; k++){
+                if(current->cardsInHand[k].id == place || current->cardsInHand[k].id == character || current->cardsInHand[k].id == death){
+                    fprintf(stdout, "{{%c}}", current->cardsInHand[k]);
+                }
+            }
+            current = current->next;
+        }
+    }
 }
 
 // Dice Random Function
@@ -297,17 +310,6 @@ void initializeCards (GameState game){
 
 }
 
-/*
-// This function is to make a suggestion
-void makeSuggestion(GameState game, Card cards[3]){   
-    if(game->envelope[PLACES].id == cards[PLACES]->id && 
-        game->envelope[CHARACTER].id == cards[CHARACTER]->id && 
-        game->envelope[DEATHS].id == cards[DEATHS]->id){
-            //return true;
-        }
-    //return false;
-}
-*/
 char whatPlace(GameState game){
     if (game->playerInTurn->x == 0 && game->playerInTurn->y == 0) return 'U'; // UPPER ENGINE
     if (game->playerInTurn->x == 23 && game->playerInTurn->y == 0) return 'X'; // WEAPONS
