@@ -1,54 +1,16 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
 #include "graphsLib.h"
 #include "impostorLib.h"
+#include "mechanicsLib.h"
 
 //Aqui solamente funciones graficas
 
-void Movement(GameState game){
-    if(IsKeyReleased(KEY_K)){
-        game->playerInTurn = game->playerInTurn->next;
-    }
-    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)){
-        game->playerInTurn->position.y += GetFrameTime() * -(game->speed);
-        SelectAnimation(game,1,false);
-    }
-    if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)){
-        game->playerInTurn->position.y += GetFrameTime() * (game->speed);
-        SelectAnimation(game,2,false);
-    }
-    if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)){
-        game->playerInTurn->position.x += GetFrameTime() * (game->speed);
-        SelectAnimation(game,3,false);
-    }
-    if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)){
-        game->playerInTurn->position.x += GetFrameTime() * -(game->speed);
-        SelectAnimation(game,4,false);
-    }
-    
-    UpdateCameraPosition(game);
-
-    if (IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP)){
-        SelectAnimation(game,1,true);
-    }
-    if (IsKeyReleased(KEY_S) || IsKeyReleased(KEY_DOWN)){
-        SelectAnimation(game,2,true);
-    }
-    if (IsKeyReleased(KEY_D) || IsKeyReleased(KEY_RIGHT)){
-        SelectAnimation(game,3,true);
-    }
-    if (IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT)){
-        SelectAnimation(game,4,true);
-    }
-    //fprintf(stdout, "-----CORDS: x->[%f] y->[%f]\n",game->playerInTurn->position.x,game->playerInTurn->position.y);
-    UpdateAnimation(game);
-}
-
 void MovementInBoard(GameState game){
     if(IsKeyReleased(KEY_K)){
-        game->playerInTurn = game->playerInTurn->next;
+        NextTurn(game);
+    }
+    if (IsKeyReleased(KEY_SPACE)){
+        game->playerInTurn->movesLeft = CalculateRandomMovements();  
+        fprintf(stdout, "%d\n", game->playerInTurn->movesLeft); //Left here for now to know what number we got on the dice
     }
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)){
         SelectAnimation(game,1,false);
@@ -63,42 +25,67 @@ void MovementInBoard(GameState game){
         SelectAnimation(game,4,false);
     }
     
-    UpdateCameraPosition(game);
-
-    if (IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP)){
-        if((game->playerInTurn->y-1 >= 0) && game->board->boxes[game->playerInTurn->x][game->playerInTurn->y-1].status == 'f'){
+    
+    if ((IsKeyReleased(KEY_W) || IsKeyReleased(KEY_UP)) && (game->playerInTurn->movesLeft > 0)){
+        if((game->playerInTurn->y-1 >= 0) && (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y-1].status == 'f' || game->board->boxes[game->playerInTurn->x][game->playerInTurn->y-1].status == 'd')){
             game->playerInTurn->x;
             game->playerInTurn->y--;
+            game->playerInTurn->movesLeft--;
         }
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,1,true);
     }
-    if (IsKeyReleased(KEY_S) || IsKeyReleased(KEY_DOWN)){
-        if((game->playerInTurn->y+1 < 24) && game->board->boxes[game->playerInTurn->x][game->playerInTurn->y+1].status == 'f'){
+    if ((IsKeyReleased(KEY_S) || IsKeyReleased(KEY_DOWN)) && (game->playerInTurn->movesLeft > 0)){
+        if((game->playerInTurn->y+1 < 24) && (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y+1].status == 'f' || game->board->boxes[game->playerInTurn->x][game->playerInTurn->y+1].status == 'd')){
             game->playerInTurn->x;
             game->playerInTurn->y++;
+            game->playerInTurn->movesLeft--;
         }
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,2,true);
     }
-    if (IsKeyReleased(KEY_D) || IsKeyReleased(KEY_RIGHT)){
-        if((game->playerInTurn->x+1 < 24) && game->board->boxes[game->playerInTurn->x+1][game->playerInTurn->y].status == 'f'){
+    if ((IsKeyReleased(KEY_D) || IsKeyReleased(KEY_RIGHT)) && (game->playerInTurn->movesLeft > 0)){
+        if((game->playerInTurn->x+1 < 24) && (game->board->boxes[game->playerInTurn->x+1][game->playerInTurn->y].status == 'f' || game->board->boxes[game->playerInTurn->x+1][game->playerInTurn->y].status == 'd')){
             game->playerInTurn->x++;
             game->playerInTurn->y;
+            game->playerInTurn->movesLeft--;
         }
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,3,true);
     }
-    if (IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT)){
-        if((game->playerInTurn->x-1 >= 0) && game->board->boxes[game->playerInTurn->x-1][game->playerInTurn->y].status == 'f'){
+    if ((IsKeyReleased(KEY_A) || IsKeyReleased(KEY_LEFT)) && (game->playerInTurn->movesLeft > 0)){
+        if((game->playerInTurn->x-1 >= 0) && (game->board->boxes[game->playerInTurn->x-1][game->playerInTurn->y].status == 'f' || game->board->boxes[game->playerInTurn->x-1][game->playerInTurn->y].status == 'd')){
             game->playerInTurn->x--;
             game->playerInTurn->y;
+            game->playerInTurn->movesLeft--;
         }
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
         SelectAnimation(game,4,true);
     }
-    //fprintf(stdout, "-----CORDS: x->%d y->%d\n",game->playerInTurn->x,game->playerInTurn->y);
+    UpdateCameraPosition(game);
     UpdateAnimation(game);
+
+    MoveCharacter(game);
+
+    // Suggestion & Accusation
+    if (IsKeyReleased(KEY_G)){
+        if (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].status == 'r'){
+            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 0){char place = 'U';} // UPPER ENGINE
+            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 0){char place = 'X';} // WEAPONS
+            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 23){char place = 'I';} // LOWER ENGINE
+            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 23){char place = 'H';} // SHIELDS
+            if (game->playerInTurn->x == 0 && game->playerInTurn->y == 12){char place = 'R';} // REACTOR
+            if (game->playerInTurn->x == 23 && game->playerInTurn->y == 12){char place = 'V';} // NAVIGATION
+            if (game->playerInTurn->x == 6 && game->playerInTurn->y == 6){char place = 'Y';} // MED-BAY
+            if (game->playerInTurn->x == 17 && game->playerInTurn->y == 6){char place = 'L';} // STORAGE
+            if (game->playerInTurn->x == 5 && game->playerInTurn->y == 18){char place = 'A';} // ADMIN
+            if (game->playerInTurn->x == 18 && game->playerInTurn->y == 18){char place = 'E';} // ELECTRICAL
+            //makeAccusation(game, place, character, death);
+        }
+        if (game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].status == 'c'){
+            fprintf(stdout, "ACC");
+        }
+    }
 }
 
 void SelectAnimation(GameState game, int Selection,int isStill){
@@ -194,14 +181,239 @@ void InitCamera(GameState game){
     game->board->camera.zoom = 1.0f;
 }
 
-void SetPlayersInBoard(GameState game){
-    for(int i=0;i<game->playersAlive;i++){
+
+/*
+Move Outside
+    [I]
+[J]     [L]
+    [M]
+*/
+void MoveCharacter(GameState game){
+    // UPPER ENGINE
+    if ((game->playerInTurn->x == 2 && game->playerInTurn->y == 0) || (game->playerInTurn->x == 0 && game->playerInTurn->y == 2)){
         game->playerInTurn->x = 0;
         game->playerInTurn->y = 0;
         game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
-        game->playerInTurn = game->playerInTurn->next;
+    }
+    if (game->playerInTurn->x == 0 && game->playerInTurn->y == 0){
+        if (IsKeyReleased(KEY_M)){
+            game->playerInTurn->x = 0;
+            game->playerInTurn->y = 3;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_L)){
+            game->playerInTurn->x = 3;
+            game->playerInTurn->y = 0;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // WEAPONS
+    if ((game->playerInTurn->x == 21 && game->playerInTurn->y == 0) || (game->playerInTurn->x == 23 && game->playerInTurn->y == 2)){
+        game->playerInTurn->x = 23;
+        game->playerInTurn->y = 0;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 23 && game->playerInTurn->y == 0){
+        if (IsKeyReleased(KEY_M)){
+            game->playerInTurn->x = 23;
+            game->playerInTurn->y = 3;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_J)){
+            game->playerInTurn->x = 20;
+            game->playerInTurn->y = 0;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // LOWER ENGINE
+    if ((game->playerInTurn->x == 0 && game->playerInTurn->y == 21) || (game->playerInTurn->x == 2 && game->playerInTurn->y == 23)){
+        game->playerInTurn->x = 0;
+        game->playerInTurn->y = 23;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 0 && game->playerInTurn->y == 23){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 0;
+            game->playerInTurn->y = 20;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_L)){
+            game->playerInTurn->x = 3;
+            game->playerInTurn->y = 23;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // SHIELDS
+    if ((game->playerInTurn->x == 21 && game->playerInTurn->y == 23) || (game->playerInTurn->x == 23 && game->playerInTurn->y == 21)){
+        game->playerInTurn->x = 23;
+        game->playerInTurn->y = 23;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 23 && game->playerInTurn->y == 23){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 23;
+            game->playerInTurn->y = 20;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_J)){
+            game->playerInTurn->x = 20;
+            game->playerInTurn->y = 23;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // REACTOR
+    if ((game->playerInTurn->x == 0 && game->playerInTurn->y == 10) || (game->playerInTurn->x == 0 && game->playerInTurn->y == 13)){
+        game->playerInTurn->x = 0;
+        game->playerInTurn->y = 12;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 0 && game->playerInTurn->y == 12){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 0;
+            game->playerInTurn->y = 9;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_M)){
+            game->playerInTurn->x = 0;
+            game->playerInTurn->y = 14;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // NAVIGATION
+    if ((game->playerInTurn->x == 23 && game->playerInTurn->y == 10) || (game->playerInTurn->x == 23 && game->playerInTurn->y == 13)){
+        game->playerInTurn->x = 23;
+        game->playerInTurn->y = 12;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 23 && game->playerInTurn->y == 12){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 23;
+            game->playerInTurn->y = 9;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_M)){
+            game->playerInTurn->x = 23;
+            game->playerInTurn->y = 14;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // MED-BAY
+    if ((game->playerInTurn->x == 6 && game->playerInTurn->y == 5) || (game->playerInTurn->x == 6 && game->playerInTurn->y == 7)){
+        game->playerInTurn->x = 6;
+        game->playerInTurn->y = 6;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 6 && game->playerInTurn->y == 6){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 6;
+            game->playerInTurn->y = 4;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_M)){
+            game->playerInTurn->x = 6;
+            game->playerInTurn->y = 8;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // STORAGE
+    if ((game->playerInTurn->x == 17 && game->playerInTurn->y == 5) || (game->playerInTurn->x == 17 && game->playerInTurn->y == 7)){
+        game->playerInTurn->x = 17;
+        game->playerInTurn->y = 6;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 17 && game->playerInTurn->y == 6){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 17;
+            game->playerInTurn->y = 4;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_M)){
+            game->playerInTurn->x = 17;
+            game->playerInTurn->y = 8;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // ADMIN
+    if ((game->playerInTurn->x == 6 && game->playerInTurn->y == 16) || (game->playerInTurn->x == 7 && game->playerInTurn->y == 17)){
+        game->playerInTurn->x = 5;
+        game->playerInTurn->y = 18;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 5 && game->playerInTurn->y == 18){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 6;
+            game->playerInTurn->y = 15;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_L)){
+            game->playerInTurn->x = 8;
+            game->playerInTurn->y = 17;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // ELECTRICAL
+    if ((game->playerInTurn->x == 17 && game->playerInTurn->y == 16) || (game->playerInTurn->x == 16 && game->playerInTurn->y == 17)){
+        game->playerInTurn->x = 18;
+        game->playerInTurn->y = 18;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 18 && game->playerInTurn->y == 18){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 17;
+            game->playerInTurn->y = 15;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_J)){
+            game->playerInTurn->x = 15;
+            game->playerInTurn->y = 17;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+    }
+    // CAFETERIA
+    if ((game->playerInTurn->x == 11 && game->playerInTurn->y == 9) || (game->playerInTurn->x == 12 && game->playerInTurn->y == 9) || (game->playerInTurn->x == 11 && game->playerInTurn->y == 14) || (game->playerInTurn->x == 12 && game->playerInTurn->y == 14) || (game->playerInTurn->x == 9 && game->playerInTurn->y == 11) || (game->playerInTurn->x == 9 && game->playerInTurn->y == 12) || (game->playerInTurn->x == 14 && game->playerInTurn->y == 11) || (game->playerInTurn->x == 14 && game->playerInTurn->y == 12)){
+        game->playerInTurn->x = 12;
+        game->playerInTurn->y = 12;
+        game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+    }
+    if (game->playerInTurn->x == 12 && game->playerInTurn->y == 12){
+        if (IsKeyReleased(KEY_I)){
+            game->playerInTurn->x = 12;
+            game->playerInTurn->y = 8;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_J)){
+            game->playerInTurn->x = 8;
+            game->playerInTurn->y = 12;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_L)){
+            game->playerInTurn->x = 15;
+            game->playerInTurn->y = 12;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
+        if (IsKeyReleased(KEY_M)){
+            game->playerInTurn->x = 12;
+            game->playerInTurn->y = 15;
+            game->playerInTurn->position = game->board->boxes[game->playerInTurn->x][game->playerInTurn->y].tilePosition;
+        }
     }
 }
+
+void PrintMap(GameState game){
+    for(int x=0;x<24;x++){
+        for(int y=0;y<24;y++){
+            fprintf(stdout, "[%c] ",game->board->boxes[y][x].status);
+        }
+        fprintf(stdout, "\n");
+    }
+}
+
+void PrintPlayersAndCards(GameState game){
+    for(int i=0;i<game->playersAlive;i++){
+        
+    }
+}
+
 
 void Teleport()
 {

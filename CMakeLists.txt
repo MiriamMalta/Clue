@@ -8,11 +8,13 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 find_package(raylib 3.0 QUIET) # Let CMake search for a raylib-config.cmake
 file(COPY res DESTINATION ${CMAKE_BINARY_DIR})
 include(FetchContent)
+set(BUILD_EXAMPLES FALSE)
 if (NOT raylib_FOUND)
 
     FetchContent_Declare(
             raylib
-            URL https://github.com/raysan5/raylib/archive/master.tar.gz
+            GIT_REPOSITORY https://github.com/raysan5/raylib.git
+            GIT_TAG 3.0.0
     )
 
     FetchContent_GetProperties(raylib)
@@ -45,7 +47,7 @@ endif()
 set(WANT_ZLIB FALSE)
 
 
-add_executable(Impostor main.c src/graphsLib.c src/impostorLib.c src/mecanicsLib.c src/test.c)
+add_executable(Impostor main.c src/graphsLib.c src/impostorLib.c src/mechanicsLib.c src/test.c)
 if (WIN32)
     target_link_libraries(Impostor raylib)
 elseif (APPLE)
