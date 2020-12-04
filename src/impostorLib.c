@@ -18,107 +18,7 @@
 void playImpostor(GameState game){
     GuiLoadStyle("./res/styles/impostor/impostor.rgs");
     GameScreen  gameScene = LOGO;
-
-    Texture2D logo,menu,black,RL,credits,save,load,newGame,pause,settings,win,lose;
-    int btnWidth,btnHeight,btnSpace,btnCenter,btnInitialPosition,btnRowDistance;
-    switch (game->resolution){
-        case 1:     // Monitor normal
-            logo = LoadTexture("./res/animations/1920x1080/Logo.png");
-            menu = LoadTexture("./res/animations/1920x1080/Menu.png");
-            black = LoadTexture("./res/animations/1920x1080/black.png");
-            RL = LoadTexture("./res/animations/1920x1080/raylib_logo.png");
-            credits = LoadTexture("./res/animations/1920x1080/Credits.png");
-            save = LoadTexture("./res/animations/1920x1080/Save.png");   
-            load = LoadTexture("./res/animations/1920x1080/Load.png");
-            newGame = LoadTexture("./res/animations/1920x1080/NewGame.png");
-            pause = LoadTexture("./res/animations/1920x1080/Pause.png");
-            settings = LoadTexture("./res/animations/1920x1080/Settings.png");
-            win = LoadTexture("");
-            lose = LoadTexture("");
-            btnWidth = 460;
-            btnHeight = 90;
-            btnInitialPosition = 400;
-            btnRowDistance = 120;
-            btnCenter = (int)btnWidth/2;
-            break;
-        case 2:     // Monitor lap
-            logo = LoadTexture("./res/animations/1366x768/Logo.png");
-            menu = LoadTexture("./res/animations/1366x768/Menu.png");
-            black = LoadTexture("./res/animations/1366x768/black.png");
-            RL = LoadTexture("./res/animations/1366x768/raylib_logo.png");
-            credits = LoadTexture("./res/animations/1366x768/Credits.png");
-            save = LoadTexture("./res/animations/1366x768/Save.png");   
-            load = LoadTexture("./res/animations/1366x768/Load.png");
-            newGame = LoadTexture("./res/animations/1366x768/NewGame.png");
-            pause = LoadTexture("./res/animations/1366x768/Pause.png");
-            settings = LoadTexture("./res/animations/1366x768/Settings.png");
-            win = LoadTexture("");
-            lose = LoadTexture("");
-            btnWidth = 450;
-            btnHeight = 70;
-            btnInitialPosition = 290;
-            btnRowDistance = 90;
-            btnCenter = (int)btnWidth/2;
-            break;
-        case 3:     // Monitor feo
-            logo = LoadTexture("./res/animations/1024x768/Logo.png");
-            menu = LoadTexture("./res/animations/1024x768/Menu.png");
-            black = LoadTexture("./res/animations/1024x768/black.png");
-            RL = LoadTexture("./res/animations/1024x768/raylib_logo.png");
-            credits = LoadTexture("./res/animations/1024x768/Credits.png");
-            save = LoadTexture("./res/animations/1024x768/Save.png");   
-            load = LoadTexture("./res/animations/1024x768/Load.png");
-            newGame = LoadTexture("./res/animations/1024x768/NewGame.png");
-            pause = LoadTexture("./res/animations/1024x768/Pause.png");
-            settings = LoadTexture("./res/animations/1024x768/Settings.png");
-            win = LoadTexture("");
-            lose = LoadTexture("");
-            btnWidth = 450;
-            btnHeight = 70;
-            btnInitialPosition = 290;
-            btnRowDistance = 90;
-            btnCenter = (int)btnWidth/2;
-            break;
-        case 4:     // Monitor Mac
-            logo = LoadTexture("./res/animations/1280x700/Logo.png");
-            menu = LoadTexture("./res/animations/1280x700/Menu.png");
-            black = LoadTexture("./res/animations/1280x700/black.png");
-            RL = LoadTexture("./res/animations/1280x700/raylib_logo.png");
-            credits = LoadTexture("./res/animations/1280x700/Credits.png");
-            save = LoadTexture("./res/animations/1280x700/Save.png");   
-            load = LoadTexture("./res/animations/1280x700/Load.png");
-            newGame = LoadTexture("./res/animations/1280x700/NewGame.png");
-            pause = LoadTexture("./res/animations/1280x700/Pause.png");
-            settings = LoadTexture("./res/animations/1280x700/Settings.png");
-            win = LoadTexture("");
-            lose = LoadTexture("");
-            btnWidth = 450;
-            btnHeight = 70;
-            btnInitialPosition = 280;
-            btnRowDistance = 82;
-            btnCenter = (int)btnWidth/2;
-            break;
-        default:    // Default normal
-            logo = LoadTexture("./res/animations/1920x1080/Logo.png");
-            menu = LoadTexture("./res/animations/1920x1080/Menu.png");
-            black = LoadTexture("./res/animations/1920x1080/black.png");
-            RL = LoadTexture("./res/animations/1920x1080/raylib_logo.png");
-            credits = LoadTexture("./res/animations/1920x1080/Credits.png");
-            save = LoadTexture("./res/animations/1920x1080/Save.png");   
-            load = LoadTexture("./res/animations/1920x1080/Load.png");
-            newGame = LoadTexture("./res/animations/1920x1080/NewGame.png");
-            pause = LoadTexture("./res/animations/1920x1080/Pause.png");
-            settings = LoadTexture("./res/animations/1920x1080/Settings.png");
-            win = LoadTexture("");
-            lose = LoadTexture("");
-            btnWidth = 460;
-            btnHeight = 90;
-            btnInitialPosition = 400;
-            btnRowDistance = 120;
-            btnCenter = (int)btnWidth/2;
-            break;
-    }
-
+    ScreenRes sRes;
     
     bool        exitWindow = false;
     bool        showMessageBox = false;
@@ -334,168 +234,148 @@ void playImpostor(GameState game){
                 case LOGO:
                     switch(state){
                         case 0 : 
-                            DrawTexture(black,0,0,Fade(BLACK,alpha));
+                            DrawTexture(game->screens[sBLACK],0,0,Fade(BLACK,alpha));
                             break;
                         case 1 :
-                            DrawTexture(logo,0,0,RAYWHITE);
+                            DrawTexture(game->screens[sLOGO],0,0,RAYWHITE);
                             break;
                         case 2 : 
-                            DrawTexture(black,0,0,BLACK);
+                            DrawTexture(game->screens[sBLACK],0,0,BLACK);
                             break;
                     }
                     break;
                 case POWERED:
                     switch(state){
                         case 1 :
-                            DrawTexture(RL,0,0,RAYWHITE);
+                            DrawTexture(game->screens[sRAYLOGO],0,0,RAYWHITE);
                             break;
                         case 2 :
-                            DrawTexture(black,0,0,Fade(BLACK,alpha));
+                            DrawTexture(game->screens[sBLACK],0,0,Fade(BLACK,alpha));
                             break;
                     }
                     break;
                 case DISCLAIMER:
                     switch(state){
                         case 0 : 
-                            DrawTexture(black,0,0,Fade(BLACK,alpha));
+                            DrawTexture(game->screens[sBLACK],0,0,Fade(BLACK,alpha));
                             break;
                         case 1 :
-                            DrawTexture(black,0,0,BLACK);
+                            DrawTexture(game->screens[sBLACK],0,0,BLACK);
                             DrawText(
                                 "This Game is for Educational purposes. No nos demanden pliz.", 
-                                (game->screenCenterWidth/2)-150, 
-                                //game->screenCenterWidth/2,  
+                                (game->screenCenterWidth/2)-150,
                                 game->screenCenterHeight, 
                                 30, 
                                 WHITE
                             );
                             break;
                         case 2 :
-                            DrawTexture(black,0,0,Fade(BLACK,alpha));
+                            DrawTexture(game->screens[sBLACK],0,0,Fade(BLACK,alpha));
                             break;
                     }
                     break;
                 case MENU:
-                    DrawTexture(menu,0, 0,RAYWHITE);
-                    //game->screenCenterWidth-225, 280, btnWidth, btnHeight
-                    //(btnInitialPosicion)+(0)(btnRowDistance)
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, btnInitialPosition, btnWidth, btnHeight}, "New Game")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 410, 460, 90 }, "New Game")) { 
+                    DrawTexture(game->screens[sMENU],0, 0,RAYWHITE);
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, game->btnInitialPosition, game->btnWidth, game->btnHeight}, "New Game")) { 
                         fprintf(stdout,"New Game\n"); 
                         gameScene = NEWGAME;
                         state = 0;
                     }
-                    //game->screenCenterWidth-225, 362, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, (btnInitialPosition)+(1*btnRowDistance), btnWidth, btnHeight }, "Load Game")) {
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 530, 460, 90 }, "Load Game")) {
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(1*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Load Game")) {
                         fprintf(stdout,"Load Game\n");
                         gameScene = LOADGAME;
                         state = 0; 
                     }
-                    //game->screenCenterWidth-225, 444, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, (btnInitialPosition)+(2*btnRowDistance), btnWidth, btnHeight }, "Settings")) {
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 650, 460, 90 }, "Settings")) {
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(2*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Settings")) {
                         fprintf(stdout,"Settings\n"); 
                         gameScene = SETTINGS;
                         state = 0;
                     }
-                    //game->screenCenterWidth-225, 526, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, (btnInitialPosition)+(3*btnRowDistance), btnWidth, btnHeight }, "Credits")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 770, 460, 90 }, "Credits")) { 
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(3*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Credits")) { 
                         fprintf(stdout,"Credits\n"); 
                         gameScene = CREDITS;
                         state = 0;
                     }
-                    //game->screenCenterWidth-225, 608, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, (btnInitialPosition)+(4*btnRowDistance), btnWidth, btnHeight }, "Exit")) { 
-                    //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 890, 460, 90 }, "Exit")) { 
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Exit")) { 
                         fprintf(stdout,"Exit\n"); 
                         gameScene = THANKS;
                         state = 0;
                     }
-            
                     break;
                 case GAME:
                     if(IsKeyPressed(KEY_P)){
-                        fprintf(stdout,"Si jala\n"); 
-                        
+                        fprintf(stdout,"Si jala\n");    
                         gameScene = PAUSE;
                         state = 0;
                     }
                     BeginMode2D(game->board->camera);
                         DrawTexture(game->board->mapBackground, 0, 0, WHITE);
                         DrawTexture(game->board->map, 0, 0, WHITE);
-                        MovementInBoard(game);
-                        //fprintf(stdout,"x=[%f] y=[%f]||x=[%d] y=[%d]\n",game->board->camera.target.x,game->board->camera.target.y,(int)((game->board->camera.target.x)*.5),(int)((game->board->camera.target.y)*1.1));
-                        
-                        //
-                        //
                         int initXHUD = (int)((game->board->camera.target.x)-960);
-                        
-                        //
-                        //
                         int initYHUD = (int)((game->board->camera.target.y)+270);
-                        DrawRectangle(
-                            initXHUD,
-                            initYHUD,
+
+                        MovementInBoard(game);
+                    EndMode2D();
+                    int offset = game->screenHeight - 200;
+                    DrawRectangle(
+                            0,
+                            offset,
                             game->screenWidth,
                             game->screenHeight/4,
                             DARKGRAY
-                        );    
-                        GuiGroupBox((Rectangle){ initXHUD + 25, initYHUD + 30, 125, 150 }, "OPTIONS");
-                        if (GuiButton((Rectangle){ initXHUD + 30, initYHUD + 40, 115, 30 }, "Tirar Dado")) {
-                            fprintf(stdout,"Hola");
-                        }
-                        if (GuiButton((Rectangle){ initXHUD + 30, initYHUD + 75, 115, 30 }, "Suggest")) { 
-                            fprintf(stdout,"Hola");
+                    );
 
-                        }
-                        if (GuiButton((Rectangle){ initXHUD + 30, initYHUD + 110, 115, 30 }, "Notebook")) {
-                            fprintf(stdout,"Hola");
+                    GuiGroupBox((Rectangle){ 10, offset + 10, 125, 150 }, "OPTIONS");
+                    if (GuiButton((Rectangle){ 15, offset + 20, 115, 30 }, "Tirar Dado")) {
+                        fprintf(stdout,"Hola");
+                    }
+                    if (GuiButton((Rectangle){ 15, offset + 55, 115, 30 }, "Suggest")) {
+                        fprintf(stdout,"Hola");
 
-                        }
-                    EndMode2D();
-                    
+                    }
+                    if (GuiButton((Rectangle){ 15, offset + 95, 115, 30 }, "Notebook")) {
+                        fprintf(stdout,"Hola");
+                    }
                     break;
                 case PAUSE:
-                    DrawTexture(pause,0, 0,RAYWHITE);
+                    DrawTexture(game->screens[sPAUSE],0, 0,RAYWHITE);
                     //game->screenCenterWidth-225, 198, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, (btnInitialPosition)-(1*btnRowDistance), btnWidth, btnHeight }, "Quit Current Game")) { 
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)-(1*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Quit Current Game")) { 
                     //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 290, 460, 90 }, "Quit Current Game")) { 
                         fprintf(stdout,"Menu\n"); 
                         gameScene = MENU;
                         state = 0;
                     }
                     //game->screenCenterWidth-225, 280, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, btnInitialPosition, btnWidth, btnHeight }, "Save Game")) {
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, game->btnInitialPosition, game->btnWidth, game->btnHeight }, "Save Game")) {
                     //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 410, 460, 90 }, "Save Game")) {
                         fprintf(stdout,"Save Game\n");
                         gameScene = SAVEGAME;
                         state = 0; 
                     }
                     //game->screenCenterWidth-225, 362, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, (btnInitialPosition)+(1*btnRowDistance), btnWidth, btnHeight }, "Load Game")) {
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(1*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Load Game")) {
                     //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 530, 460, 90 }, "Load Game")) {
                         fprintf(stdout,"Load Game\n"); 
                         gameScene = LOADGAME;
                         state = 0;
                     }
                     //game->screenCenterWidth-225, 444, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, (btnInitialPosition)+(2*btnRowDistance), btnWidth, btnHeight }, "Settings")) { 
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(2*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Settings")) { 
                     //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 650, 460, 90 }, "Settings")) { 
                         fprintf(stdout,"Settings\n"); 
                         gameScene = SETTINGS;
                         state = 0;
                     }
                     //game->screenCenterWidth-225, 526, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, (btnInitialPosition)+(3*btnRowDistance), btnWidth, btnHeight }, "Restart")) { 
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(3*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Restart")) { 
                     //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 770, 460, 90 }, "Restart")) { 
                         fprintf(stdout,"Exit\n"); 
                         gameScene = THANKS;
                         state = 0;
                     }
                     //game->screenCenterWidth-225, 608, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, (btnInitialPosition)+(4*btnRowDistance), btnWidth, btnHeight }, "Cancel")) { 
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Cancel")) { 
                     //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 890, 460, 90 }, "Cancel")) { 
                         fprintf(stdout,"GAME\n"); 
                         gameScene = GAME;
@@ -507,7 +387,7 @@ void playImpostor(GameState game){
                 case LOSE:
                     break;
                 case NEWGAME:
-                    DrawTexture(newGame,0, 0,RAYWHITE);
+                    DrawTexture(game->screens[sNEWGAME],0, 0,RAYWHITE);
                     GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, GUI_TEXT_ALIGN_LEFT);
                     //game->screenCenterWidth-350, 290, 200, 40
                     //if (GuiTextBox((Rectangle){ game->screenCenterWidth-350, 290, 200, 40 }, game->nameTB[0], 30, game->nameEditMode[0])){
@@ -588,14 +468,14 @@ void playImpostor(GameState game){
                     }
 
                     //game->screenCenterWidth+19, 608, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth+19, (btnInitialPosition)+(4*btnRowDistance), btnWidth, btnHeight }, "Return to Menu")) { 
+                    if (GuiButton((Rectangle){ game->screenCenterWidth+19, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Return to Menu")) { 
                     //if (GuiButton((Rectangle){ game->screenCenterWidth+20, 890, 460, 90 }, "Return to Menu")) {
                         fprintf(stdout,"Menu\n"); 
                         gameScene = MENU;
                         state = 0;
                     }
-                    //game->screenCenterWidth-465, 608, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-465, (btnInitialPosition)+(4*btnRowDistance), btnWidth, btnHeight }, "Begin Game")) {
+                    //game->screenCenterWidth-465, 608, game->btnWidth, game->btnHeight
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-465, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Begin Game")) {
                     //if (GuiButton((Rectangle){ game->screenCenterWidth-500, 890, 460, 90 }, "Begin Game")) {
                         fprintf(stdout,"Game\n"); 
                         UnloadMusicStream(ostMenu);
@@ -609,37 +489,37 @@ void playImpostor(GameState game){
                     break;
 
                 case LOADGAME:
-                    DrawTexture(load,0, 0,RAYWHITE);
-                    //game->screenCenterWidth-225, 280, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, btnInitialPosition, btnWidth, btnHeight }, "Slot 1")) {  
+                    DrawTexture(game->screens[sLOAD],0, 0,RAYWHITE);
+                    //game->screenCenterWidth-225, 280, game->btnWidth, game->btnHeight
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, game->btnInitialPosition, game->btnWidth, game->btnHeight }, "Slot 1")) {  
                     //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 410, 460, 90 }, "Slot 1")) {  
                         fprintf(stdout,"Slot 1\n"); 
                         gameScene = GAME;
                         state = 0;
                     }
-                    //game->screenCenterWidth-225, 362, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, (btnInitialPosition)+(1*btnRowDistance), btnWidth, btnHeight }, "Slot 2")) {
+                    //game->screenCenterWidth-225, 362, game->btnWidth, game->btnHeight
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(1*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Slot 2")) {
                     //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 530, 460, 90 }, "Slot 2")) {
                         fprintf(stdout,"Slot 2\n");
                         gameScene = GAME;
                         state = 0; 
                     }
-                    //game->screenCenterWidth-225, 444, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, (btnInitialPosition)+(2*btnRowDistance), btnWidth, btnHeight }, "Slot 3")) { 
+                    //game->screenCenterWidth-225, 444, game->btnWidth, game->btnHeight
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(2*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Slot 3")) { 
                     //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 650, 460, 90 }, "Slot 3")) { 
                         fprintf(stdout,"Slot 3\n"); 
                         gameScene = GAME;
                         state = 0;
                     }
-                    //game->screenCenterWidth+19, 608, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth+19, (btnInitialPosition)+(4*btnRowDistance), btnWidth, btnHeight }, "Return to Menu")) { 
+                    //game->screenCenterWidth+19, 608, game->btnWidth, game->btnHeight
+                    if (GuiButton((Rectangle){ game->screenCenterWidth+19, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Return to Menu")) { 
                     //if (GuiButton((Rectangle){ game->screenCenterWidth+20, 890, 460, 90 }, "Return to Menu")) { 
                         fprintf(stdout,"Menu\n"); 
                         gameScene = MENU;
                         state = 0;
                     }
-                    //game->screenCenterWidth-465, 608, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-465, (btnInitialPosition)+(4*btnRowDistance), btnWidth, btnHeight }, "Exit Game")) {
+                    //game->screenCenterWidth-465, 608, game->btnWidth, game->btnHeight
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-465, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Exit Game")) {
                     //if (GuiButton((Rectangle){ game->screenCenterWidth-500, 890, 460, 90 }, "Exit Game")) {
                         fprintf(stdout,"Exit\n"); 
                         gameScene = THANKS;
@@ -647,37 +527,37 @@ void playImpostor(GameState game){
                     }
                     break;
                 case SAVEGAME:
-                    DrawTexture(save,0, 0,RAYWHITE);
-                    //game->screenCenterWidth-225, 280, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, btnInitialPosition, btnWidth, btnHeight }, "Slot 1")) {
+                    DrawTexture(game->screens[sSAVE],0, 0,RAYWHITE);
+                    //game->screenCenterWidth-225, 280, game->btnWidth, game->btnHeight
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, game->btnInitialPosition, game->btnWidth, game->btnHeight }, "Slot 1")) {
                     //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 410, 460, 90 }, "Slot 1")) { 
                         fprintf(stdout,"Slot 1\n"); 
                         gameScene = GAME;
                         state = 0;
                     }
-                    //game->screenCenterWidth-225, 362, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, (btnInitialPosition)+(1*btnRowDistance), btnWidth, btnHeight }, "Slot 2")) { 
+                    //game->screenCenterWidth-225, 362, game->btnWidth, game->btnHeight
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(1*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Slot 2")) { 
                     //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 530, 460, 90 }, "Slot 2")) { 
                         fprintf(stdout,"Slot 2\n");
                         gameScene = GAME;
                         state = 0; 
                     }
-                    //game->screenCenterWidth-225, 444, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-btnCenter, (btnInitialPosition)+(2*btnRowDistance), btnWidth, btnHeight }, "Slot 3")) { 
+                    //game->screenCenterWidth-225, 444, game->btnWidth, game->btnHeight
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-game->btnCenter, (game->btnInitialPosition)+(2*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Slot 3")) { 
                     //if (GuiButton((Rectangle){ game->screenCenterWidth-230, 650, 460, 90 }, "Slot 3")) { 
                         fprintf(stdout,"Slot 3\n"); 
                         gameScene = GAME;
                         state = 0;
                     }
-                    //game->screenCenterWidth+19, 608, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth+19, (btnInitialPosition)+(4*btnRowDistance), btnWidth, btnHeight }, "Return to Menu")) { 
+                    //game->screenCenterWidth+19, 608, game->btnWidth, game->btnHeight
+                    if (GuiButton((Rectangle){ game->screenCenterWidth+19, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Return to Menu")) { 
                     //if (GuiButton((Rectangle){ game->screenCenterWidth+20, 890, 460, 90 }, "Return to Menu")) { 
                         fprintf(stdout,"Menu\n"); 
                         gameScene = MENU;
                         state = 0;
                     }
-                    //game->screenCenterWidth-465, 608, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-465, (btnInitialPosition)+(4*btnRowDistance), btnWidth, btnHeight }, "Exit Game")) {
+                    //game->screenCenterWidth-465, 608, game->btnWidth, game->btnHeight
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-465, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Exit Game")) {
                     //if (GuiButton((Rectangle){ game->screenCenterWidth-500, 890, 460, 90 }, "Exit Game")) {
                         fprintf(stdout,"Exit\n"); 
                         gameScene = THANKS;
@@ -685,17 +565,17 @@ void playImpostor(GameState game){
                     }
                     break;
                 case SETTINGS:
-                    DrawTexture(settings,0, 0,RAYWHITE);
+                    DrawTexture(game->screens[sSETTINGS],0, 0,RAYWHITE);
 
-                    //game->screenCenterWidth-225, 340, btnWidth, 50
-                    volumeLevel = GuiSliderBar((Rectangle){ game->screenCenterWidth-225, 340, btnWidth, 50 }, "Volume", TextFormat("%i", (int)volumeLevel), volumeLevel, 0, 100);
+                    //game->screenCenterWidth-225, 340, game->btnWidth, 50
+                    volumeLevel = GuiSliderBar((Rectangle){ game->screenCenterWidth-225, 340, game->btnWidth, 50 }, "Volume", TextFormat("%i", (int)volumeLevel), volumeLevel, 0, 100);
                     //volumeLevel = GuiSliderBar((Rectangle){ game->screenCenterWidth-230, 510, 460, 50 }, "Volume", TextFormat("%i", (int)volumeLevel), volumeLevel, 0, 100);
                     
                     SetMusicVolume(ostMenu,volumeLevel/100);
                     SetMusicVolume(ostGame,volumeLevel/100);
                     
-                    //game->screenCenterWidth+19, 608, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth+19, (btnInitialPosition)+(4*btnRowDistance), btnWidth, btnHeight }, "Return to Menu")) { 
+                    //game->screenCenterWidth+19, 608, game->btnWidth, game->btnHeight
+                    if (GuiButton((Rectangle){ game->screenCenterWidth+19, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Return to Menu")) { 
                     //if (GuiButton((Rectangle){ game->screenCenterWidth+20, 890, 460, 90 }, "Return to Menu")) { 
                         fprintf(stdout,"Menu\n"); 
                         gameScene = MENU;
@@ -703,8 +583,8 @@ void playImpostor(GameState game){
                         StopMusicStream(ostMenu);
                         PlayMusicStream(ostMenu);
                     }
-                    //game->screenCenterWidth-465, 608, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-465, (btnInitialPosition)+(4*btnRowDistance), btnWidth, btnHeight }, "Exit Game")) {
+                    //game->screenCenterWidth-465, 608, game->btnWidth, game->btnHeight
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-465, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Exit Game")) {
                     //if (GuiButton((Rectangle){ game->screenCenterWidth-500, 890, 460, 90 }, "Exit Game")) {
                         fprintf(stdout,"Exit\n"); 
                         gameScene = THANKS;
@@ -721,16 +601,16 @@ void playImpostor(GameState game){
                     break;
 
                 case CREDITS:
-                    DrawTexture(credits,0, 0,RAYWHITE);
-                    //game->screenCenterWidth+19, 608, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth+19, (btnInitialPosition)+(4*btnRowDistance), btnWidth, btnHeight }, "Return to Menu")) { 
+                    DrawTexture(game->screens[sCREDITS],0, 0,RAYWHITE);
+                    //game->screenCenterWidth+19, 608, game->btnWidth, game->btnHeight
+                    if (GuiButton((Rectangle){ game->screenCenterWidth+19, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Return to Menu")) { 
                     //if (GuiButton((Rectangle){ game->screenCenterWidth+20, 890, 460, 90 }, "Return to Menu")) { 
                         fprintf(stdout,"Menu\n"); 
                         gameScene = MENU;
                         state = 0;
                     }
-                    //game->screenCenterWidth-465, 608, btnWidth, btnHeight
-                    if (GuiButton((Rectangle){ game->screenCenterWidth-465, (btnInitialPosition)+(4*btnRowDistance), btnWidth, btnHeight }, "Exit Game")) {
+                    //game->screenCenterWidth-465, 608, game->btnWidth, game->btnHeight
+                    if (GuiButton((Rectangle){ game->screenCenterWidth-465, (game->btnInitialPosition)+(4*game->btnRowDistance), game->btnWidth, game->btnHeight }, "Exit Game")) {
                     //if (GuiButton((Rectangle){ game->screenCenterWidth-500, 890, 460, 90 }, "Exit Game")) {
                         fprintf(stdout,"Exit\n"); 
                         gameScene = THANKS;
@@ -743,10 +623,10 @@ void playImpostor(GameState game){
                 case THANKS:
                     switch(state){
                         case 0 : 
-                            DrawTexture(black,0,0,Fade(BLACK,alpha));
+                            DrawTexture(game->screens[sBLACK],0,0,Fade(BLACK,alpha));
                             break;
                         case 1 :
-                            DrawTexture(black,0,0,BLACK);
+                            DrawTexture(game->screens[sBLACK],0,0,BLACK);
                             DrawText(
                                 "Gracias por jugar esta basura.", 
                                 (game->screenCenterWidth/2)+100,
@@ -757,7 +637,7 @@ void playImpostor(GameState game){
                             );
                             break;
                         case 2 :
-                            DrawTexture(black,0,0,Fade(BLACK,alpha));
+                            DrawTexture(game->screens[sBLACK],0,0,Fade(BLACK,alpha));
                             break;
                     }
                     break;
@@ -798,7 +678,8 @@ void initImpostor(GameState game){
 }
 GameState newImpostorGame(){
     GameState game = malloc(sizeof(struct ImpostorGame));
-    game->resolution = 3;
+    ScreenRes sRes;
+    game->resolution = 1;
     switch(game->resolution){
         case 1:     // Monitor normal
             game->screenWidth = 1920;
@@ -825,24 +706,111 @@ GameState newImpostorGame(){
     game->speed = 200.0f;
     game->screenCenterWidth = (int)game->screenWidth/2;
     game->screenCenterHeight = (int)game->screenHeight/2;
+    InitWindow(game->screenWidth, game->screenHeight, "raylib");
+    SetExitKey(0);
+    SetTargetFPS(game->fps);
+    InitAudioDevice();
+    switch (game->resolution){
+        case 1:     // Monitor normal
+            game->screens[sLOGO] = LoadTexture("./res/animations/1920x1080/Logo.png");
+            game->screens[sMENU] = LoadTexture("./res/animations/1920x1080/Menu.png");
+            game->screens[sBLACK] = LoadTexture("./res/animations/1920x1080/black.png");
+            game->screens[sRAYLOGO] = LoadTexture("./res/animations/1920x1080/raylib_logo.png");
+            game->screens[sCREDITS] = LoadTexture("./res/animations/1920x1080/Credits.png");
+            game->screens[sSAVE] = LoadTexture("./res/animations/1920x1080/Save.png");   
+            game->screens[sLOAD] = LoadTexture("./res/animations/1920x1080/Load.png");
+            game->screens[sNEWGAME] = LoadTexture("./res/animations/1920x1080/NewGame.png");
+            game->screens[sPAUSE] = LoadTexture("./res/animations/1920x1080/Pause.png");
+            game->screens[sSETTINGS] = LoadTexture("./res/animations/1920x1080/Settings.png");
+            game->btnWidth = 460;
+            game->btnHeight = 90;
+            game->btnInitialPosition = 400;
+            game->btnRowDistance = 120;
+            game->btnCenter = (int)game->btnWidth/2;
+            break;
+        case 2:     // Monitor lap
+            game->screens[sLOGO] = LoadTexture("./res/animations/1366x768/Logo.png");
+            game->screens[sMENU] = LoadTexture("./res/animations/1366x768/Menu.png");
+            game->screens[sBLACK] = LoadTexture("./res/animations/1366x768/black.png");
+            game->screens[sRAYLOGO] = LoadTexture("./res/animations/1366x768/raylib_logo.png");
+            game->screens[sCREDITS] = LoadTexture("./res/animations/1366x768/Credits.png");
+            game->screens[sSAVE] = LoadTexture("./res/animations/1366x768/Save.png");   
+            game->screens[sLOAD] = LoadTexture("./res/animations/1366x768/Load.png");
+            game->screens[sNEWGAME] = LoadTexture("./res/animations/1366x768/NewGame.png");
+            game->screens[sPAUSE] = LoadTexture("./res/animations/1366x768/Pause.png");
+            game->screens[sSETTINGS] = LoadTexture("./res/animations/1366x768/Settings.png");
+            game->btnWidth = 450;
+            game->btnHeight = 70;
+            game->btnInitialPosition = 290;
+            game->btnRowDistance = 90;
+            game->btnCenter = (int)game->btnWidth/2;
+            break;
+        case 3:     // Monitor feo
+            game->screens[sLOGO] = LoadTexture("./res/animations/1024x768/Logo.png");
+            game->screens[sMENU] = LoadTexture("./res/animations/1024x768/Menu.png");
+            game->screens[sBLACK] = LoadTexture("./res/animations/1024x768/black.png");
+            game->screens[sRAYLOGO] = LoadTexture("./res/animations/1024x768/raylib_logo.png");
+            game->screens[sCREDITS] = LoadTexture("./res/animations/1024x768/Credits.png");
+            game->screens[sSAVE] = LoadTexture("./res/animations/1024x768/Save.png");   
+            game->screens[sLOAD] = LoadTexture("./res/animations/1024x768/Load.png");
+            game->screens[sNEWGAME] = LoadTexture("./res/animations/1024x768/NewGame.png");
+            game->screens[sPAUSE] = LoadTexture("./res/animations/1024x768/Pause.png");
+            game->screens[sSETTINGS] = LoadTexture("./res/animations/1024x768/Settings.png");
+            game->btnWidth = 450;
+            game->btnHeight = 70;
+            game->btnInitialPosition = 290;
+            game->btnRowDistance = 90;
+            game->btnCenter = (int)game->btnWidth/2;
+            break;
+        case 4:     // Monitor Mac
+            game->screens[sLOGO] = LoadTexture("./res/animations/1280x700/Logo.png");
+            game->screens[sMENU] = LoadTexture("./res/animations/1280x700/Menu.png");
+            game->screens[sBLACK] = LoadTexture("./res/animations/1280x700/black.png");
+            game->screens[sRAYLOGO] = LoadTexture("./res/animations/1280x700/raylib_logo.png");
+            game->screens[sCREDITS] = LoadTexture("./res/animations/1280x700/Credits.png");
+            game->screens[sSAVE] = LoadTexture("./res/animations/1280x700/Save.png");   
+            game->screens[sLOAD] = LoadTexture("./res/animations/1280x700/Load.png");
+            game->screens[sNEWGAME] = LoadTexture("./res/animations/1280x700/NewGame.png");
+            game->screens[sPAUSE] = LoadTexture("./res/animations/1280x700/Pause.png");
+            game->screens[sSETTINGS] = LoadTexture("./res/animations/1280x700/Settings.png");
+            game->btnWidth = 450;
+            game->btnHeight = 70;
+            game->btnInitialPosition = 280;
+            game->btnRowDistance = 82;
+            game->btnCenter = (int)game->btnWidth/2;
+            break;
+        default:    // Default normal
+            game->screens[sLOGO] = LoadTexture("./res/animations/1920x1080/Logo.png");
+            game->screens[sMENU] = LoadTexture("./res/animations/1920x1080/Menu.png");
+            game->screens[sBLACK] = LoadTexture("./res/animations/1920x1080/black.png");
+            game->screens[sRAYLOGO] = LoadTexture("./res/animations/1920x1080/raylib_logo.png");
+            game->screens[sCREDITS] = LoadTexture("./res/animations/1920x1080/Credits.png");
+            game->screens[sSAVE] = LoadTexture("./res/animations/1920x1080/Save.png");   
+            game->screens[sLOAD] = LoadTexture("./res/animations/1920x1080/Load.png");
+            game->screens[sNEWGAME] = LoadTexture("./res/animations/1920x1080/NewGame.png");
+            game->screens[sPAUSE] = LoadTexture("./res/animations/1920x1080/Pause.png");
+            game->screens[sSETTINGS] = LoadTexture("./res/animations/1920x1080/Settings.png");
+            game->btnWidth = 460;
+            game->btnHeight = 90;
+            game->btnInitialPosition = 400;
+            game->btnRowDistance = 120;
+            game->btnCenter = (int)game->btnWidth/2;
+            break;
+    }
     game->playersAlive = 0;
     for(int i=0;i<6;i++){
-        game->typeTBActive[i] = 1;
+        game->typeTBActive[i] = 0;
         game->typeTBEditMode[i] = false;
-        game->nameTB[i] = "Ingrese nombre";
+        memset(game->nameTB[i], 0, 50);
+        strcpy(game->nameTB[i], "Ingrese nombre");
         game->nameEditMode[i] = false; 
     }
-    
     game->colorTB[0] = "Blue";
     game->colorTB[1] = "Green";
     game->colorTB[2] = "Purple";
     game->colorTB[3] = "Red";
     game->colorTB[4] = "White";
     game->colorTB[5] = "Yellow";
-    InitWindow(game->screenWidth, game->screenHeight, "raylib");
-    SetExitKey(0);
-    SetTargetFPS(game->fps);
-    InitAudioDevice();
     return game;
 }
 Board NewBoard(GameState game){
